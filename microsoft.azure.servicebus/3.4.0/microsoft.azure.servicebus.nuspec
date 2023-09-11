@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.Azure.ServiceBus</id>
+    <version>3.4.0</version>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>https://raw.githubusercontent.com/Azure/azure-service-bus-dotnet/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Azure/azure-service-bus-dotnet</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/Azure/azure-service-bus-dotnet/master/service-bus.png</iconUrl>
+    <description>This is the next generation Azure Service Bus .NET Standard client library that focuses on queues &amp; topics. For more information about Service Bus, see https://azure.microsoft.com/en-us/services/service-bus/</description>
+    <releaseNotes>https://github.com/Azure/azure-service-bus-dotnet/releases</releaseNotes>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>Azure Service Bus ServiceBus .NET AMQP IoT Queue Topic</tags>
+    <repository type="git" url="https://github.com/Azure/azure-service-bus-dotnet.git" commit="6ba1915981d9d9b976f24f48d4342a4b4257ce69" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1">
+        <dependency id="Microsoft.Azure.Amqp" version="[2.4.2, 3.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Azure.Services.AppAuthentication" version="[1.0.1, 2.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="[3.17.2, 5.0.0)" exclude="Build,Analyzers" />
+        <dependency id="System.Diagnostics.DiagnosticSource" version="4.5.1" exclude="Build,Analyzers" />
+        <dependency id="System.IdentityModel.Tokens.Jwt" version="[5.2.2, 6.0.0)" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Microsoft.Azure.Amqp" version="[2.4.2, 3.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Azure.Services.AppAuthentication" version="[1.0.1, 2.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="[3.17.2, 5.0.0)" exclude="Build,Analyzers" />
+        <dependency id="System.Diagnostics.DiagnosticSource" version="4.5.1" exclude="Build,Analyzers" />
+        <dependency id="System.IdentityModel.Tokens.Jwt" version="[5.2.2, 6.0.0)" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Net.Http" targetFramework=".NETFramework4.6.1" />
+      <frameworkAssembly assemblyName="System.Transactions" targetFramework=".NETFramework4.6.1" />
+      <frameworkAssembly assemblyName="System.Web" targetFramework=".NETFramework4.6.1" />
+    </frameworkAssemblies>
+  </metadata>
+</package>
