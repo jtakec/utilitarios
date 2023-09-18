@@ -19,9 +19,9 @@
 //=======================================================================================
 #endregion
 
-using Microsoft.Azure.ServiceBusExplorer.Controls;
+using ServiceBusExplorer.Controls;
 
-namespace Microsoft.Azure.ServiceBusExplorer.Forms
+namespace ServiceBusExplorer.Forms
 {
     partial class DateTimeForm
     {
@@ -56,7 +56,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DateTimeForm));
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.grouperCaption = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperCaption = new ServiceBusExplorer.Controls.Grouper();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.grouperCaption.SuspendLayout();
             this.SuspendLayout();
@@ -72,8 +72,8 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnOk.Location = new System.Drawing.Point(96, 104);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(72, 24);
-            this.btnOk.TabIndex = 0;
-            this.btnOk.Text = "Ok";
+            this.btnOk.TabIndex = 1;
+            this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = false;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             this.btnOk.MouseEnter += new System.EventHandler(this.button_MouseEnter);
@@ -90,7 +90,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnCancel.Location = new System.Drawing.Point(176, 104);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(72, 24);
-            this.btnCancel.TabIndex = 1;
+            this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -104,7 +104,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperCaption.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperCaption.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperCaption.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperCaption.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperCaption.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperCaption.BorderThickness = 1F;
             this.grouperCaption.Controls.Add(this.dateTimePicker);
@@ -122,20 +122,20 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.grouperCaption.ShadowControl = false;
             this.grouperCaption.ShadowThickness = 1;
             this.grouperCaption.Size = new System.Drawing.Size(232, 72);
-            this.grouperCaption.TabIndex = 33;
+            this.grouperCaption.TabIndex = 0;
             // 
             // dateTimePicker
             // 
             this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker.Checked = false;
-            this.dateTimePicker.CustomFormat = "ddMMMMyyyy    hh:mm:ss";
+            this.dateTimePicker.CustomFormat = "dd MMM yyyy HH:mm:ss";
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker.Location = new System.Drawing.Point(16, 32);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.ShowCheckBox = true;
             this.dateTimePicker.Size = new System.Drawing.Size(203, 20);
-            this.dateTimePicker.TabIndex = 36;
+            this.dateTimePicker.TabIndex = 0;
             // 
             // DateTimeForm
             // 

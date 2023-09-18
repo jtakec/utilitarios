@@ -19,7 +19,7 @@
 //=======================================================================================
 #endregion
 
-namespace Microsoft.Azure.ServiceBusExplorer.Forms
+namespace ServiceBusExplorer.Forms
 {
     partial class RegistrationsForm
     {
@@ -56,7 +56,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnCancel = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.txtTop = new System.Windows.Forms.TextBox();
+            this.txtTop = new ServiceBusExplorer.Controls.NumericTextBox();
             this.lblTop = new System.Windows.Forms.Label();
             this.txtTag = new System.Windows.Forms.TextBox();
             this.txtPnsHandle = new System.Windows.Forms.TextBox();
@@ -77,7 +77,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(72, 24);
             this.btnOk.TabIndex = 1;
-            this.btnOk.Text = "Ok";
+            this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = false;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             this.btnOk.MouseEnter += new System.EventHandler(this.button_MouseEnter);
@@ -126,7 +126,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.radioButton1.Location = new System.Drawing.Point(24, 80);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(39, 17);
-            this.radioButton1.TabIndex = 8;
+            this.radioButton1.TabIndex = 4;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "All:";
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -134,12 +134,14 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             // 
             // txtTop
             // 
+            this.txtTop.AllowDecimal = false;
+            this.txtTop.AllowNegative = false;
+            this.txtTop.AllowSpace = false;
             this.txtTop.Location = new System.Drawing.Point(232, 80);
             this.txtTop.Name = "txtTop";
             this.txtTop.Size = new System.Drawing.Size(152, 20);
-            this.txtTop.TabIndex = 7;
+            this.txtTop.TabIndex = 6;
             this.txtTop.Text = "100";
-            this.txtTop.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMessageCount_KeyPress);
             // 
             // lblTop
             // 
@@ -147,7 +149,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.lblTop.Location = new System.Drawing.Point(112, 84);
             this.lblTop.Name = "lblTop";
             this.lblTop.Size = new System.Drawing.Size(113, 13);
-            this.lblTop.TabIndex = 6;
+            this.lblTop.TabIndex = 5;
             this.lblTop.Text = "Top Count/Page Size:";
             // 
             // txtTag
@@ -164,7 +166,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.txtPnsHandle.Location = new System.Drawing.Point(112, 16);
             this.txtPnsHandle.Name = "txtPnsHandle";
             this.txtPnsHandle.Size = new System.Drawing.Size(272, 20);
-            this.txtPnsHandle.TabIndex = 2;
+            this.txtPnsHandle.TabIndex = 1;
             // 
             // btnTag
             // 
@@ -172,7 +174,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnTag.Location = new System.Drawing.Point(24, 48);
             this.btnTag.Name = "btnTag";
             this.btnTag.Size = new System.Drawing.Size(47, 17);
-            this.btnTag.TabIndex = 1;
+            this.btnTag.TabIndex = 2;
             this.btnTag.Text = "Tag:";
             this.btnTag.UseVisualStyleBackColor = true;
             this.btnTag.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
@@ -222,7 +224,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
         private System.Windows.Forms.TextBox txtPnsHandle;
         private System.Windows.Forms.RadioButton btnTag;
         private System.Windows.Forms.Label lblTop;
-        private System.Windows.Forms.TextBox txtTop;
+        private ServiceBusExplorer.Controls.NumericTextBox txtTop;
         private System.Windows.Forms.RadioButton radioButton1;
     }
 }

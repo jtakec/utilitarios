@@ -19,9 +19,9 @@
 //=======================================================================================
 #endregion
 
-using Microsoft.Azure.ServiceBusExplorer.Controls;
+using ServiceBusExplorer.Controls;
 
-namespace Microsoft.Azure.ServiceBusExplorer.Forms
+namespace ServiceBusExplorer.Forms
 {
     partial class MessageForm
     {
@@ -59,11 +59,13 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnSave = new System.Windows.Forms.Button();
             this.messagesSplitContainer = new System.Windows.Forms.SplitContainer();
             this.messageListTextPropertiesSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.grouperMessageText = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessageText = new ServiceBusExplorer.Controls.Grouper();
+            this.chkAutoindent = new System.Windows.Forms.CheckBox();
             this.txtMessageText = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.grouperMessageCustomProperties = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessageCustomProperties = new ServiceBusExplorer.Controls.Grouper();
+            this.legend = new System.Windows.Forms.Label();
             this.propertiesDataGridView = new System.Windows.Forms.DataGridView();
-            this.grouperMessageProperties = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessageProperties = new ServiceBusExplorer.Controls.Grouper();
             this.messagePropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.lblBody = new System.Windows.Forms.Label();
             this.cboBodyType = new System.Windows.Forms.ComboBox();
@@ -99,7 +101,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnClose.Location = new System.Drawing.Point(880, 508);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(72, 24);
-            this.btnClose.TabIndex = 2;
+            this.btnClose.TabIndex = 8;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -117,7 +119,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnSave.Location = new System.Drawing.Point(800, 508);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(72, 24);
-            this.btnSave.TabIndex = 1;
+            this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -165,9 +167,10 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             // 
             this.grouperMessageText.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageText.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageText.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageText.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageText.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageText.BorderThickness = 1F;
+            this.grouperMessageText.Controls.Add(this.chkAutoindent);
             this.grouperMessageText.Controls.Add(this.txtMessageText);
             this.grouperMessageText.CustomGroupBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageText.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -184,7 +187,24 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.grouperMessageText.ShadowControl = false;
             this.grouperMessageText.ShadowThickness = 1;
             this.grouperMessageText.Size = new System.Drawing.Size(666, 225);
-            this.grouperMessageText.TabIndex = 26;
+            this.grouperMessageText.TabIndex = 0;
+            // 
+            // chkAutoindent
+            // 
+            this.chkAutoindent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkAutoindent.AutoSize = true;
+            this.chkAutoindent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.chkAutoindent.Checked = true;
+            this.chkAutoindent.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAutoindent.ForeColor = System.Drawing.Color.Black;
+            this.chkAutoindent.Location = new System.Drawing.Point(530, 3);
+            this.chkAutoindent.Name = "chkAutoindent";
+            this.chkAutoindent.Padding = new System.Windows.Forms.Padding(18, 0, 9, 0);
+            this.chkAutoindent.Size = new System.Drawing.Size(104, 17);
+            this.chkAutoindent.TabIndex = 0;
+            this.chkAutoindent.Text = "Autoindent";
+            this.chkAutoindent.UseVisualStyleBackColor = false;
+            this.chkAutoindent.CheckedChanged += new System.EventHandler(this.ChkAutoindent_CheckedChanged);
             // 
             // txtMessageText
             // 
@@ -209,7 +229,6 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.txtMessageText.CharWidth = 8;
             this.txtMessageText.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtMessageText.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtMessageText.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.txtMessageText.ForeColor = System.Drawing.SystemColors.ControlText;
             this.txtMessageText.IsReplaceMode = false;
             this.txtMessageText.Location = new System.Drawing.Point(16, 32);
@@ -218,16 +237,17 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.txtMessageText.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.txtMessageText.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtMessageText.ServiceColors")));
             this.txtMessageText.Size = new System.Drawing.Size(632, 176);
-            this.txtMessageText.TabIndex = 0;
+            this.txtMessageText.TabIndex = 1;
             this.txtMessageText.Zoom = 100;
             // 
             // grouperMessageCustomProperties
             // 
             this.grouperMessageCustomProperties.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageCustomProperties.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageCustomProperties.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageCustomProperties.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageCustomProperties.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageCustomProperties.BorderThickness = 1F;
+            this.grouperMessageCustomProperties.Controls.Add(this.legend);
             this.grouperMessageCustomProperties.Controls.Add(this.propertiesDataGridView);
             this.grouperMessageCustomProperties.CustomGroupBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageCustomProperties.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -237,15 +257,29 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.grouperMessageCustomProperties.GroupTitle = "Message Custom Properties";
             this.grouperMessageCustomProperties.Location = new System.Drawing.Point(0, 0);
             this.grouperMessageCustomProperties.Name = "grouperMessageCustomProperties";
-            this.grouperMessageCustomProperties.Padding = new System.Windows.Forms.Padding(20);
+            this.grouperMessageCustomProperties.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
             this.grouperMessageCustomProperties.PaintGroupBox = true;
             this.grouperMessageCustomProperties.RoundCorners = 4;
             this.grouperMessageCustomProperties.ShadowColor = System.Drawing.Color.DarkGray;
             this.grouperMessageCustomProperties.ShadowControl = false;
             this.grouperMessageCustomProperties.ShadowThickness = 1;
             this.grouperMessageCustomProperties.Size = new System.Drawing.Size(666, 241);
-            this.grouperMessageCustomProperties.TabIndex = 27;
+            this.grouperMessageCustomProperties.TabIndex = 0;
             this.grouperMessageCustomProperties.CustomPaint += new System.Action<System.Windows.Forms.PaintEventArgs>(this.grouperMessageCustomProperties_CustomPaint);
+            // 
+            // legend
+            // 
+            this.legend.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
+            this.legend.AutoSize = true;
+            this.legend.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.legend.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.legend.ForeColor = System.Drawing.Color.Black;
+            this.legend.Location = new System.Drawing.Point(20, 226);
+            this.legend.Name = "legend";
+            this.legend.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.legend.Size = new System.Drawing.Size(313, 15);
+            this.legend.TabIndex = 1;
+            this.legend.Text = "* To delete a property, select the row and press the DELETE key";
             // 
             // propertiesDataGridView
             // 
@@ -258,6 +292,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.propertiesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.propertiesDataGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.propertiesDataGridView.Location = new System.Drawing.Point(16, 32);
+            this.propertiesDataGridView.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.propertiesDataGridView.Name = "propertiesDataGridView";
             this.propertiesDataGridView.Size = new System.Drawing.Size(636, 194);
             this.propertiesDataGridView.TabIndex = 0;
@@ -270,7 +305,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             // 
             this.grouperMessageProperties.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageProperties.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageProperties.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageProperties.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageProperties.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageProperties.BorderThickness = 1F;
             this.grouperMessageProperties.Controls.Add(this.messagePropertyGrid);
@@ -289,7 +324,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.grouperMessageProperties.ShadowControl = false;
             this.grouperMessageProperties.ShadowThickness = 1;
             this.grouperMessageProperties.Size = new System.Drawing.Size(254, 474);
-            this.grouperMessageProperties.TabIndex = 19;
+            this.grouperMessageProperties.TabIndex = 0;
             // 
             // messagePropertyGrid
             // 
@@ -314,7 +349,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.lblBody.Location = new System.Drawing.Point(322, 512);
             this.lblBody.Name = "lblBody";
             this.lblBody.Size = new System.Drawing.Size(61, 13);
-            this.lblBody.TabIndex = 77;
+            this.lblBody.TabIndex = 2;
             this.lblBody.Text = "Body Type:";
             // 
             // cboBodyType
@@ -331,7 +366,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.cboBodyType.Location = new System.Drawing.Point(386, 509);
             this.cboBodyType.Name = "cboBodyType";
             this.cboBodyType.Size = new System.Drawing.Size(100, 21);
-            this.cboBodyType.TabIndex = 76;
+            this.cboBodyType.TabIndex = 3;
             // 
             // cboSenderInspector
             // 
@@ -341,9 +376,10 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.cboSenderInspector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboSenderInspector.FormattingEnabled = true;
             this.cboSenderInspector.Location = new System.Drawing.Point(120, 509);
+            this.cboSenderInspector.MaximumSize = new System.Drawing.Size(198, 0);
             this.cboSenderInspector.Name = "cboSenderInspector";
             this.cboSenderInspector.Size = new System.Drawing.Size(198, 21);
-            this.cboSenderInspector.TabIndex = 152;
+            this.cboSenderInspector.TabIndex = 1;
             // 
             // lblReceiverInspector
             // 
@@ -353,7 +389,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.lblReceiverInspector.Location = new System.Drawing.Point(16, 512);
             this.lblReceiverInspector.Name = "lblReceiverInspector";
             this.lblReceiverInspector.Size = new System.Drawing.Size(100, 13);
-            this.lblReceiverInspector.TabIndex = 151;
+            this.lblReceiverInspector.TabIndex = 0;
             this.lblReceiverInspector.Text = "Message Inspector:";
             // 
             // btnSubmit
@@ -367,7 +403,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnSubmit.Location = new System.Drawing.Point(720, 508);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(72, 24);
-            this.btnSubmit.TabIndex = 0;
+            this.btnSubmit.TabIndex = 6;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = false;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
@@ -378,7 +414,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.chkNewMessageId.Location = new System.Drawing.Point(621, 502);
             this.chkNewMessageId.Name = "chkNewMessageId";
             this.chkNewMessageId.Size = new System.Drawing.Size(93, 39);
-            this.chkNewMessageId.TabIndex = 153;
+            this.chkNewMessageId.TabIndex = 5;
             this.chkNewMessageId.Text = "Generate new MessageId";
             this.chkNewMessageId.UseVisualStyleBackColor = true;
             // 
@@ -388,7 +424,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.chkRemove.Location = new System.Drawing.Point(491, 502);
             this.chkRemove.Name = "chkRemove";
             this.chkRemove.Size = new System.Drawing.Size(124, 39);
-            this.chkRemove.TabIndex = 154;
+            this.chkRemove.TabIndex = 4;
             this.chkRemove.Text = "Remove message from DLQ";
             this.chkRemove.UseVisualStyleBackColor = true;
             this.chkRemove.Visible = false;
@@ -424,8 +460,10 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.messageListTextPropertiesSplitContainer)).EndInit();
             this.messageListTextPropertiesSplitContainer.ResumeLayout(false);
             this.grouperMessageText.ResumeLayout(false);
+            this.grouperMessageText.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtMessageText)).EndInit();
             this.grouperMessageCustomProperties.ResumeLayout(false);
+            this.grouperMessageCustomProperties.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.propertiesDataGridView)).EndInit();
             this.grouperMessageProperties.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -453,5 +491,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
         private System.Windows.Forms.CheckBox chkNewMessageId;
         private System.Windows.Forms.CheckBox chkRemove;
         private FastColoredTextBoxNS.FastColoredTextBox txtMessageText;
+        private System.Windows.Forms.CheckBox chkAutoindent;
+        private System.Windows.Forms.Label legend;
     }
 }

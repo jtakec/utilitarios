@@ -19,9 +19,9 @@
 //=======================================================================================
 #endregion
 
-using Microsoft.Azure.ServiceBusExplorer.Controls;
+using ServiceBusExplorer.Controls;
 
-namespace Microsoft.Azure.ServiceBusExplorer.Forms
+namespace ServiceBusExplorer.Forms
 {
     partial class SelectEntityForm
     {
@@ -57,7 +57,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectEntityForm));
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.grouperTreeView = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperTreeView = new ServiceBusExplorer.Controls.Grouper();
             this.lblSelectTargetEntity = new System.Windows.Forms.Label();
             this.lblTargetQueueTopic = new System.Windows.Forms.Label();
             this.txtEntity = new System.Windows.Forms.TextBox();
@@ -79,7 +79,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(72, 24);
             this.btnOk.TabIndex = 2;
-            this.btnOk.Text = "Ok";
+            this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = false;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             this.btnOk.MouseEnter += new System.EventHandler(this.button_MouseEnter);
@@ -110,7 +110,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperTreeView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperTreeView.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperTreeView.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperTreeView.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperTreeView.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperTreeView.BorderThickness = 1F;
             this.grouperTreeView.Controls.Add(this.lblSelectTargetEntity);
@@ -124,7 +124,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.grouperTreeView.GroupTitle = "Title";
             this.grouperTreeView.Location = new System.Drawing.Point(16, 16);
             this.grouperTreeView.Name = "grouperTreeView";
-            this.grouperTreeView.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.grouperTreeView.Padding = new System.Windows.Forms.Padding(20);
             this.grouperTreeView.PaintGroupBox = true;
             this.grouperTreeView.RoundCorners = 4;
             this.grouperTreeView.ShadowColor = System.Drawing.Color.DarkGray;
@@ -140,7 +140,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.lblSelectTargetEntity.Location = new System.Drawing.Point(16, 32);
             this.lblSelectTargetEntity.Name = "lblSelectTargetEntity";
             this.lblSelectTargetEntity.Size = new System.Drawing.Size(104, 13);
-            this.lblSelectTargetEntity.TabIndex = 24;
+            this.lblSelectTargetEntity.TabIndex = 0;
             this.lblSelectTargetEntity.Text = "Current Namespace:";
             // 
             // lblTargetQueueTopic
@@ -151,7 +151,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.lblTargetQueueTopic.Location = new System.Drawing.Point(16, 350);
             this.lblTargetQueueTopic.Name = "lblTargetQueueTopic";
             this.lblTargetQueueTopic.Size = new System.Drawing.Size(118, 13);
-            this.lblTargetQueueTopic.TabIndex = 23;
+            this.lblTargetQueueTopic.TabIndex = 2;
             this.lblTargetQueueTopic.Text = "Target Queue or Topic:";
             // 
             // txtEntity
@@ -162,7 +162,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.txtEntity.Name = "txtEntity";
             this.txtEntity.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtEntity.Size = new System.Drawing.Size(429, 20);
-            this.txtEntity.TabIndex = 1;
+            this.txtEntity.TabIndex = 3;
             this.txtEntity.TextChanged += new System.EventHandler(this.txtForwardTo_TextChanged);
             // 
             // serviceBusTreeView
@@ -179,7 +179,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.serviceBusTreeView.Name = "serviceBusTreeView";
             this.serviceBusTreeView.SelectedImageIndex = 0;
             this.serviceBusTreeView.Size = new System.Drawing.Size(429, 294);
-            this.serviceBusTreeView.TabIndex = 0;
+            this.serviceBusTreeView.TabIndex = 1;
             this.serviceBusTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.serviceBusTreeView_NodeMouseClick);
             // 
             // imageList

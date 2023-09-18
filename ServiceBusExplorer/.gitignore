@@ -157,3 +157,12 @@ $RECYCLE.BIN/
 
 # Visual Studio 2015 cache/options directory
 .vs/
+
+# JetBrains Rider
+.idea/
+
+# The new Debug Profile file
+/src/ServiceBusExplorer/Properties/launchSettings.json
+
+# VS code settings
+.vscode/settings.json

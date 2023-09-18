@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.AspNetCore.Components.WebView.Maui</id>
+    <version>6.0.300-rc.2.5513+sha.8a017cf73-azdo.6048189</version>
+    <authors>Microsoft</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/dotnet/maui</projectUrl>
+    <description>Build .NET MAUI applications with Blazor web UI in the BlazorWebView control.</description>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <repository type="git" url="https://github.com/dotnet/maui.git" commit="8a017cf7310f71907517e42f6def0b2ce464e5df" />
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="Microsoft.AspNetCore.Authorization" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebView" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.JSInterop" version="6.0.4" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0-android31.0">
+        <dependency id="Microsoft.AspNetCore.Authorization" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebView" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.JSInterop" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Xamarin.AndroidX.Legacy.Support.V4" version="1.0.0.13" exclude="Build,Analyzers" />
+        <dependency id="Xamarin.AndroidX.Lifecycle.LiveData" version="2.4.1.1" exclude="Build,Analyzers" />
+        <dependency id="Xamarin.AndroidX.Navigation.Common" version="2.4.1.1" exclude="Build,Analyzers" />
+        <dependency id="Xamarin.AndroidX.Navigation.Fragment" version="2.4.1.2" exclude="Build,Analyzers" />
+        <dependency id="Xamarin.AndroidX.Navigation.Runtime" version="2.4.1.1" exclude="Build,Analyzers" />
+        <dependency id="Xamarin.AndroidX.Navigation.UI" version="2.4.1.1" exclude="Build,Analyzers" />
+        <dependency id="Xamarin.Google.Android.Material" version="1.5.0.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0-ios15.4">
+        <dependency id="Microsoft.AspNetCore.Authorization" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebView" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.JSInterop" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="System.Runtime.InteropServices.NFloat.Internal" version="6.0.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0-maccatalyst15.4">
+        <dependency id="Microsoft.AspNetCore.Authorization" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebView" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.JSInterop" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="System.Runtime.InteropServices.NFloat.Internal" version="6.0.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0-tizen7.0">
+        <dependency id="Microsoft.AspNetCore.Authorization" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebView" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.JSInterop" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Maui.Graphics.Skia" version="6.0.300-rc.2.1310" exclude="Build,Analyzers" />
+        <dependency id="Tizen.UIExtensions.ElmSharp" version="0.6.0-pre1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0-windows10.0.19041">
+        <dependency id="Microsoft.AspNetCore.Authorization" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebView" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Graphics.Win2D" version="1.0.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.JSInterop" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Maui.Graphics.Win2D.WinUI.Desktop" version="6.0.300-rc.2.1310" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.WindowsAppSDK" version="1.0.3" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0-windows10.0.20348">
+        <dependency id="Microsoft.AspNetCore.Authorization" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebView" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Graphics.Win2D" version="1.0.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.JSInterop" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Maui.Graphics.Win2D.WinUI.Desktop" version="6.0.300-rc.2.1310" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.WindowsAppSDK" version="1.0.3" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

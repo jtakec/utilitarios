@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Azure.ServiceBusExplorer.Controls
+﻿namespace ServiceBusExplorer.Controls
 {
     partial class TestEventHubControl
     {
@@ -16,12 +16,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestEventHubControl));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestEventHubControl));
             this.btnStart = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -30,20 +30,13 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.messageTabControl = new System.Windows.Forms.TabControl();
             this.tabMessagePage = new System.Windows.Forms.TabPage();
-            this.tabFilesPage = new System.Windows.Forms.TabPage();
-            this.tabGeneratorPage = new System.Windows.Forms.TabPage();
-            this.mainTabSenderPage = new System.Windows.Forms.TabPage();
-            this.tabPageGraph = new System.Windows.Forms.TabPage();
-            this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.btnOpenFile = new System.Windows.Forms.Button();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.btnSelectFiles = new System.Windows.Forms.Button();
-            this.btnClearFiles = new System.Windows.Forms.Button();
-            this.grouperMessageFormat = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessageFormat = new ServiceBusExplorer.Controls.Grouper();
             this.cboMessageFormat = new System.Windows.Forms.ComboBox();
-            this.grouperMessageText = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessageText = new ServiceBusExplorer.Controls.Grouper();
             this.txtMessageText = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.grouperMessageFiles = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.tabFilesPage = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.grouperMessageFiles = new ServiceBusExplorer.Controls.Grouper();
             this.radioButtonBinaryFile = new System.Windows.Forms.RadioButton();
             this.radioButtonJsonTemplate = new System.Windows.Forms.RadioButton();
             this.radioButtonXmlTemplate = new System.Windows.Forms.RadioButton();
@@ -52,25 +45,27 @@
             this.messageFileListView = new System.Windows.Forms.ListView();
             this.nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.sizeColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.grouperEventDataGenerator = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.tabGeneratorPage = new System.Windows.Forms.TabPage();
+            this.grouperEventDataGenerator = new ServiceBusExplorer.Controls.Grouper();
             this.lblRegistration = new System.Windows.Forms.Label();
             this.eventDataGeneratorPropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.cboEventDataGeneratorType = new System.Windows.Forms.ComboBox();
             this.lblRegistrationType = new System.Windows.Forms.Label();
-            this.grouperPartitionKey = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperPartitionKey = new ServiceBusExplorer.Controls.Grouper();
             this.txtPartitionKey = new System.Windows.Forms.TextBox();
-            this.grouperMessageProperties = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessageProperties = new ServiceBusExplorer.Controls.Grouper();
             this.propertiesDataGridView = new System.Windows.Forms.DataGridView();
-            this.grouperSender = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.mainTabSenderPage = new System.Windows.Forms.TabPage();
+            this.grouperSender = new ServiceBusExplorer.Controls.Grouper();
             this.checkBoxNoPartitionKey = new System.Windows.Forms.CheckBox();
-            this.txtSendBatchSize = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtSendBatchSize = new ServiceBusExplorer.Controls.NumericTextBox();
             this.checkBoxSendBatch = new System.Windows.Forms.CheckBox();
             this.lblSendBatchSize = new System.Windows.Forms.Label();
             this.cboSenderInspector = new System.Windows.Forms.ComboBox();
             this.lblSenderInspector = new System.Windows.Forms.Label();
-            this.txtMessageCount = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
-            this.txtSendTaskCount = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
-            this.txtSenderThinkTime = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtMessageCount = new ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtSendTaskCount = new ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtSenderThinkTime = new ServiceBusExplorer.Controls.NumericTextBox();
             this.lblSenderThinkTime = new System.Windows.Forms.Label();
             this.checkBoxSenderThinkTime = new System.Windows.Forms.CheckBox();
             this.checkBoxAddMessageNumber = new System.Windows.Forms.CheckBox();
@@ -81,7 +76,8 @@
             this.checkBoxSenderVerboseLogging = new System.Windows.Forms.CheckBox();
             this.lblSendTaskCount = new System.Windows.Forms.Label();
             this.lblCount = new System.Windows.Forms.Label();
-            this.grouperSenderStatistics = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.tabPageGraph = new System.Windows.Forms.TabPage();
+            this.grouperSenderStatistics = new ServiceBusExplorer.Controls.Grouper();
             this.senderLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSenderAverageTime = new System.Windows.Forms.Label();
@@ -101,6 +97,11 @@
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSenderMessageNumber = new System.Windows.Forms.Label();
             this.lblSenderCallsSuccessedCaption = new System.Windows.Forms.Label();
+            this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btnOpenFile = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.btnSelectFiles = new System.Windows.Forms.Button();
+            this.btnClearFiles = new System.Windows.Forms.Button();
             this.mainTabControl.SuspendLayout();
             this.mainTabMessagePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -109,20 +110,19 @@
             this.splitContainer.SuspendLayout();
             this.messageTabControl.SuspendLayout();
             this.tabMessagePage.SuspendLayout();
-            this.tabFilesPage.SuspendLayout();
-            this.tabGeneratorPage.SuspendLayout();
-            this.mainTabSenderPage.SuspendLayout();
-            this.tabPageGraph.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.grouperMessageFormat.SuspendLayout();
             this.grouperMessageText.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtMessageText)).BeginInit();
+            this.tabFilesPage.SuspendLayout();
             this.grouperMessageFiles.SuspendLayout();
+            this.tabGeneratorPage.SuspendLayout();
             this.grouperEventDataGenerator.SuspendLayout();
             this.grouperPartitionKey.SuspendLayout();
             this.grouperMessageProperties.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.propertiesDataGridView)).BeginInit();
+            this.mainTabSenderPage.SuspendLayout();
             this.grouperSender.SuspendLayout();
+            this.tabPageGraph.SuspendLayout();
             this.grouperSenderStatistics.SuspendLayout();
             this.senderLayoutPanel.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -131,6 +131,7 @@
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStart
@@ -145,7 +146,7 @@
             this.btnStart.Location = new System.Drawing.Point(840, 392);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(72, 24);
-            this.btnStart.TabIndex = 3;
+            this.btnStart.TabIndex = 4;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -164,7 +165,7 @@
             this.btnCancel.Location = new System.Drawing.Point(920, 392);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(72, 24);
-            this.btnCancel.TabIndex = 4;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -185,7 +186,7 @@
             this.mainTabControl.Name = "mainTabControl";
             this.mainTabControl.SelectedIndex = 0;
             this.mainTabControl.Size = new System.Drawing.Size(976, 368);
-            this.mainTabControl.TabIndex = 2;
+            this.mainTabControl.TabIndex = 0;
             this.mainTabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mainTabControl_DrawItem);
             // 
             // mainTabMessagePage
@@ -233,7 +234,7 @@
             this.messageTabControl.Name = "messageTabControl";
             this.messageTabControl.SelectedIndex = 0;
             this.messageTabControl.Size = new System.Drawing.Size(459, 320);
-            this.messageTabControl.TabIndex = 10;
+            this.messageTabControl.TabIndex = 0;
             this.messageTabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.messageTabControl_DrawItem);
             // 
             // tabMessagePage
@@ -248,196 +249,13 @@
             this.tabMessagePage.TabIndex = 2;
             this.tabMessagePage.Text = "Message";
             // 
-            // tabFilesPage
-            // 
-            this.tabFilesPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.tabFilesPage.Controls.Add(this.grouperMessageFiles);
-            this.tabFilesPage.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.tabFilesPage.Location = new System.Drawing.Point(4, 24);
-            this.tabFilesPage.Name = "tabFilesPage";
-            this.tabFilesPage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFilesPage.Size = new System.Drawing.Size(451, 292);
-            this.tabFilesPage.TabIndex = 5;
-            this.tabFilesPage.Text = "Files";
-            // 
-            // tabGeneratorPage
-            // 
-            this.tabGeneratorPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.tabGeneratorPage.Controls.Add(this.grouperEventDataGenerator);
-            this.tabGeneratorPage.Location = new System.Drawing.Point(4, 24);
-            this.tabGeneratorPage.Name = "tabGeneratorPage";
-            this.tabGeneratorPage.Size = new System.Drawing.Size(451, 292);
-            this.tabGeneratorPage.TabIndex = 6;
-            this.tabGeneratorPage.Text = "Generator";
-            // 
-            // mainTabSenderPage
-            // 
-            this.mainTabSenderPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.mainTabSenderPage.Controls.Add(this.grouperSender);
-            this.mainTabSenderPage.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.mainTabSenderPage.Location = new System.Drawing.Point(4, 24);
-            this.mainTabSenderPage.Name = "mainTabSenderPage";
-            this.mainTabSenderPage.Padding = new System.Windows.Forms.Padding(3);
-            this.mainTabSenderPage.Size = new System.Drawing.Size(968, 340);
-            this.mainTabSenderPage.TabIndex = 1;
-            this.mainTabSenderPage.Text = "Sender";
-            // 
-            // tabPageGraph
-            // 
-            this.tabPageGraph.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.tabPageGraph.Controls.Add(this.grouperSenderStatistics);
-            this.tabPageGraph.Controls.Add(this.chart);
-            this.tabPageGraph.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.tabPageGraph.Location = new System.Drawing.Point(4, 24);
-            this.tabPageGraph.Name = "tabPageGraph";
-            this.tabPageGraph.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGraph.Size = new System.Drawing.Size(968, 340);
-            this.tabPageGraph.TabIndex = 3;
-            this.tabPageGraph.Text = "Graph";
-            // 
-            // chart
-            // 
-            this.chart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.chart.BackImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.chart.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.chart.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
-            this.chart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-            this.chart.BorderSkin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.chart.BorderSkin.BorderWidth = 0;
-            this.chart.BorderSkin.PageColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.chart.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.FrameTitle1;
-            chartArea1.Area3DStyle.Inclination = 15;
-            chartArea1.Area3DStyle.IsClustered = true;
-            chartArea1.Area3DStyle.IsRightAngleAxes = false;
-            chartArea1.Area3DStyle.Perspective = 10;
-            chartArea1.Area3DStyle.Rotation = 10;
-            chartArea1.Area3DStyle.WallWidth = 0;
-            chartArea1.AxisX.LabelAutoFitStyle = ((System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles)(((System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.IncreaseFont | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.DecreaseFont) 
-            | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.WordWrap)));
-            chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            chartArea1.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.AxisX.ScrollBar.LineColor = System.Drawing.Color.Black;
-            chartArea1.AxisX.ScrollBar.Size = 10D;
-            chartArea1.AxisX.Title = "Messages";
-            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            chartArea1.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.AxisY.ScrollBar.LineColor = System.Drawing.Color.Black;
-            chartArea1.AxisY.ScrollBar.Size = 10D;
-            chartArea1.AxisY.Title = "Time - Msg/Sec";
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.AxisY2.Title = "Messages/Sec";
-            chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-            chartArea1.BackSecondaryColor = System.Drawing.Color.White;
-            chartArea1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-            chartArea1.CursorX.IsUserEnabled = true;
-            chartArea1.CursorX.IsUserSelectionEnabled = true;
-            chartArea1.CursorY.IsUserEnabled = true;
-            chartArea1.CursorY.IsUserSelectionEnabled = true;
-            chartArea1.Name = "Default";
-            chartArea1.ShadowColor = System.Drawing.Color.White;
-            this.chart.ChartAreas.Add(chartArea1);
-            legend1.Alignment = System.Drawing.StringAlignment.Far;
-            legend1.BackColor = System.Drawing.Color.Transparent;
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend1.Font = new System.Drawing.Font("Trebuchet MS", 8.25F);
-            legend1.IsTextAutoFit = false;
-            legend1.MaximumAutoSize = 5F;
-            legend1.Name = "Default";
-            this.chart.Legends.Add(legend1);
-            this.chart.Location = new System.Drawing.Point(152, 16);
-            this.chart.Name = "chart";
-            series1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
-            series1.BorderWidth = 2;
-            series1.ChartArea = "Default";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series1.Legend = "Default";
-            series1.LegendText = "Sender Latency";
-            series1.Name = "SenderLatency";
-            series2.BorderWidth = 2;
-            series2.ChartArea = "Default";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series2.Legend = "Default";
-            series2.LegendText = "Sender Throughput";
-            series2.Name = "SenderThroughput";
-            this.chart.Series.Add(series1);
-            this.chart.Series.Add(series2);
-            this.chart.Size = new System.Drawing.Size(800, 312);
-            this.chart.TabIndex = 126;
-            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            title1.Name = "Title";
-            title1.ShadowColor = System.Drawing.Color.Transparent;
-            title1.ShadowOffset = 1;
-            title1.Text = "Sender Performance Counters";
-            this.chart.Titles.Add(title1);
-            // 
-            // btnOpenFile
-            // 
-            this.btnOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.btnOpenFile.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
-            this.btnOpenFile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
-            this.btnOpenFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
-            this.btnOpenFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenFile.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOpenFile.Location = new System.Drawing.Point(760, 392);
-            this.btnOpenFile.Name = "btnOpenFile";
-            this.btnOpenFile.Size = new System.Drawing.Size(72, 24);
-            this.btnOpenFile.TabIndex = 2;
-            this.btnOpenFile.Text = "Open";
-            this.btnOpenFile.UseVisualStyleBackColor = false;
-            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
-            this.btnOpenFile.MouseEnter += new System.EventHandler(this.button_MouseEnter);
-            this.btnOpenFile.MouseLeave += new System.EventHandler(this.button_MouseLeave);
-            // 
-            // btnSelectFiles
-            // 
-            this.btnSelectFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectFiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.btnSelectFiles.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
-            this.btnSelectFiles.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
-            this.btnSelectFiles.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
-            this.btnSelectFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectFiles.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSelectFiles.Location = new System.Drawing.Point(600, 392);
-            this.btnSelectFiles.Name = "btnSelectFiles";
-            this.btnSelectFiles.Size = new System.Drawing.Size(72, 24);
-            this.btnSelectFiles.TabIndex = 0;
-            this.btnSelectFiles.Text = "Select Files";
-            this.btnSelectFiles.UseVisualStyleBackColor = false;
-            this.btnSelectFiles.Click += new System.EventHandler(this.btnSelectFiles_Click);
-            // 
-            // btnClearFiles
-            // 
-            this.btnClearFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearFiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.btnClearFiles.Enabled = false;
-            this.btnClearFiles.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
-            this.btnClearFiles.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
-            this.btnClearFiles.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
-            this.btnClearFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearFiles.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClearFiles.Location = new System.Drawing.Point(679, 392);
-            this.btnClearFiles.Name = "btnClearFiles";
-            this.btnClearFiles.Size = new System.Drawing.Size(72, 24);
-            this.btnClearFiles.TabIndex = 1;
-            this.btnClearFiles.Text = "Clear Files";
-            this.btnClearFiles.UseVisualStyleBackColor = false;
-            this.btnClearFiles.Click += new System.EventHandler(this.btnClearFiles_Click);
-            // 
             // grouperMessageFormat
             // 
             this.grouperMessageFormat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperMessageFormat.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageFormat.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageFormat.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageFormat.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageFormat.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageFormat.BorderThickness = 1F;
             this.grouperMessageFormat.Controls.Add(this.cboMessageFormat);
@@ -445,7 +263,7 @@
             this.grouperMessageFormat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.grouperMessageFormat.ForeColor = System.Drawing.Color.White;
             this.grouperMessageFormat.GroupImage = null;
-            this.grouperMessageFormat.GroupTitle = "Message Format";
+            this.grouperMessageFormat.GroupTitle = "Event Format";
             this.grouperMessageFormat.Location = new System.Drawing.Point(16, 208);
             this.grouperMessageFormat.Name = "grouperMessageFormat";
             this.grouperMessageFormat.Padding = new System.Windows.Forms.Padding(20);
@@ -455,7 +273,7 @@
             this.grouperMessageFormat.ShadowControl = false;
             this.grouperMessageFormat.ShadowThickness = 1;
             this.grouperMessageFormat.Size = new System.Drawing.Size(416, 70);
-            this.grouperMessageFormat.TabIndex = 18;
+            this.grouperMessageFormat.TabIndex = 1;
             this.grouperMessageFormat.CustomPaint += new System.Action<System.Windows.Forms.PaintEventArgs>(this.grouperMessageFormat_CustomPaint);
             // 
             // cboMessageFormat
@@ -478,7 +296,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperMessageText.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageText.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageText.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageText.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageText.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageText.BorderThickness = 1F;
             this.grouperMessageText.Controls.Add(this.txtMessageText);
@@ -486,7 +304,7 @@
             this.grouperMessageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.grouperMessageText.ForeColor = System.Drawing.Color.White;
             this.grouperMessageText.GroupImage = null;
-            this.grouperMessageText.GroupTitle = "Message Text";
+            this.grouperMessageText.GroupTitle = "Event Text";
             this.grouperMessageText.Location = new System.Drawing.Point(16, 8);
             this.grouperMessageText.Name = "grouperMessageText";
             this.grouperMessageText.Padding = new System.Windows.Forms.Padding(20);
@@ -496,7 +314,7 @@
             this.grouperMessageText.ShadowControl = false;
             this.grouperMessageText.ShadowThickness = 1;
             this.grouperMessageText.Size = new System.Drawing.Size(416, 192);
-            this.grouperMessageText.TabIndex = 14;
+            this.grouperMessageText.TabIndex = 0;
             // 
             // txtMessageText
             // 
@@ -533,6 +351,30 @@
             this.txtMessageText.Zoom = 100;
             this.txtMessageText.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.txtMessageText_TextChanged);
             // 
+            // tabFilesPage
+            // 
+            this.tabFilesPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.tabFilesPage.Controls.Add(this.label2);
+            this.tabFilesPage.Controls.Add(this.grouperMessageFiles);
+            this.tabFilesPage.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.tabFilesPage.Location = new System.Drawing.Point(4, 24);
+            this.tabFilesPage.Name = "tabFilesPage";
+            this.tabFilesPage.Padding = new System.Windows.Forms.Padding(3);
+            this.tabFilesPage.Size = new System.Drawing.Size(451, 292);
+            this.tabFilesPage.TabIndex = 5;
+            this.tabFilesPage.Text = "Files";
+            // 
+            // label2
+            // 
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label2.Location = new System.Drawing.Point(16, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(416, 56);
+            this.label2.TabIndex = 34;
+            this.label2.Text = "The default is to just send one event, so if you have selected muliple files and " +
+    "want to send all of them you have to change the Event Data Count on the Sender t" +
+    "ab.";
+            // 
             // grouperMessageFiles
             // 
             this.grouperMessageFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -540,7 +382,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperMessageFiles.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageFiles.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageFiles.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageFiles.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageFiles.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageFiles.BorderThickness = 1F;
             this.grouperMessageFiles.Controls.Add(this.radioButtonBinaryFile);
@@ -554,7 +396,7 @@
             this.grouperMessageFiles.ForeColor = System.Drawing.Color.White;
             this.grouperMessageFiles.GroupImage = null;
             this.grouperMessageFiles.GroupTitle = "Message Files";
-            this.grouperMessageFiles.Location = new System.Drawing.Point(16, 8);
+            this.grouperMessageFiles.Location = new System.Drawing.Point(16, 69);
             this.grouperMessageFiles.Name = "grouperMessageFiles";
             this.grouperMessageFiles.Padding = new System.Windows.Forms.Padding(20);
             this.grouperMessageFiles.PaintGroupBox = true;
@@ -562,7 +404,7 @@
             this.grouperMessageFiles.ShadowColor = System.Drawing.Color.DarkGray;
             this.grouperMessageFiles.ShadowControl = false;
             this.grouperMessageFiles.ShadowThickness = 1;
-            this.grouperMessageFiles.Size = new System.Drawing.Size(416, 271);
+            this.grouperMessageFiles.Size = new System.Drawing.Size(416, 210);
             this.grouperMessageFiles.TabIndex = 16;
             this.grouperMessageFiles.CustomPaint += new System.Action<System.Windows.Forms.PaintEventArgs>(this.grouperMessageFiles_CustomPaint);
             // 
@@ -571,7 +413,7 @@
             this.radioButtonBinaryFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButtonBinaryFile.AutoSize = true;
             this.radioButtonBinaryFile.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.radioButtonBinaryFile.Location = new System.Drawing.Point(104, 240);
+            this.radioButtonBinaryFile.Location = new System.Drawing.Point(104, 179);
             this.radioButtonBinaryFile.Name = "radioButtonBinaryFile";
             this.radioButtonBinaryFile.Size = new System.Drawing.Size(73, 17);
             this.radioButtonBinaryFile.TabIndex = 19;
@@ -583,12 +425,12 @@
             this.radioButtonJsonTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButtonJsonTemplate.AutoSize = true;
             this.radioButtonJsonTemplate.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.radioButtonJsonTemplate.Location = new System.Drawing.Point(192, 240);
+            this.radioButtonJsonTemplate.Location = new System.Drawing.Point(192, 179);
             this.radioButtonJsonTemplate.Name = "radioButtonJsonTemplate";
-            this.radioButtonJsonTemplate.Size = new System.Drawing.Size(94, 17);
+            this.radioButtonJsonTemplate.Size = new System.Drawing.Size(100, 17);
             this.radioButtonJsonTemplate.TabIndex = 18;
             this.radioButtonJsonTemplate.TabStop = true;
-            this.radioButtonJsonTemplate.Text = "Json Template";
+            this.radioButtonJsonTemplate.Text = "JSON Template";
             this.radioButtonJsonTemplate.UseVisualStyleBackColor = true;
             // 
             // radioButtonXmlTemplate
@@ -596,12 +438,12 @@
             this.radioButtonXmlTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButtonXmlTemplate.AutoSize = true;
             this.radioButtonXmlTemplate.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.radioButtonXmlTemplate.Location = new System.Drawing.Point(310, 240);
+            this.radioButtonXmlTemplate.Location = new System.Drawing.Point(305, 179);
             this.radioButtonXmlTemplate.Name = "radioButtonXmlTemplate";
-            this.radioButtonXmlTemplate.Size = new System.Drawing.Size(89, 17);
+            this.radioButtonXmlTemplate.Size = new System.Drawing.Size(94, 17);
             this.radioButtonXmlTemplate.TabIndex = 17;
             this.radioButtonXmlTemplate.TabStop = true;
-            this.radioButtonXmlTemplate.Text = "Xml Template";
+            this.radioButtonXmlTemplate.Text = "XML Template";
             this.radioButtonXmlTemplate.UseVisualStyleBackColor = true;
             // 
             // radioButtonTextFile
@@ -610,7 +452,7 @@
             this.radioButtonTextFile.AutoSize = true;
             this.radioButtonTextFile.Checked = true;
             this.radioButtonTextFile.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.radioButtonTextFile.Location = new System.Drawing.Point(17, 239);
+            this.radioButtonTextFile.Location = new System.Drawing.Point(17, 178);
             this.radioButtonTextFile.Name = "radioButtonTextFile";
             this.radioButtonTextFile.Size = new System.Drawing.Size(65, 17);
             this.radioButtonTextFile.TabIndex = 16;
@@ -640,10 +482,11 @@
             this.nameColumnHeader,
             this.sizeColumnHeader});
             this.messageFileListView.FullRowSelect = true;
+            this.messageFileListView.HideSelection = false;
             this.messageFileListView.Location = new System.Drawing.Point(16, 32);
             this.messageFileListView.Name = "messageFileListView";
             this.messageFileListView.OwnerDraw = true;
-            this.messageFileListView.Size = new System.Drawing.Size(384, 200);
+            this.messageFileListView.Size = new System.Drawing.Size(384, 139);
             this.messageFileListView.TabIndex = 2;
             this.messageFileListView.UseCompatibleStateImageBehavior = false;
             this.messageFileListView.View = System.Windows.Forms.View.Details;
@@ -663,6 +506,16 @@
             this.sizeColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.sizeColumnHeader.Width = 70;
             // 
+            // tabGeneratorPage
+            // 
+            this.tabGeneratorPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.tabGeneratorPage.Controls.Add(this.grouperEventDataGenerator);
+            this.tabGeneratorPage.Location = new System.Drawing.Point(4, 24);
+            this.tabGeneratorPage.Name = "tabGeneratorPage";
+            this.tabGeneratorPage.Size = new System.Drawing.Size(451, 292);
+            this.tabGeneratorPage.TabIndex = 6;
+            this.tabGeneratorPage.Text = "Generator";
+            // 
             // grouperEventDataGenerator
             // 
             this.grouperEventDataGenerator.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -670,7 +523,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperEventDataGenerator.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperEventDataGenerator.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperEventDataGenerator.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperEventDataGenerator.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperEventDataGenerator.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperEventDataGenerator.BorderThickness = 1F;
             this.grouperEventDataGenerator.Controls.Add(this.lblRegistration);
@@ -748,7 +601,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperPartitionKey.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperPartitionKey.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperPartitionKey.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperPartitionKey.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperPartitionKey.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperPartitionKey.BorderThickness = 1F;
             this.grouperPartitionKey.Controls.Add(this.txtPartitionKey);
@@ -765,8 +618,8 @@
             this.grouperPartitionKey.ShadowColor = System.Drawing.Color.DarkGray;
             this.grouperPartitionKey.ShadowControl = false;
             this.grouperPartitionKey.ShadowThickness = 1;
-            this.grouperPartitionKey.Size = new System.Drawing.Size(440, 72);
-            this.grouperPartitionKey.TabIndex = 17;
+            this.grouperPartitionKey.Size = new System.Drawing.Size(404, 72);
+            this.grouperPartitionKey.TabIndex = 1;
             this.grouperPartitionKey.CustomPaint += new System.Action<System.Windows.Forms.PaintEventArgs>(this.grouperPartitionKey_CustomPaint);
             // 
             // txtPartitionKey
@@ -777,7 +630,7 @@
             this.txtPartitionKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.txtPartitionKey.Location = new System.Drawing.Point(16, 32);
             this.txtPartitionKey.Name = "txtPartitionKey";
-            this.txtPartitionKey.Size = new System.Drawing.Size(408, 20);
+            this.txtPartitionKey.Size = new System.Drawing.Size(372, 20);
             this.txtPartitionKey.TabIndex = 0;
             // 
             // grouperMessageProperties
@@ -787,7 +640,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperMessageProperties.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageProperties.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageProperties.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageProperties.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageProperties.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageProperties.BorderThickness = 1F;
             this.grouperMessageProperties.Controls.Add(this.propertiesDataGridView);
@@ -795,7 +648,7 @@
             this.grouperMessageProperties.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.grouperMessageProperties.ForeColor = System.Drawing.Color.White;
             this.grouperMessageProperties.GroupImage = null;
-            this.grouperMessageProperties.GroupTitle = "Message Properties";
+            this.grouperMessageProperties.GroupTitle = "Event Properties";
             this.grouperMessageProperties.Location = new System.Drawing.Point(0, 32);
             this.grouperMessageProperties.Name = "grouperMessageProperties";
             this.grouperMessageProperties.Padding = new System.Windows.Forms.Padding(20);
@@ -804,7 +657,7 @@
             this.grouperMessageProperties.ShadowColor = System.Drawing.Color.DarkGray;
             this.grouperMessageProperties.ShadowControl = false;
             this.grouperMessageProperties.ShadowThickness = 1;
-            this.grouperMessageProperties.Size = new System.Drawing.Size(440, 192);
+            this.grouperMessageProperties.Size = new System.Drawing.Size(404, 192);
             this.grouperMessageProperties.TabIndex = 0;
             this.grouperMessageProperties.CustomPaint += new System.Action<System.Windows.Forms.PaintEventArgs>(this.grouperMessageProperties_CustomPaint);
             // 
@@ -820,12 +673,24 @@
             this.propertiesDataGridView.Location = new System.Drawing.Point(16, 32);
             this.propertiesDataGridView.Name = "propertiesDataGridView";
             this.propertiesDataGridView.RowHeadersWidth = 24;
-            this.propertiesDataGridView.Size = new System.Drawing.Size(408, 144);
+            this.propertiesDataGridView.Size = new System.Drawing.Size(372, 144);
             this.propertiesDataGridView.TabIndex = 0;
             this.propertiesDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.propertiesDataGridView_DataError);
             this.propertiesDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.propertiesDataGridView_RowsAdded);
             this.propertiesDataGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.propertiesDataGridView_RowsRemoved);
             this.propertiesDataGridView.Resize += new System.EventHandler(this.propertiesDataGridView_Resize);
+            // 
+            // mainTabSenderPage
+            // 
+            this.mainTabSenderPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.mainTabSenderPage.Controls.Add(this.grouperSender);
+            this.mainTabSenderPage.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.mainTabSenderPage.Location = new System.Drawing.Point(4, 24);
+            this.mainTabSenderPage.Name = "mainTabSenderPage";
+            this.mainTabSenderPage.Padding = new System.Windows.Forms.Padding(3);
+            this.mainTabSenderPage.Size = new System.Drawing.Size(968, 340);
+            this.mainTabSenderPage.TabIndex = 1;
+            this.mainTabSenderPage.Text = "Sender";
             // 
             // grouperSender
             // 
@@ -834,7 +699,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperSender.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperSender.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperSender.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperSender.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperSender.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperSender.BorderThickness = 1F;
             this.grouperSender.Controls.Add(this.checkBoxNoPartitionKey);
@@ -887,7 +752,10 @@
             // 
             // txtSendBatchSize
             // 
+            this.txtSendBatchSize.AllowDecimal = false;
+            this.txtSendBatchSize.AllowNegative = false;
             this.txtSendBatchSize.AllowSpace = false;
+            this.txtSendBatchSize.IsZeroWhenEmpty = false;
             this.txtSendBatchSize.Location = new System.Drawing.Point(272, 104);
             this.txtSendBatchSize.Name = "txtSendBatchSize";
             this.txtSendBatchSize.Size = new System.Drawing.Size(104, 20);
@@ -937,7 +805,10 @@
             // 
             // txtMessageCount
             // 
+            this.txtMessageCount.AllowDecimal = false;
+            this.txtMessageCount.AllowNegative = false;
             this.txtMessageCount.AllowSpace = false;
+            this.txtMessageCount.IsZeroWhenEmpty = false;
             this.txtMessageCount.Location = new System.Drawing.Point(272, 200);
             this.txtMessageCount.Name = "txtMessageCount";
             this.txtMessageCount.Size = new System.Drawing.Size(104, 20);
@@ -945,7 +816,10 @@
             // 
             // txtSendTaskCount
             // 
+            this.txtSendTaskCount.AllowDecimal = false;
+            this.txtSendTaskCount.AllowNegative = false;
             this.txtSendTaskCount.AllowSpace = false;
+            this.txtSendTaskCount.IsZeroWhenEmpty = false;
             this.txtSendTaskCount.Location = new System.Drawing.Point(272, 168);
             this.txtSendTaskCount.Name = "txtSendTaskCount";
             this.txtSendTaskCount.Size = new System.Drawing.Size(104, 20);
@@ -953,8 +827,11 @@
             // 
             // txtSenderThinkTime
             // 
+            this.txtSenderThinkTime.AllowDecimal = false;
+            this.txtSenderThinkTime.AllowNegative = false;
             this.txtSenderThinkTime.AllowSpace = false;
             this.txtSenderThinkTime.Enabled = false;
+            this.txtSenderThinkTime.IsZeroWhenEmpty = false;
             this.txtSenderThinkTime.Location = new System.Drawing.Point(272, 136);
             this.txtSenderThinkTime.Name = "txtSenderThinkTime";
             this.txtSenderThinkTime.Size = new System.Drawing.Size(104, 20);
@@ -1076,13 +953,26 @@
             this.lblCount.TabIndex = 14;
             this.lblCount.Text = "Event Data Count:";
             // 
+            // tabPageGraph
+            // 
+            this.tabPageGraph.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.tabPageGraph.Controls.Add(this.grouperSenderStatistics);
+            this.tabPageGraph.Controls.Add(this.chart);
+            this.tabPageGraph.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.tabPageGraph.Location = new System.Drawing.Point(4, 24);
+            this.tabPageGraph.Name = "tabPageGraph";
+            this.tabPageGraph.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGraph.Size = new System.Drawing.Size(968, 340);
+            this.tabPageGraph.TabIndex = 3;
+            this.tabPageGraph.Text = "Graph";
+            // 
             // grouperSenderStatistics
             // 
             this.grouperSenderStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.grouperSenderStatistics.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperSenderStatistics.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperSenderStatistics.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperSenderStatistics.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperSenderStatistics.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperSenderStatistics.BorderThickness = 1F;
             this.grouperSenderStatistics.Controls.Add(this.senderLayoutPanel);
@@ -1371,6 +1261,142 @@
             this.lblSenderCallsSuccessedCaption.TabIndex = 124;
             this.lblSenderCallsSuccessedCaption.Text = "Messages Total";
             // 
+            // chart
+            // 
+            this.chart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chart.BackImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.chart.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.chart.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
+            this.chart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            this.chart.BorderSkin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.chart.BorderSkin.BorderWidth = 0;
+            this.chart.BorderSkin.PageColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.chart.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.FrameTitle1;
+            chartArea1.Area3DStyle.Inclination = 15;
+            chartArea1.Area3DStyle.IsClustered = true;
+            chartArea1.Area3DStyle.IsRightAngleAxes = false;
+            chartArea1.Area3DStyle.Perspective = 10;
+            chartArea1.Area3DStyle.Rotation = 10;
+            chartArea1.Area3DStyle.WallWidth = 0;
+            chartArea1.AxisX.LabelAutoFitStyle = ((System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles)(((System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.IncreaseFont | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.DecreaseFont) 
+            | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.WordWrap)));
+            chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            chartArea1.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            chartArea1.AxisX.ScrollBar.LineColor = System.Drawing.Color.Black;
+            chartArea1.AxisX.ScrollBar.Size = 10D;
+            chartArea1.AxisX.Title = "Messages";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            chartArea1.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            chartArea1.AxisY.ScrollBar.LineColor = System.Drawing.Color.Black;
+            chartArea1.AxisY.ScrollBar.Size = 10D;
+            chartArea1.AxisY.Title = "Time - Msg/Sec";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY2.Title = "Messages/Sec";
+            chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            chartArea1.BackSecondaryColor = System.Drawing.Color.White;
+            chartArea1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            chartArea1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            chartArea1.CursorX.IsUserEnabled = true;
+            chartArea1.CursorX.IsUserSelectionEnabled = true;
+            chartArea1.CursorY.IsUserEnabled = true;
+            chartArea1.CursorY.IsUserSelectionEnabled = true;
+            chartArea1.Name = "Default";
+            chartArea1.ShadowColor = System.Drawing.Color.White;
+            this.chart.ChartAreas.Add(chartArea1);
+            legend1.Alignment = System.Drawing.StringAlignment.Far;
+            legend1.BackColor = System.Drawing.Color.Transparent;
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend1.Font = new System.Drawing.Font("Trebuchet MS", 8.25F);
+            legend1.IsTextAutoFit = false;
+            legend1.MaximumAutoSize = 5F;
+            legend1.Name = "Default";
+            this.chart.Legends.Add(legend1);
+            this.chart.Location = new System.Drawing.Point(152, 16);
+            this.chart.Name = "chart";
+            series1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
+            series1.BorderWidth = 2;
+            series1.ChartArea = "Default";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series1.Legend = "Default";
+            series1.LegendText = "Sender Latency";
+            series1.Name = "SenderLatency";
+            series2.BorderWidth = 2;
+            series2.ChartArea = "Default";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series2.Legend = "Default";
+            series2.LegendText = "Sender Throughput";
+            series2.Name = "SenderThroughput";
+            this.chart.Series.Add(series1);
+            this.chart.Series.Add(series2);
+            this.chart.Size = new System.Drawing.Size(800, 312);
+            this.chart.TabIndex = 126;
+            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title1.Name = "Title";
+            title1.ShadowColor = System.Drawing.Color.Transparent;
+            title1.ShadowOffset = 1;
+            title1.Text = "Sender Performance Counters";
+            this.chart.Titles.Add(title1);
+            // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.btnOpenFile.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
+            this.btnOpenFile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
+            this.btnOpenFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
+            this.btnOpenFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenFile.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnOpenFile.Location = new System.Drawing.Point(760, 392);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(72, 24);
+            this.btnOpenFile.TabIndex = 3;
+            this.btnOpenFile.Text = "Open";
+            this.btnOpenFile.UseVisualStyleBackColor = false;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
+            this.btnOpenFile.MouseEnter += new System.EventHandler(this.button_MouseEnter);
+            this.btnOpenFile.MouseLeave += new System.EventHandler(this.button_MouseLeave);
+            // 
+            // btnSelectFiles
+            // 
+            this.btnSelectFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectFiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.btnSelectFiles.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
+            this.btnSelectFiles.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
+            this.btnSelectFiles.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
+            this.btnSelectFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectFiles.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSelectFiles.Location = new System.Drawing.Point(600, 392);
+            this.btnSelectFiles.Name = "btnSelectFiles";
+            this.btnSelectFiles.Size = new System.Drawing.Size(72, 24);
+            this.btnSelectFiles.TabIndex = 1;
+            this.btnSelectFiles.Text = "Select Files";
+            this.btnSelectFiles.UseVisualStyleBackColor = false;
+            this.btnSelectFiles.Click += new System.EventHandler(this.btnSelectFiles_Click);
+            // 
+            // btnClearFiles
+            // 
+            this.btnClearFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearFiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.btnClearFiles.Enabled = false;
+            this.btnClearFiles.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
+            this.btnClearFiles.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
+            this.btnClearFiles.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
+            this.btnClearFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearFiles.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnClearFiles.Location = new System.Drawing.Point(679, 392);
+            this.btnClearFiles.Name = "btnClearFiles";
+            this.btnClearFiles.Size = new System.Drawing.Size(72, 24);
+            this.btnClearFiles.TabIndex = 2;
+            this.btnClearFiles.Text = "Clear Files";
+            this.btnClearFiles.UseVisualStyleBackColor = false;
+            this.btnClearFiles.Click += new System.EventHandler(this.btnClearFiles_Click);
+            // 
             // TestEventHubControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1392,24 +1418,23 @@
             this.splitContainer.ResumeLayout(false);
             this.messageTabControl.ResumeLayout(false);
             this.tabMessagePage.ResumeLayout(false);
-            this.tabFilesPage.ResumeLayout(false);
-            this.tabGeneratorPage.ResumeLayout(false);
-            this.mainTabSenderPage.ResumeLayout(false);
-            this.tabPageGraph.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             this.grouperMessageFormat.ResumeLayout(false);
             this.grouperMessageText.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtMessageText)).EndInit();
+            this.tabFilesPage.ResumeLayout(false);
             this.grouperMessageFiles.ResumeLayout(false);
             this.grouperMessageFiles.PerformLayout();
+            this.tabGeneratorPage.ResumeLayout(false);
             this.grouperEventDataGenerator.ResumeLayout(false);
             this.grouperEventDataGenerator.PerformLayout();
             this.grouperPartitionKey.ResumeLayout(false);
             this.grouperPartitionKey.PerformLayout();
             this.grouperMessageProperties.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.propertiesDataGridView)).EndInit();
+            this.mainTabSenderPage.ResumeLayout(false);
             this.grouperSender.ResumeLayout(false);
             this.grouperSender.PerformLayout();
+            this.tabPageGraph.ResumeLayout(false);
             this.grouperSenderStatistics.ResumeLayout(false);
             this.senderLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
@@ -1418,6 +1443,7 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1503,5 +1529,6 @@
         private FastColoredTextBoxNS.FastColoredTextBox txtMessageText;
         private Grouper grouperPartitionKey;
         private System.Windows.Forms.TextBox txtPartitionKey;
+        private System.Windows.Forms.Label label2;
     }
 }

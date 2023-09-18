@@ -21,6 +21,7 @@
 
 #region Using Directives
 
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -30,7 +31,7 @@ using System.Windows.Forms;
 
 #endregion
 
-namespace Microsoft.Azure.ServiceBusExplorer.Forms
+namespace ServiceBusExplorer.Forms
 {
     public partial class ReceiveModeForm : Form
     {
@@ -42,7 +43,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
         #endregion
 
         #region Public Constructor
-        public ReceiveModeForm(string message, int count, IEnumerable<string> brokeredMessageInspectors)
+        public ReceiveModeForm(string message, int count, IEnumerable<string> brokeredMessageInspectors, bool fromSessionSelectionActive = false)
         {
             InitializeComponent();
             Text = message;
@@ -58,6 +59,8 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             {
                 cboReceiverInspector.Items.Add(messageInspectors[i]);
             }
+
+            txtFromSession.Enabled = fromSessionSelectionActive;
         }
         #endregion
 
@@ -71,11 +74,13 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
         public int Count { get; private set; }
         public bool Peek { get; private set; }
         public bool All { get; private set; }
-        public string Inspector { get; private set; }
+        public string? Inspector { get; private set; }
+        public long? FromSequenceNumber { get; private set; }
+        public string? FromSession { get; private set; }
         #endregion
 
         #region Event Handlers
-        private void btnOk_Click(object sender, EventArgs e)
+        private void btnOk_Click(object? sender, EventArgs? e)
         {
             DialogResult = DialogResult.OK;
             if (int.TryParse(txtMessageCount.Text, out var count))
@@ -87,6 +92,19 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             if (cboReceiverInspector.SelectedIndex > 0)
             {
                 Inspector = cboReceiverInspector.Text;
+            }
+
+            if (txtFromSequenceNumber.Enabled && !string.IsNullOrEmpty(txtFromSequenceNumber.Text))
+            {
+                if (long.TryParse(txtFromSequenceNumber.Text, out var fromSequenceNumber))
+                {
+                    FromSequenceNumber = fromSequenceNumber;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(txtFromSession.Text))
+            {
+                FromSession = txtFromSession.Text;
             }
             Close();
         }
@@ -115,41 +133,6 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             }
         }
 
-        private void txtMessageCount_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            OnKeyPress(e);
-
-            var numberFormatInfo = CultureInfo.CurrentCulture.NumberFormat;
-            var decimalSeparator = numberFormatInfo.NumberDecimalSeparator;
-            var groupSeparator = numberFormatInfo.NumberGroupSeparator;
-            var negativeSign = numberFormatInfo.NegativeSign;
-
-            var keyInput = e.KeyChar.ToString(CultureInfo.InvariantCulture);
-
-            if (Char.IsDigit(e.KeyChar))
-            {
-                // Digits are OK
-            }
-            else if (keyInput.Equals(decimalSeparator) || keyInput.Equals(groupSeparator) ||
-                     keyInput.Equals(negativeSign))
-            {
-                // Decimal separator is OK
-            }
-            else if (e.KeyChar == '\b')
-            {
-                // Backspace key is OK
-            }
-            else if (e.KeyChar == ' ')
-            {
-
-            }
-            else
-            {
-                // Swallow this invalid key and beep
-                e.Handled = true;
-            }
-        }
-
         private void ReceiveModeForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '\r' || e.KeyChar == '\n')
@@ -171,10 +154,13 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
         private void receiveMode_CheckedChanged(object sender, EventArgs e)
         {
             btnAll.Enabled = btnReceive.Checked;
+            
             if (btnPeek.Checked)
             {
                 btnTop.Checked = true;
             }
+
+            txtFromSequenceNumber.Enabled = btnPeek.Checked;
         }
         
         private void grouperInspector_CustomPaint(PaintEventArgs e)

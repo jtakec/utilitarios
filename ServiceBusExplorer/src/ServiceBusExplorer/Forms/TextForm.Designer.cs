@@ -19,9 +19,9 @@
 //=======================================================================================
 #endregion
 
-using Microsoft.Azure.ServiceBusExplorer.Controls;
+using ServiceBusExplorer.Controls;
 
-namespace Microsoft.Azure.ServiceBusExplorer.Forms
+namespace ServiceBusExplorer.Forms
 {
     partial class TextForm
     {
@@ -56,7 +56,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextForm));
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.grouperCaption = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperCaption = new ServiceBusExplorer.Controls.Grouper();
             this.txtContent = new System.Windows.Forms.TextBox();
             this.btnOpen = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -75,8 +75,8 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnOk.Location = new System.Drawing.Point(376, 328);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(72, 24);
-            this.btnOk.TabIndex = 2;
-            this.btnOk.Text = "Ok";
+            this.btnOk.TabIndex = 3;
+            this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = false;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             this.btnOk.MouseEnter += new System.EventHandler(this.button_MouseEnter);
@@ -93,7 +93,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnCancel.Location = new System.Drawing.Point(456, 328);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(72, 24);
-            this.btnCancel.TabIndex = 3;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -107,7 +107,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperCaption.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperCaption.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperCaption.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperCaption.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperCaption.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperCaption.BorderThickness = 1F;
             this.grouperCaption.Controls.Add(this.txtContent);
@@ -125,7 +125,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.grouperCaption.ShadowControl = false;
             this.grouperCaption.ShadowThickness = 1;
             this.grouperCaption.Size = new System.Drawing.Size(512, 296);
-            this.grouperCaption.TabIndex = 33;
+            this.grouperCaption.TabIndex = 0;
             // 
             // txtContent
             // 
@@ -152,7 +152,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnOpen.Location = new System.Drawing.Point(216, 328);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(72, 24);
-            this.btnOpen.TabIndex = 0;
+            this.btnOpen.TabIndex = 1;
             this.btnOpen.Text = "Open";
             this.btnOpen.UseVisualStyleBackColor = false;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
@@ -172,7 +172,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnClear.Location = new System.Drawing.Point(296, 328);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(72, 24);
-            this.btnClear.TabIndex = 1;
+            this.btnClear.TabIndex = 2;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);

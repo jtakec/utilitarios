@@ -32,13 +32,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Azure.ServiceBusExplorer.Forms;
-using Microsoft.Azure.ServiceBusExplorer.Helpers;
+using ServiceBusExplorer.Forms;
+using ServiceBusExplorer.Helpers;
+using ServiceBusExplorer.UIHelpers;
+using ServiceBusExplorer.Utilities.Helpers;
 using Microsoft.ServiceBus.Messaging;
 
 #endregion
 
-namespace Microsoft.Azure.ServiceBusExplorer.Controls
+namespace ServiceBusExplorer.Controls
 {
     public partial class HandleConsumerGroupControl : UserControl
     {
@@ -332,6 +334,17 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 {
                     using (var deleteForm = new DeleteForm(consumerGroupDescription.Name, ConsumerGroupEntity.ToLower()))
                     {
+                        var configuration = TwoFilesConfiguration.Create(TwoFilesConfiguration.GetCurrentConfigFileUse(), writeToLog);
+
+                        bool disableAccidentalDeletionPrevention = configuration.GetBoolValue(
+                                                               ConfigurationParameters.DisableAccidentalDeletionPrevention,
+                                                               defaultValue: false);
+
+                        if (!disableAccidentalDeletionPrevention)
+                        {
+                            deleteForm.ShowAccidentalDeletionPreventionCheck(configuration, $"Delete {consumerGroupDescription.Name} {ConsumerGroupEntity.ToLower()}");
+                        }
+
                         if (deleteForm.ShowDialog() == DialogResult.OK)
                         {
                             serviceBusHelper.DeleteConsumerGroup(consumerGroupDescription);

@@ -19,9 +19,9 @@
 //=======================================================================================
 #endregion
 
-using Microsoft.Azure.ServiceBusExplorer.Controls;
+using ServiceBusExplorer.Controls;
 
-namespace Microsoft.Azure.ServiceBusExplorer.Forms
+namespace ServiceBusExplorer.Forms
 {
     partial class FilterForm
     {
@@ -59,9 +59,9 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnCancel = new System.Windows.Forms.Button();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.btnClear = new System.Windows.Forms.Button();
-            this.grouperFilter = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperFilter = new ServiceBusExplorer.Controls.Grouper();
             this.cboMessageCountOperator = new System.Windows.Forms.ComboBox();
-            this.txtMessageCount = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtMessageCount = new ServiceBusExplorer.Controls.NumericTextBox();
             this.lblMessageCount = new System.Windows.Forms.Label();
             this.lblTimeFilters = new System.Windows.Forms.Label();
             this.txtStartsWith = new System.Windows.Forms.TextBox();
@@ -84,8 +84,8 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnOk.Location = new System.Drawing.Point(248, 432);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(72, 24);
-            this.btnOk.TabIndex = 1;
-            this.btnOk.Text = "Ok";
+            this.btnOk.TabIndex = 2;
+            this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = false;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             this.btnOk.MouseEnter += new System.EventHandler(this.button_MouseEnter);
@@ -102,7 +102,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnCancel.Location = new System.Drawing.Point(328, 432);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(72, 24);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -140,7 +140,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.btnClear.Location = new System.Drawing.Point(168, 432);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(72, 24);
-            this.btnClear.TabIndex = 0;
+            this.btnClear.TabIndex = 1;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -152,7 +152,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperFilter.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperFilter.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperFilter.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperFilter.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperFilter.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperFilter.BorderThickness = 1F;
             this.grouperFilter.Controls.Add(this.cboMessageCountOperator);
@@ -197,20 +197,21 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.cboMessageCountOperator.Location = new System.Drawing.Point(16, 96);
             this.cboMessageCountOperator.Name = "cboMessageCountOperator";
             this.cboMessageCountOperator.Size = new System.Drawing.Size(72, 21);
-            this.cboMessageCountOperator.TabIndex = 31;
+            this.cboMessageCountOperator.TabIndex = 3;
             this.cboMessageCountOperator.TextChanged += new System.EventHandler(this.cboMessageCountOperator_TextChanged);
             // 
             // txtMessageCount
             // 
+            this.txtMessageCount.AllowDecimal = false;
+            this.txtMessageCount.AllowNegative = false;
             this.txtMessageCount.AllowSpace = false;
             this.txtMessageCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMessageCount.Location = new System.Drawing.Point(96, 96);
             this.txtMessageCount.Name = "txtMessageCount";
             this.txtMessageCount.Size = new System.Drawing.Size(272, 20);
-            this.txtMessageCount.TabIndex = 30;
+            this.txtMessageCount.TabIndex = 4;
             this.txtMessageCount.TextChanged += new System.EventHandler(this.txtMessageCount_TextChanged);
-            this.txtMessageCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // lblMessageCount
             // 
@@ -219,7 +220,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.lblMessageCount.Location = new System.Drawing.Point(16, 80);
             this.lblMessageCount.Name = "lblMessageCount";
             this.lblMessageCount.Size = new System.Drawing.Size(109, 13);
-            this.lblMessageCount.TabIndex = 29;
+            this.lblMessageCount.TabIndex = 2;
             this.lblMessageCount.Text = "Message Count Filter:";
             // 
             // lblTimeFilters
@@ -229,7 +230,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.lblTimeFilters.Location = new System.Drawing.Point(16, 128);
             this.lblTimeFilters.Name = "lblTimeFilters";
             this.lblTimeFilters.Size = new System.Drawing.Size(63, 13);
-            this.lblTimeFilters.TabIndex = 27;
+            this.lblTimeFilters.TabIndex = 5;
             this.lblTimeFilters.Text = "Time Filters:";
             // 
             // txtStartsWith
@@ -240,7 +241,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.txtStartsWith.Name = "txtStartsWith";
             this.txtStartsWith.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtStartsWith.Size = new System.Drawing.Size(352, 20);
-            this.txtStartsWith.TabIndex = 0;
+            this.txtStartsWith.TabIndex = 1;
             this.txtStartsWith.TextChanged += new System.EventHandler(this.txtStartsWith_TextChanged);
             // 
             // timeFilterDataGridView
@@ -257,7 +258,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.timeFilterDataGridView.Location = new System.Drawing.Point(17, 145);
             this.timeFilterDataGridView.Name = "timeFilterDataGridView";
             this.timeFilterDataGridView.Size = new System.Drawing.Size(350, 166);
-            this.timeFilterDataGridView.TabIndex = 25;
+            this.timeFilterDataGridView.TabIndex = 6;
             this.timeFilterDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.timeFilterDataGridView_CellClick);
             this.timeFilterDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.filtersDataGridView_DataError);
             this.timeFilterDataGridView.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.filtersDataGridView_RowLeave);
@@ -273,7 +274,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.lblStartsWith.Location = new System.Drawing.Point(16, 32);
             this.lblStartsWith.Name = "lblStartsWith";
             this.lblStartsWith.Size = new System.Drawing.Size(112, 13);
-            this.lblStartsWith.TabIndex = 24;
+            this.lblStartsWith.TabIndex = 0;
             this.lblStartsWith.Text = "Path Starts With Filter:";
             // 
             // lblFilterExpression
@@ -284,7 +285,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.lblFilterExpression.Location = new System.Drawing.Point(16, 320);
             this.lblFilterExpression.Name = "lblFilterExpression";
             this.lblFilterExpression.Size = new System.Drawing.Size(86, 13);
-            this.lblFilterExpression.TabIndex = 23;
+            this.lblFilterExpression.TabIndex = 7;
             this.lblFilterExpression.Text = "Filter Expression:";
             // 
             // txtFilterExpression
@@ -296,7 +297,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Forms
             this.txtFilterExpression.Name = "txtFilterExpression";
             this.txtFilterExpression.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtFilterExpression.Size = new System.Drawing.Size(352, 50);
-            this.txtFilterExpression.TabIndex = 1;
+            this.txtFilterExpression.TabIndex = 8;
             this.txtFilterExpression.TextChanged += new System.EventHandler(this.txtFilterExpression_TextChanged);
             // 
             // FilterForm

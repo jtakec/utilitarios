@@ -1,7 +1,7 @@
 <package>
   <metadata>
     <id>servicebusexplorer</id>
-    <title>ServiceBusExplorer</title>
+    <title>Service Bus Explorer</title>
     <version>$version$</version>
     <authors>Paolo Salvatori</authors>
     <owners>Paolo Salvatori</owners>
@@ -14,7 +14,7 @@
     <copyright>Copyright 2017 Paolo Salvatori</copyright>
     <licenseUrl>https://github.com/paolosalvatori/ServiceBusExplorer#license</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <iconUrl>https://github.com/paolosalvatori/ServiceBusExplorer/master/src/ServiceBusExplorer/servicebusexplorer.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/paolosalvatori/ServiceBusExplorer/main/src/ServiceBusExplorer/Icons/NewServiceBusExplorerLogo.ico</iconUrl>
     <docsUrl>https://github.com/paolosalvatori/ServiceBusExplorer/wiki</docsUrl>
     <releaseNotes>https://github.com/paolosalvatori/ServiceBusExplorer/releases</releaseNotes>
     <dependencies></dependencies>

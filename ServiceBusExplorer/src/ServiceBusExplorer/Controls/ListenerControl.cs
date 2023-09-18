@@ -35,14 +35,16 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Azure.ServiceBusExplorer.Forms;
-using Microsoft.Azure.ServiceBusExplorer.Helpers;
+using ServiceBusExplorer.Forms;
+using ServiceBusExplorer.Helpers;
 using Microsoft.ServiceBus.Messaging;
 using FastColoredTextBoxNS;
+using ServiceBusExplorer.UIHelpers;
+using ServiceBusExplorer.Utilities.Helpers;
 
 #endregion
 
-namespace Microsoft.Azure.ServiceBusExplorer.Controls
+namespace ServiceBusExplorer.Controls
 {
     public partial class ListenerControl : UserControl
     {
@@ -72,7 +74,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
         private const string SelectEntityGrouperTitle = "Forward To";
         private const string SelectEntityLabelText = "Target Queue or Topic:";
         private const string DoubleClickMessage = "Double-click a row to repair and resubmit the corresponding message.";
-        private const string MessageSentMessage = "[{0}] messages where sent to [{1}]";
+        private const string MessageSentMessage = "[{0}] messages were sent to [{1}]";
         private const string FilterExpressionTitle = "Define Filter Expression";
         private const string FilterExpressionLabel = "Filter Expression";
         private const string FilterExpressionNotValidMessage = "The filter expression [{0}] is not valid: {1}";
@@ -622,9 +624,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
 
             LanguageDetector.SetFormattedMessage(serviceBusHelper, brokeredMessage, txtMessageText);
 
-            var listViewItems = brokeredMessage.Properties.Select(p => new ListViewItem(new[] { p.Key, (p.Value ?? string.Empty).ToString() })).ToArray();
-            messagePropertyListView.Items.Clear();
-            messagePropertyListView.Items.AddRange(listViewItems);
+            messageCustomPropertyGrid.SelectedObject = new DictionaryPropertyGridAdapter<string, object>(brokeredMessage.Properties);
         }
 
         private void tabPageMessages_Resize(object sender, EventArgs e)
@@ -635,7 +635,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 messagesSplitContainer.SuspendLayout();
                 grouperMessageCustomProperties.Size = new Size(grouperMessageCustomProperties.Size.Width, messageMainSplitContainer.Panel2.Size.Height);
                 messagePropertyGrid.Size = new Size(grouperMessageSystemProperties.Size.Width - 32, messagePropertyGrid.Size.Height);
-                messagePropertyListView.Size = new Size(grouperMessageCustomProperties.Size.Width - 32, messagePropertyListView.Size.Height);
+                messageCustomPropertyGrid.Size = new Size(grouperMessageCustomProperties.Size.Width - 32, messageCustomPropertyGrid.Size.Height);
                 grouperMessageCustomPropertiesWidth = grouperMessageCustomProperties.Width;
             }
             finally
@@ -691,8 +691,8 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
 
         private void grouperMessageCustomProperties_CustomPaint(PaintEventArgs obj)
         {
-            messagePropertyListView.Size = new Size(grouperMessageCustomProperties.Size.Width - (messagePropertyListView.Location.X * 2),
-                                                    grouperMessageCustomProperties.Size.Height - messagePropertyListView.Location.Y - messagePropertyListView.Location.X);
+            messageCustomPropertyGrid.Size = new Size(grouperMessageCustomProperties.Size.Width - (messageCustomPropertyGrid.Location.X * 2),
+                                                    grouperMessageCustomProperties.Size.Height - messageCustomPropertyGrid.Location.Y - messageCustomPropertyGrid.Location.X);
         }
 
         private void grouperMessageSystemProperties_CustomPaint(PaintEventArgs obj)
@@ -710,6 +710,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             messagesDataGridView.Rows[e.RowIndex].Selected = true;
             var multipleSelectedRows = messagesDataGridView.SelectedRows.Count > 1;
             repairAndResubmitMessageToolStripMenuItem.Visible = !multipleSelectedRows;
+            resubmitMessageToolStripMenuItem.Visible = !multipleSelectedRows;
             saveSelectedMessageToolStripMenuItem.Visible = !multipleSelectedRows;
             resubmitSelectedMessagesInBatchModeToolStripMenuItem.Visible = multipleSelectedRows;
             saveSelectedMessagesToolStripMenuItem.Visible = multipleSelectedRows;
@@ -721,7 +722,17 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             messagesDataGridView_CellDoubleClick(messagesDataGridView, new DataGridViewCellEventArgs(0, currentMessageRowIndex));
         }
 
+        private async void resubmitMessageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await ResubmitSelectedMessages();
+        }
+
         private async void resubmitSelectedMessagesInBatchModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await ResubmitSelectedMessages();
+        }
+
+        private async Task ResubmitSelectedMessages()
         {
             try
             {
@@ -729,6 +740,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 {
                     return;
                 }
+
                 string entityPath;
                 using (var form = new SelectEntityForm(SelectEntityDialogTitle, SelectEntityGrouperTitle, SelectEntityLabelText))
                 {
@@ -736,40 +748,44 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                     {
                         return;
                     }
+
                     if (string.IsNullOrWhiteSpace(form.Path))
                     {
                         return;
                     }
+
                     entityPath = form.Path;
                 }
+
                 var sent = 0;
                 var messageSender = await serviceBusHelper.MessagingFactory.CreateMessageSenderAsync(entityPath);
                 var messages = messagesDataGridView.SelectedRows.Cast<DataGridViewRow>().Select(r =>
                 {
                     var message = r.DataBoundItem as BrokeredMessage;
-                    serviceBusHelper.GetMessageText(message, out var bodyType);
+                    serviceBusHelper.GetMessageText(message, MainForm.SingletonMainForm.UseAscii, out var bodyType);
                     if (bodyType == BodyType.Wcf)
                     {
-                        var wcfUri = serviceBusHelper.IsCloudNamespace ?
-                                         new Uri(serviceBusHelper.NamespaceUri, messageSender.Path) :
-                                         new UriBuilder
-                                         {
-                                             Host = serviceBusHelper.NamespaceUri.Host,
-                                             Path = $"{serviceBusHelper.NamespaceUri.AbsolutePath}/{messageSender.Path}",
-                                             Scheme = "sb"
-                                         }.Uri;
+                        var wcfUri = serviceBusHelper.IsCloudNamespace
+                            ? new Uri(serviceBusHelper.NamespaceUri, messageSender.Path)
+                            : new UriBuilder
+                            {
+                                Host = serviceBusHelper.NamespaceUri.Host,
+                                Path = $"{serviceBusHelper.NamespaceUri.AbsolutePath}/{messageSender.Path}",
+                                Scheme = "sb"
+                            }.Uri;
                         return serviceBusHelper.CreateMessageForWcfReceiver(message,
-                                                                            0,
-                                                                            false,
-                                                                            false,
-                                                                            wcfUri);
+                            0,
+                            false,
+                            false,
+                            wcfUri);
                     }
+
                     return serviceBusHelper.CreateMessageForApiReceiver(message,
-                                                                        0,
-                                                                        false,
-                                                                        false,
-                                                                        bodyType,
-                                                                        null);
+                        0,
+                        false,
+                        false,
+                        bodyType,
+                        null);
                 });
                 IEnumerable<BrokeredMessage> brokeredMessages = messages as IList<BrokeredMessage> ?? messages.ToList();
                 if (brokeredMessages.Any())
@@ -777,6 +793,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                     sent = brokeredMessages.Count();
                     await messageSender.SendBatchAsync(brokeredMessages);
                 }
+
                 writeToLog(string.Format(MessageSentMessage, sent, entityPath));
             }
             catch (Exception ex)
@@ -1040,7 +1057,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                     containerForm.Clear();
                 }
                 txtMessageText.Text = null;
-                messagePropertyListView.Clear();
+                messageCustomPropertyGrid.SelectedObject = null;
                 messagePropertyGrid.SelectedObject = null;
             }
             catch (Exception ex)
@@ -1763,7 +1780,8 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 }
                 using (var writer = new StreamWriter(saveFileDialog.FileName))
                 {
-                    var bodies = brokeredMessages.Select(bm => serviceBusHelper.GetMessageText(bm, out _));
+                    var bodies = brokeredMessages.Select(bm => serviceBusHelper.GetMessageText(bm,
+                        MainForm.SingletonMainForm.UseAscii, out _));
                     writer.Write(MessageSerializationHelper.Serialize(brokeredMessages, bodies));
                 }
             }

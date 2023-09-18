@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Azure.ServiceBusExplorer.Controls
+﻿namespace ServiceBusExplorer.Controls
 {
     partial class PartitionListenerControl
     {
@@ -28,52 +28,52 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.tabPageListener = new System.Windows.Forms.TabPage();
-            this.grouperStatistics = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperStatistics = new ServiceBusExplorer.Controls.Grouper();
             this.cboMessageSizePerSecond = new System.Windows.Forms.ComboBox();
             this.cboAverageDuration = new System.Windows.Forms.ComboBox();
             this.cboEventDataPerSecond = new System.Windows.Forms.ComboBox();
             this.lblMessageSizePerSecond = new System.Windows.Forms.Label();
-            this.txtMessageSizePerSecond = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtMessageSizePerSecond = new ServiceBusExplorer.Controls.NumericTextBox();
             this.lblAverageTime = new System.Windows.Forms.Label();
-            this.txtAverageDuration = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
-            this.txtEventDataTotal = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtAverageDuration = new ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtEventDataTotal = new ServiceBusExplorer.Controls.NumericTextBox();
             this.lblEventDataTotal = new System.Windows.Forms.Label();
-            this.txtEventDataPerSecond = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtEventDataPerSecond = new ServiceBusExplorer.Controls.NumericTextBox();
             this.lblEventDataPerSecond = new System.Windows.Forms.Label();
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.grouperPartitionInformation = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperPartitionInformation = new ServiceBusExplorer.Controls.Grouper();
             this.lblPartitionInformation = new System.Windows.Forms.Label();
             this.lblPartition = new System.Windows.Forms.Label();
             this.cboPartition = new System.Windows.Forms.ComboBox();
             this.propertyListView = new System.Windows.Forms.ListView();
             this.nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.valueColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.grouperOptions = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperOptions = new ServiceBusExplorer.Controls.Grouper();
             this.lblStartingDateTimeUtc = new System.Windows.Forms.Label();
             this.pickerStartingDateTimeUtc = new System.Windows.Forms.DateTimePicker();
             this.checkBoxOffsetInclusive = new System.Windows.Forms.CheckBox();
-            this.txtMaxBatchSize = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtMaxBatchSize = new ServiceBusExplorer.Controls.NumericTextBox();
             this.lblMaxBatchSize = new System.Windows.Forms.Label();
             this.checkBoxCheckpoint = new System.Windows.Forms.CheckBox();
-            this.txtReceiveTimeout = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtReceiveTimeout = new ServiceBusExplorer.Controls.NumericTextBox();
             this.lblReceiveTimeout = new System.Windows.Forms.Label();
             this.checkBoxGraph = new System.Windows.Forms.CheckBox();
             this.checkBoxLogging = new System.Windows.Forms.CheckBox();
             this.checkBoxTrackMessages = new System.Windows.Forms.CheckBox();
             this.checkBoxVerbose = new System.Windows.Forms.CheckBox();
-            this.txtRefreshInformation = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtRefreshInformation = new ServiceBusExplorer.Controls.NumericTextBox();
             this.lblRefreshInformation = new System.Windows.Forms.Label();
             this.tabPageEventData = new System.Windows.Forms.TabPage();
             this.eventDataSplitContainer = new System.Windows.Forms.SplitContainer();
             this.eventDataMainSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.grouperMessageList = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessageList = new ServiceBusExplorer.Controls.Grouper();
             this.eventDataDataGridView = new System.Windows.Forms.DataGridView();
-            this.grouperMessageText = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessageText = new ServiceBusExplorer.Controls.Grouper();
             this.txtMessageText = new FastColoredTextBoxNS.FastColoredTextBox();
             this.eventDataPropertiesSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.grouperMessageProperties = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessageProperties = new ServiceBusExplorer.Controls.Grouper();
             this.eventDataPropertyGrid = new System.Windows.Forms.PropertyGrid();
-            this.grouperEventDataCustomProperties = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperEventDataCustomProperties = new ServiceBusExplorer.Controls.Grouper();
             this.eventDataPropertyListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -150,7 +150,7 @@
             this.btnStart.Location = new System.Drawing.Point(840, 504);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(72, 24);
-            this.btnStart.TabIndex = 3;
+            this.btnStart.TabIndex = 4;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -171,7 +171,7 @@
             this.mainTabControl.Name = "mainTabControl";
             this.mainTabControl.SelectedIndex = 0;
             this.mainTabControl.Size = new System.Drawing.Size(976, 480);
-            this.mainTabControl.TabIndex = 11;
+            this.mainTabControl.TabIndex = 0;
             this.mainTabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mainTabControl_DrawItem);
             // 
             // tabPageListener
@@ -193,7 +193,7 @@
             this.grouperStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperStatistics.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperStatistics.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperStatistics.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperStatistics.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperStatistics.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperStatistics.BorderThickness = 1F;
             this.grouperStatistics.Controls.Add(this.cboMessageSizePerSecond);
@@ -221,7 +221,7 @@
             this.grouperStatistics.ShadowControl = false;
             this.grouperStatistics.ShadowThickness = 1;
             this.grouperStatistics.Size = new System.Drawing.Size(312, 120);
-            this.grouperStatistics.TabIndex = 127;
+            this.grouperStatistics.TabIndex = 2;
             this.grouperStatistics.CustomPaint += new System.Action<System.Windows.Forms.PaintEventArgs>(this.grouperStatistics_CustomPaint);
             // 
             // cboMessageSizePerSecond
@@ -232,7 +232,7 @@
             this.cboMessageSizePerSecond.Location = new System.Drawing.Point(248, 89);
             this.cboMessageSizePerSecond.Name = "cboMessageSizePerSecond";
             this.cboMessageSizePerSecond.Size = new System.Drawing.Size(48, 21);
-            this.cboMessageSizePerSecond.TabIndex = 34;
+            this.cboMessageSizePerSecond.TabIndex = 10;
             this.cboMessageSizePerSecond.SelectedIndexChanged += new System.EventHandler(this.cboMessageSizePerSecond_SelectedIndexChanged);
             // 
             // cboAverageDuration
@@ -244,7 +244,7 @@
             this.cboAverageDuration.Location = new System.Drawing.Point(96, 89);
             this.cboAverageDuration.Name = "cboAverageDuration";
             this.cboAverageDuration.Size = new System.Drawing.Size(48, 21);
-            this.cboAverageDuration.TabIndex = 33;
+            this.cboAverageDuration.TabIndex = 7;
             this.cboAverageDuration.SelectedIndexChanged += new System.EventHandler(this.cboAverageTime_SelectedIndexChanged);
             // 
             // cboEventDataPerSecond
@@ -255,7 +255,7 @@
             this.cboEventDataPerSecond.Location = new System.Drawing.Point(248, 49);
             this.cboEventDataPerSecond.Name = "cboEventDataPerSecond";
             this.cboEventDataPerSecond.Size = new System.Drawing.Size(48, 21);
-            this.cboEventDataPerSecond.TabIndex = 31;
+            this.cboEventDataPerSecond.TabIndex = 4;
             this.cboEventDataPerSecond.SelectedIndexChanged += new System.EventHandler(this.cboEventDataPerSecond_SelectedIndexChanged);
             // 
             // lblMessageSizePerSecond
@@ -265,16 +265,18 @@
             this.lblMessageSizePerSecond.Location = new System.Drawing.Point(160, 72);
             this.lblMessageSizePerSecond.Name = "lblMessageSizePerSecond";
             this.lblMessageSizePerSecond.Size = new System.Drawing.Size(45, 13);
-            this.lblMessageSizePerSecond.TabIndex = 30;
+            this.lblMessageSizePerSecond.TabIndex = 8;
             this.lblMessageSizePerSecond.Text = "KB/Sec";
             // 
             // txtMessageSizePerSecond
             // 
+            this.txtMessageSizePerSecond.AllowDecimal = false;
+            this.txtMessageSizePerSecond.AllowNegative = false;
             this.txtMessageSizePerSecond.AllowSpace = false;
             this.txtMessageSizePerSecond.Location = new System.Drawing.Point(160, 88);
             this.txtMessageSizePerSecond.Name = "txtMessageSizePerSecond";
             this.txtMessageSizePerSecond.Size = new System.Drawing.Size(88, 20);
-            this.txtMessageSizePerSecond.TabIndex = 29;
+            this.txtMessageSizePerSecond.TabIndex = 9;
             // 
             // lblAverageTime
             // 
@@ -283,24 +285,28 @@
             this.lblAverageTime.Location = new System.Drawing.Point(16, 72);
             this.lblAverageTime.Name = "lblAverageTime";
             this.lblAverageTime.Size = new System.Drawing.Size(121, 13);
-            this.lblAverageTime.TabIndex = 28;
+            this.lblAverageTime.TabIndex = 5;
             this.lblAverageTime.Text = "Average Duration (Sec):";
             // 
             // txtAverageDuration
             // 
+            this.txtAverageDuration.AllowDecimal = false;
+            this.txtAverageDuration.AllowNegative = false;
             this.txtAverageDuration.AllowSpace = false;
             this.txtAverageDuration.Location = new System.Drawing.Point(16, 88);
             this.txtAverageDuration.Name = "txtAverageDuration";
             this.txtAverageDuration.Size = new System.Drawing.Size(80, 20);
-            this.txtAverageDuration.TabIndex = 27;
+            this.txtAverageDuration.TabIndex = 6;
             // 
             // txtEventDataTotal
             // 
+            this.txtEventDataTotal.AllowDecimal = false;
+            this.txtEventDataTotal.AllowNegative = false;
             this.txtEventDataTotal.AllowSpace = false;
             this.txtEventDataTotal.Location = new System.Drawing.Point(16, 48);
             this.txtEventDataTotal.Name = "txtEventDataTotal";
             this.txtEventDataTotal.Size = new System.Drawing.Size(128, 20);
-            this.txtEventDataTotal.TabIndex = 26;
+            this.txtEventDataTotal.TabIndex = 1;
             // 
             // lblEventDataTotal
             // 
@@ -309,16 +315,18 @@
             this.lblEventDataTotal.Location = new System.Drawing.Point(16, 32);
             this.lblEventDataTotal.Name = "lblEventDataTotal";
             this.lblEventDataTotal.Size = new System.Drawing.Size(70, 13);
-            this.lblEventDataTotal.TabIndex = 25;
+            this.lblEventDataTotal.TabIndex = 0;
             this.lblEventDataTotal.Text = "Events Total:";
             // 
             // txtEventDataPerSecond
             // 
+            this.txtEventDataPerSecond.AllowDecimal = false;
+            this.txtEventDataPerSecond.AllowNegative = false;
             this.txtEventDataPerSecond.AllowSpace = false;
             this.txtEventDataPerSecond.Location = new System.Drawing.Point(160, 48);
             this.txtEventDataPerSecond.Name = "txtEventDataPerSecond";
             this.txtEventDataPerSecond.Size = new System.Drawing.Size(88, 20);
-            this.txtEventDataPerSecond.TabIndex = 24;
+            this.txtEventDataPerSecond.TabIndex = 3;
             // 
             // lblEventDataPerSecond
             // 
@@ -327,7 +335,7 @@
             this.lblEventDataPerSecond.Location = new System.Drawing.Point(160, 32);
             this.lblEventDataPerSecond.Name = "lblEventDataPerSecond";
             this.lblEventDataPerSecond.Size = new System.Drawing.Size(67, 13);
-            this.lblEventDataPerSecond.TabIndex = 23;
+            this.lblEventDataPerSecond.TabIndex = 2;
             this.lblEventDataPerSecond.Text = "Events/Sec:";
             // 
             // chart
@@ -408,7 +416,7 @@
             this.chart.Series.Add(series2);
             this.chart.Series.Add(series3);
             this.chart.Size = new System.Drawing.Size(616, 312);
-            this.chart.TabIndex = 128;
+            this.chart.TabIndex = 0;
             title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             title1.Name = "Title";
             title1.ShadowColor = System.Drawing.Color.Transparent;
@@ -422,7 +430,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperPartitionInformation.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperPartitionInformation.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperPartitionInformation.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperPartitionInformation.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperPartitionInformation.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperPartitionInformation.BorderThickness = 1F;
             this.grouperPartitionInformation.Controls.Add(this.lblPartitionInformation);
@@ -443,7 +451,7 @@
             this.grouperPartitionInformation.ShadowControl = false;
             this.grouperPartitionInformation.ShadowThickness = 1;
             this.grouperPartitionInformation.Size = new System.Drawing.Size(312, 304);
-            this.grouperPartitionInformation.TabIndex = 7;
+            this.grouperPartitionInformation.TabIndex = 3;
             this.grouperPartitionInformation.CustomPaint += new System.Action<System.Windows.Forms.PaintEventArgs>(this.grouperPartitionInformation_CustomPaint);
             // 
             // lblPartitionInformation
@@ -453,7 +461,7 @@
             this.lblPartitionInformation.Location = new System.Drawing.Point(16, 80);
             this.lblPartitionInformation.Name = "lblPartitionInformation";
             this.lblPartitionInformation.Size = new System.Drawing.Size(62, 13);
-            this.lblPartitionInformation.TabIndex = 36;
+            this.lblPartitionInformation.TabIndex = 2;
             this.lblPartitionInformation.Text = "Information:";
             // 
             // lblPartition
@@ -463,7 +471,7 @@
             this.lblPartition.Location = new System.Drawing.Point(16, 32);
             this.lblPartition.Name = "lblPartition";
             this.lblPartition.Size = new System.Drawing.Size(48, 13);
-            this.lblPartition.TabIndex = 35;
+            this.lblPartition.TabIndex = 0;
             this.lblPartition.Text = "Partition:";
             // 
             // cboPartition
@@ -476,7 +484,7 @@
             this.cboPartition.Location = new System.Drawing.Point(16, 48);
             this.cboPartition.Name = "cboPartition";
             this.cboPartition.Size = new System.Drawing.Size(280, 21);
-            this.cboPartition.TabIndex = 34;
+            this.cboPartition.TabIndex = 1;
             this.cboPartition.SelectedIndexChanged += new System.EventHandler(this.cboPartition_SelectedIndexChanged);
             // 
             // propertyListView
@@ -487,11 +495,12 @@
             this.propertyListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.nameColumnHeader,
             this.valueColumnHeader});
+            this.propertyListView.HideSelection = false;
             this.propertyListView.Location = new System.Drawing.Point(16, 96);
             this.propertyListView.Name = "propertyListView";
             this.propertyListView.OwnerDraw = true;
             this.propertyListView.Size = new System.Drawing.Size(280, 192);
-            this.propertyListView.TabIndex = 0;
+            this.propertyListView.TabIndex = 3;
             this.propertyListView.UseCompatibleStateImageBehavior = false;
             this.propertyListView.View = System.Windows.Forms.View.Details;
             this.propertyListView.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.listView_DrawColumnHeader);
@@ -515,7 +524,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperOptions.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperOptions.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperOptions.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperOptions.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperOptions.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperOptions.BorderThickness = 1F;
             this.grouperOptions.Controls.Add(this.lblStartingDateTimeUtc);
@@ -546,7 +555,7 @@
             this.grouperOptions.ShadowControl = false;
             this.grouperOptions.ShadowThickness = 1;
             this.grouperOptions.Size = new System.Drawing.Size(608, 112);
-            this.grouperOptions.TabIndex = 0;
+            this.grouperOptions.TabIndex = 1;
             this.grouperOptions.Resize += new System.EventHandler(this.grouperOptions_Resize);
             // 
             // lblStartingDateTimeUtc
@@ -557,21 +566,21 @@
             this.lblStartingDateTimeUtc.Location = new System.Drawing.Point(424, 32);
             this.lblStartingDateTimeUtc.Name = "lblStartingDateTimeUtc";
             this.lblStartingDateTimeUtc.Size = new System.Drawing.Size(123, 13);
-            this.lblStartingDateTimeUtc.TabIndex = 149;
+            this.lblStartingDateTimeUtc.TabIndex = 6;
             this.lblStartingDateTimeUtc.Text = "Starting Date Time UTC:";
             // 
             // pickerStartingDateTimeUtc
             // 
             this.pickerStartingDateTimeUtc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pickerStartingDateTimeUtc.Checked = false;
-            this.pickerStartingDateTimeUtc.CustomFormat = "dd MMM yyyy hh:mm tt";
+            this.pickerStartingDateTimeUtc.CustomFormat = "dd MMM yyyy HH:mm:ss";
             this.pickerStartingDateTimeUtc.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.pickerStartingDateTimeUtc.Location = new System.Drawing.Point(424, 48);
             this.pickerStartingDateTimeUtc.MinDate = new System.DateTime(2014, 1, 1, 0, 0, 0, 0);
             this.pickerStartingDateTimeUtc.Name = "pickerStartingDateTimeUtc";
             this.pickerStartingDateTimeUtc.ShowCheckBox = true;
             this.pickerStartingDateTimeUtc.Size = new System.Drawing.Size(168, 20);
-            this.pickerStartingDateTimeUtc.TabIndex = 148;
+            this.pickerStartingDateTimeUtc.TabIndex = 7;
             // 
             // checkBoxOffsetInclusive
             // 
@@ -582,17 +591,19 @@
             this.checkBoxOffsetInclusive.Location = new System.Drawing.Point(400, 80);
             this.checkBoxOffsetInclusive.Name = "checkBoxOffsetInclusive";
             this.checkBoxOffsetInclusive.Size = new System.Drawing.Size(75, 17);
-            this.checkBoxOffsetInclusive.TabIndex = 10;
+            this.checkBoxOffsetInclusive.TabIndex = 12;
             this.checkBoxOffsetInclusive.Text = "Offset Inc.";
             this.checkBoxOffsetInclusive.UseVisualStyleBackColor = true;
             // 
             // txtMaxBatchSize
             // 
+            this.txtMaxBatchSize.AllowDecimal = false;
+            this.txtMaxBatchSize.AllowNegative = false;
             this.txtMaxBatchSize.AllowSpace = false;
             this.txtMaxBatchSize.Location = new System.Drawing.Point(288, 48);
             this.txtMaxBatchSize.Name = "txtMaxBatchSize";
             this.txtMaxBatchSize.Size = new System.Drawing.Size(120, 20);
-            this.txtMaxBatchSize.TabIndex = 4;
+            this.txtMaxBatchSize.TabIndex = 5;
             this.txtMaxBatchSize.Text = "100";
             // 
             // lblMaxBatchSize
@@ -602,7 +613,7 @@
             this.lblMaxBatchSize.Location = new System.Drawing.Point(288, 32);
             this.lblMaxBatchSize.Name = "lblMaxBatchSize";
             this.lblMaxBatchSize.Size = new System.Drawing.Size(84, 13);
-            this.lblMaxBatchSize.TabIndex = 147;
+            this.lblMaxBatchSize.TabIndex = 4;
             this.lblMaxBatchSize.Text = "Max Batch Size:";
             // 
             // checkBoxCheckpoint
@@ -613,17 +624,19 @@
             this.checkBoxCheckpoint.Location = new System.Drawing.Point(512, 80);
             this.checkBoxCheckpoint.Name = "checkBoxCheckpoint";
             this.checkBoxCheckpoint.Size = new System.Drawing.Size(80, 17);
-            this.checkBoxCheckpoint.TabIndex = 11;
+            this.checkBoxCheckpoint.TabIndex = 13;
             this.checkBoxCheckpoint.Text = "Checkpoint";
             this.checkBoxCheckpoint.UseVisualStyleBackColor = true;
             // 
             // txtReceiveTimeout
             // 
+            this.txtReceiveTimeout.AllowDecimal = false;
+            this.txtReceiveTimeout.AllowNegative = false;
             this.txtReceiveTimeout.AllowSpace = false;
             this.txtReceiveTimeout.Location = new System.Drawing.Point(152, 48);
             this.txtReceiveTimeout.Name = "txtReceiveTimeout";
             this.txtReceiveTimeout.Size = new System.Drawing.Size(120, 20);
-            this.txtReceiveTimeout.TabIndex = 1;
+            this.txtReceiveTimeout.TabIndex = 3;
             this.txtReceiveTimeout.Text = "30";
             // 
             // lblReceiveTimeout
@@ -633,7 +646,7 @@
             this.lblReceiveTimeout.Location = new System.Drawing.Point(152, 32);
             this.lblReceiveTimeout.Name = "lblReceiveTimeout";
             this.lblReceiveTimeout.Size = new System.Drawing.Size(117, 13);
-            this.lblReceiveTimeout.TabIndex = 142;
+            this.lblReceiveTimeout.TabIndex = 2;
             this.lblReceiveTimeout.Text = "Receive Timeout (sec):";
             // 
             // checkBoxGraph
@@ -645,7 +658,7 @@
             this.checkBoxGraph.Location = new System.Drawing.Point(304, 80);
             this.checkBoxGraph.Name = "checkBoxGraph";
             this.checkBoxGraph.Size = new System.Drawing.Size(55, 17);
-            this.checkBoxGraph.TabIndex = 9;
+            this.checkBoxGraph.TabIndex = 11;
             this.checkBoxGraph.Text = "Graph";
             this.checkBoxGraph.UseVisualStyleBackColor = true;
             this.checkBoxGraph.CheckedChanged += new System.EventHandler(this.checkBoxGraph_CheckedChanged);
@@ -659,7 +672,7 @@
             this.checkBoxLogging.Location = new System.Drawing.Point(16, 80);
             this.checkBoxLogging.Name = "checkBoxLogging";
             this.checkBoxLogging.Size = new System.Drawing.Size(64, 17);
-            this.checkBoxLogging.TabIndex = 6;
+            this.checkBoxLogging.TabIndex = 8;
             this.checkBoxLogging.Text = "Logging";
             this.checkBoxLogging.UseVisualStyleBackColor = true;
             this.checkBoxLogging.CheckedChanged += new System.EventHandler(this.checkBoxLogging_CheckedChanged);
@@ -673,7 +686,7 @@
             this.checkBoxTrackMessages.Location = new System.Drawing.Point(208, 80);
             this.checkBoxTrackMessages.Name = "checkBoxTrackMessages";
             this.checkBoxTrackMessages.Size = new System.Drawing.Size(68, 17);
-            this.checkBoxTrackMessages.TabIndex = 8;
+            this.checkBoxTrackMessages.TabIndex = 10;
             this.checkBoxTrackMessages.Text = "Tracking";
             this.checkBoxTrackMessages.UseVisualStyleBackColor = true;
             // 
@@ -684,17 +697,19 @@
             this.checkBoxVerbose.Location = new System.Drawing.Point(112, 80);
             this.checkBoxVerbose.Name = "checkBoxVerbose";
             this.checkBoxVerbose.Size = new System.Drawing.Size(65, 17);
-            this.checkBoxVerbose.TabIndex = 7;
+            this.checkBoxVerbose.TabIndex = 9;
             this.checkBoxVerbose.Text = "Verbose";
             this.checkBoxVerbose.UseVisualStyleBackColor = true;
             // 
             // txtRefreshInformation
             // 
+            this.txtRefreshInformation.AllowDecimal = false;
+            this.txtRefreshInformation.AllowNegative = false;
             this.txtRefreshInformation.AllowSpace = false;
             this.txtRefreshInformation.Location = new System.Drawing.Point(16, 48);
             this.txtRefreshInformation.Name = "txtRefreshInformation";
             this.txtRefreshInformation.Size = new System.Drawing.Size(120, 20);
-            this.txtRefreshInformation.TabIndex = 0;
+            this.txtRefreshInformation.TabIndex = 1;
             this.txtRefreshInformation.Text = "30";
             this.txtRefreshInformation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
@@ -705,7 +720,7 @@
             this.lblRefreshInformation.Location = new System.Drawing.Point(16, 32);
             this.lblRefreshInformation.Name = "lblRefreshInformation";
             this.lblRefreshInformation.Size = new System.Drawing.Size(111, 13);
-            this.lblRefreshInformation.TabIndex = 25;
+            this.lblRefreshInformation.TabIndex = 0;
             this.lblRefreshInformation.Text = "Refresh Interval (sec):";
             // 
             // tabPageEventData
@@ -764,7 +779,7 @@
             // 
             this.grouperMessageList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageList.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageList.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageList.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageList.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageList.BorderThickness = 1F;
             this.grouperMessageList.Controls.Add(this.eventDataDataGridView);
@@ -783,7 +798,7 @@
             this.grouperMessageList.ShadowControl = false;
             this.grouperMessageList.ShadowThickness = 1;
             this.grouperMessageList.Size = new System.Drawing.Size(608, 212);
-            this.grouperMessageList.TabIndex = 17;
+            this.grouperMessageList.TabIndex = 0;
             this.grouperMessageList.CustomPaint += new System.Action<System.Windows.Forms.PaintEventArgs>(this.grouperMessageList_CustomPaint);
             // 
             // eventDataDataGridView
@@ -823,7 +838,7 @@
             // 
             this.grouperMessageText.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageText.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageText.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageText.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageText.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageText.BorderThickness = 1F;
             this.grouperMessageText.Controls.Add(this.txtMessageText);
@@ -842,7 +857,7 @@
             this.grouperMessageText.ShadowControl = false;
             this.grouperMessageText.ShadowThickness = 1;
             this.grouperMessageText.Size = new System.Drawing.Size(608, 212);
-            this.grouperMessageText.TabIndex = 26;
+            this.grouperMessageText.TabIndex = 0;
             // 
             // txtMessageText
             // 
@@ -902,7 +917,7 @@
             // 
             this.grouperMessageProperties.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageProperties.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageProperties.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageProperties.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageProperties.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageProperties.BorderThickness = 1F;
             this.grouperMessageProperties.Controls.Add(this.eventDataPropertyGrid);
@@ -921,7 +936,7 @@
             this.grouperMessageProperties.ShadowControl = false;
             this.grouperMessageProperties.ShadowThickness = 1;
             this.grouperMessageProperties.Size = new System.Drawing.Size(312, 212);
-            this.grouperMessageProperties.TabIndex = 20;
+            this.grouperMessageProperties.TabIndex = 0;
             // 
             // eventDataPropertyGrid
             // 
@@ -934,14 +949,14 @@
             this.eventDataPropertyGrid.Location = new System.Drawing.Point(16, 32);
             this.eventDataPropertyGrid.Name = "eventDataPropertyGrid";
             this.eventDataPropertyGrid.Size = new System.Drawing.Size(280, 164);
-            this.eventDataPropertyGrid.TabIndex = 2;
+            this.eventDataPropertyGrid.TabIndex = 0;
             this.eventDataPropertyGrid.ToolbarVisible = false;
             // 
             // grouperEventDataCustomProperties
             // 
             this.grouperEventDataCustomProperties.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperEventDataCustomProperties.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperEventDataCustomProperties.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperEventDataCustomProperties.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperEventDataCustomProperties.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperEventDataCustomProperties.BorderThickness = 1F;
             this.grouperEventDataCustomProperties.Controls.Add(this.eventDataPropertyListView);
@@ -960,7 +975,7 @@
             this.grouperEventDataCustomProperties.ShadowControl = false;
             this.grouperEventDataCustomProperties.ShadowThickness = 1;
             this.grouperEventDataCustomProperties.Size = new System.Drawing.Size(312, 212);
-            this.grouperEventDataCustomProperties.TabIndex = 27;
+            this.grouperEventDataCustomProperties.TabIndex = 0;
             // 
             // eventDataPropertyListView
             // 
@@ -970,6 +985,7 @@
             this.eventDataPropertyListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+            this.eventDataPropertyListView.HideSelection = false;
             this.eventDataPropertyListView.Location = new System.Drawing.Point(16, 32);
             this.eventDataPropertyListView.Name = "eventDataPropertyListView";
             this.eventDataPropertyListView.OwnerDraw = true;
@@ -1040,7 +1056,7 @@
             this.btnClear.Location = new System.Drawing.Point(760, 504);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(72, 24);
-            this.btnClear.TabIndex = 12;
+            this.btnClear.TabIndex = 3;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -1057,7 +1073,7 @@
             this.cboReceiverInspector.Location = new System.Drawing.Point(128, 506);
             this.cboReceiverInspector.Name = "cboReceiverInspector";
             this.cboReceiverInspector.Size = new System.Drawing.Size(512, 21);
-            this.cboReceiverInspector.TabIndex = 156;
+            this.cboReceiverInspector.TabIndex = 2;
             // 
             // lblReceiverInspector
             // 
@@ -1067,7 +1083,7 @@
             this.lblReceiverInspector.Location = new System.Drawing.Point(16, 510);
             this.lblReceiverInspector.Name = "lblReceiverInspector";
             this.lblReceiverInspector.Size = new System.Drawing.Size(111, 13);
-            this.lblReceiverInspector.TabIndex = 155;
+            this.lblReceiverInspector.TabIndex = 1;
             this.lblReceiverInspector.Text = "Event Data Inspector:";
             // 
             // partitionInformationContextMenuStrip

@@ -21,6 +21,14 @@
 
 #region Using Directives
 
+using Microsoft.ServiceBus.Messaging;
+
+using ServiceBusExplorer.Forms;
+using ServiceBusExplorer.Helpers;
+using ServiceBusExplorer.ServiceBus.Helpers;
+using ServiceBusExplorer.UIHelpers;
+using ServiceBusExplorer.Utilities.Helpers;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,17 +37,12 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Azure.ServiceBusExplorer.Forms;
-using Microsoft.Azure.ServiceBusExplorer.Helpers;
-using Microsoft.ServiceBus.Messaging;
-using FastColoredTextBoxNS;
 
 #endregion
 
-namespace Microsoft.Azure.ServiceBusExplorer.Controls
+namespace ServiceBusExplorer.Controls
 {
     public partial class HandleSubscriptionControl : UserControl
     {
@@ -88,34 +91,20 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
         private const string NameCannotBeNull = "The Name field cannot be null.";
         private const string MaxDeliveryCountMustBeANumber = "The MaxDeliveryCount field must be a number.";
 
-        private const string DefaultMessageTimeToLiveDaysMustBeANumber = "The Days value of the DefaultMessageTimeToLive field must be a number.";
-        private const string DefaultMessageTimeToLiveHoursMustBeANumber = "The Hours value of the DefaultMessageTimeToLive field must be a number.";
-        private const string DefaultMessageTimeToLiveMinutesMustBeANumber = "The Minutes value of the DefaultMessageTimeToLive field must be a number.";
-        private const string DefaultMessageTimeToLiveSecondsMustBeANumber = "The Seconds value of the DefaultMessageTimeToLive field must be a number.";
-        private const string DefaultMessageTimeToLiveMillisecondsMustBeANumber = "The Milliseconds value of the DefaultMessageTimeToLive field must be a number.";
+        const string DefaultMessageTimeToLive = "DefaultMessageTimeToLive";
+        const string LockDuration = "LockDuration";
+        const string AutoDeleteOnIdle = "AutoDeleteOnIdle";
 
-        private const string LockDurationDaysMustBeANumber = "The Days value of the LockDuration field must be a number.";
-        private const string LockDurationHoursMustBeANumber = "The Hours value of the LockDuration field must be a number.";
-        private const string LockDurationMinutesMustBeANumber = "The Minutes value of the LockDuration field must be a number.";
-        private const string LockDurationSecondsMustBeANumber = "The Seconds value of the LockDuration field must be a number.";
-        private const string LockDurationMillisecondsMustBeANumber = "The Milliseconds value of the LockDuration field must be a number.";
-
-        private const string AutoDeleteOnIdleDaysMustBeANumber = "The Days value of the AutoDeleteOnIdle field must be a number.";
-        private const string AutoDeleteOnIdleHoursMustBeANumber = "The Hours value of the AutoDeleteOnIdle field must be a number.";
-        private const string AutoDeleteOnIdleMinutesMustBeANumber = "The Minutes value of the AutoDeleteOnIdle field must be a number.";
-        private const string AutoDeleteOnIdleSecondsMustBeANumber = "The Seconds value of the AutoDeleteOnIdle field must be a number.";
-        private const string AutoDeleteOnIdleMillisecondsMustBeANumber = "The Milliseconds value of the AutoDeleteOnIdle field must be a number.";
-        
         private const string MessagesPeekedFromTheSubscription = "[{0}] messages peeked from the subscription [{1}].";
-        private const string MessagesPeekedFromTheDeadletterQueue = "[{0}] messages peeked from the deadletter queue of the subscription [{1}].";
+        private const string MessagesPeekedFromTheDeadletterQueue = "[{0}] messages peeked from the dead-letter queue of the subscription [{1}].";
         private const string MessagesReceivedFromTheSubscription = "[{0}] messages received from the subscription [{1}].";
-        private const string MessagesReceivedFromTheDeadletterQueue = "[{0}] messages received from the deadletter queue of the subscription [{1}].";
+        private const string MessagesReceivedFromTheDeadletterQueue = "[{0}] messages received from the dead-letter queue of the subscription [{1}].";
         private const string SessionsGotFromTheSubscription = "[{0}] sessions retrieved for the subscription [{1}].";
         private const string NoMessageReceivedFromTheSubscription = "The timeout  of [{0}] seconds has expired and no message was retrieved from the subscription [{1}].";
-        private const string NoMessageReceivedFromTheDeadletterQueue = "The timeout  of [{0}] seconds has expired and no message was retrieved from the deadletter queue of the subscription [{1}].";
+        private const string NoMessageReceivedFromTheDeadletterQueue = "The timeout  of [{0}] seconds has expired and no message was retrieved from the dead-letter queue of the subscription [{1}].";
 
         private const string RetrieveMessagesFromSubscription = "Retrieve messages from subscription";
-        private const string RetrieveMessagesFromDeadletterQueue = "Retrieve messages from deadletter queue";
+        private const string RetrieveMessagesFromDeadletterQueue = "Retrieve messages from dead-letter queue";
         private const string SelectEntityDialogTitle = "Select a target Queue or Topic";
         private const string SelectEntityGrouperTitle = "Forward To";
         private const string SelectEntityLabelText = "Target Queue or Topic:";
@@ -125,7 +114,8 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
         private const string FilterExpressionTitle = "Define Filter Expression";
         private const string FilterExpressionLabel = "Filter Expression";
         private const string FilterExpressionNotValidMessage = "The filter expression [{0}] is not valid: {1}";
-        private const string FilterExpressionAppliedMessage = "The filter expression [{0}] has been successfully applied. [{1}] messages retrieved.";
+        private const string FilterExpressionAppliedMessage =
+            "The filter expression [{0}] from {1} to {2} has been successfully applied. [{3}] messages retrieved.";
         private const string FilterExpressionRemovedMessage = "The filter expression has been removed.";
 
         //***************************
@@ -136,12 +126,12 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
         private const string FilterExpressionTooltip = "Gets or sets the filter expression of the default rule.";
         private const string FilterActionTooltip = "Gets or sets the filter action of the default rule.";
         private const string LockDurationTooltip = "Gets or sets the lock duration timespan associated with this queue.";
-        private const string MaxDeliveryCountTooltip = "Gets or sets the maximum delivery count. A message is automatically deadlettered after this number of deliveries.";
+        private const string MaxDeliveryCountTooltip = "Gets or sets the maximum delivery count. A message is automatically dead-lettered after this number of deliveries.";
         private const string UserMetadataTooltip = "Gets or sets the user metadata.";
         private const string AutoDeleteOnIdleTooltip = "Gets or sets the maximum period of idleness after which the queue is auto deleted.";
         private const string ForwardToTooltip = "Gets or sets the path to the recipient to which the message is forwarded.";
-        private const string ForwardDeadLetteredMessagesToTooltip = "Gets or sets the path to the recipient to which the dead lettered message is forwarded.";
-        
+        private const string ForwardDeadLetteredMessagesToTooltip = "Gets or sets the path to the recipient to which the dead-lettered message is forwarded.";
+
         //***************************
         // Property Labels
         //***************************
@@ -151,7 +141,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
         private const string UpdatedAt = "Updated At";
         private const string MessageCount = "Message Count";
         private const string ActiveMessageCount = "Active Message Count";
-        private const string DeadletterMessageCount = "DeadLetter Message Count";
+        private const string DeadletterMessageCount = "Dead-letter Message Count";
         private const string ScheduledMessageCount = "Scheduled Message Count";
         private const string TransferMessageCount = "Transfer Message Count";
         private const string TransferDeadLetterMessageCount = "Transfer DL Message Count";
@@ -193,22 +183,29 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
         private bool sorting;
         private string messagesFilterExpression;
         private string deadletterFilterExpression;
+        private DateTime? messagesFilterFromDate;
+        private DateTime? messagesFilterToDate;
+        private DateTime? deadletterFilterFromDate;
+        private DateTime? deadletterFilterToDate;
         private SortableBindingList<BrokeredMessage> messageBindingList;
         private SortableBindingList<BrokeredMessage> deadletterBindingList;
         private SortableBindingList<MessageSession> sessionBindingList;
         private bool buttonsMoved;
+        private readonly bool duplicateExistingSubscription;
         #endregion
-        
+
         #region Public Constructors
-        public HandleSubscriptionControl(WriteToLogDelegate writeToLog, ServiceBusHelper serviceBusHelper, SubscriptionWrapper subscriptionWrapper)
+        public HandleSubscriptionControl(WriteToLogDelegate writeToLog, ServiceBusHelper serviceBusHelper, SubscriptionWrapper subscriptionWrapper,
+            bool duplicateExistingSubscription = false)
         {
             this.writeToLog = writeToLog;
             this.serviceBusHelper = serviceBusHelper;
             this.subscriptionWrapper = subscriptionWrapper;
+            this.duplicateExistingSubscription = duplicateExistingSubscription;
 
             InitializeComponent();
             InitializeControls();
-        } 
+        }
         #endregion
 
         #region Public Events
@@ -238,7 +235,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 if (receiveModeForm.ShowDialog() == DialogResult.OK)
                 {
                     txtMessageText.Text = string.Empty;
-                    messagePropertyListView.Items.Clear();
+                    messageCustomPropertyGrid.SelectedObject = null;
                     messagePropertyGrid.SelectedObject = null;
                     var messageInspector = !string.IsNullOrEmpty(receiveModeForm.Inspector) &&
                                            serviceBusHelper.BrokeredMessageInspectors.ContainsKey(receiveModeForm.Inspector) ?
@@ -246,11 +243,11 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                                            null;
                     if (subscriptionWrapper.TopicDescription.EnablePartitioning)
                     {
-                        ReadMessagesOneAtTheTime(receiveModeForm.Peek, receiveModeForm.All, receiveModeForm.Count, messageInspector);
+                        ReadMessagesOneAtTheTime(receiveModeForm.Peek, receiveModeForm.All, receiveModeForm.Count, messageInspector, receiveModeForm.FromSequenceNumber);
                     }
                     else
                     {
-                        GetMessages(receiveModeForm.Peek, receiveModeForm.All, receiveModeForm.Count, messageInspector);
+                        GetMessages(receiveModeForm.Peek, receiveModeForm.All, receiveModeForm.Count, messageInspector, receiveModeForm.FromSequenceNumber);
                     }
                 }
             }
@@ -265,7 +262,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                     return;
                 }
                 txtDeadletterText.Text = string.Empty;
-                deadletterPropertyListView.Items.Clear();
+                deadletterCustomPropertyGrid.SelectedObject = null;
                 deadletterPropertyGrid.SelectedObject = null;
                 var messageInspector = !string.IsNullOrEmpty(receiveModeForm.Inspector) &&
                                        serviceBusHelper.BrokeredMessageInspectors.ContainsKey(receiveModeForm.Inspector) ?
@@ -273,11 +270,11 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                     null;
                 if (subscriptionWrapper.TopicDescription.EnablePartitioning)
                 {
-                    ReadDeadletterMessagesOneAtTheTime(receiveModeForm.Peek, receiveModeForm.All, receiveModeForm.Count, messageInspector);
+                    ReadDeadletterMessagesOneAtTheTime(receiveModeForm.Peek, receiveModeForm.All, receiveModeForm.Count, messageInspector, receiveModeForm.FromSequenceNumber);
                 }
                 else
                 {
-                    GetDeadletterMessages(receiveModeForm.Peek, receiveModeForm.All, receiveModeForm.Count, messageInspector);
+                    GetDeadletterMessages(receiveModeForm.Peek, receiveModeForm.All, receiveModeForm.Count, messageInspector, receiveModeForm.FromSequenceNumber);
                 }
             }
         }
@@ -291,7 +288,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                     return;
                 }
                 txtDeadletterText.Text = string.Empty;
-                deadletterPropertyListView.Items.Clear();
+                deadletterCustomPropertyGrid.SelectedObject = null;
                 deadletterPropertyGrid.SelectedObject = null;
                 var messageInspector = !string.IsNullOrEmpty(receiveModeForm.Inspector) &&
                                        serviceBusHelper.BrokeredMessageInspectors.ContainsKey(receiveModeForm.Inspector) ?
@@ -299,11 +296,11 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                     null;
                 if (subscriptionWrapper.TopicDescription.EnablePartitioning)
                 {
-                    ReadDeadletterMessagesOneAtTheTime(receiveModeForm.Peek, receiveModeForm.All, receiveModeForm.Count, messageInspector);
+                    ReadDeadletterMessagesOneAtTheTime(receiveModeForm.Peek, receiveModeForm.All, receiveModeForm.Count, messageInspector, receiveModeForm.FromSequenceNumber);
                 }
                 else
                 {
-                    GetDeadletterMessages(receiveModeForm.Peek, receiveModeForm.All, receiveModeForm.Count, messageInspector);
+                    GetDeadletterMessages(receiveModeForm.Peek, receiveModeForm.All, receiveModeForm.Count, messageInspector, receiveModeForm.FromSequenceNumber);
                 }
             }
         }
@@ -348,7 +345,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                                                           GrouperMessagePropertiesWith -
                                                           sessionsSplitContainer.SplitterWidth;
                 sessionMainSplitContainer.SplitterDistance =
-                    sessionMainSplitContainer.Size.Height/2 - 8;
+                    sessionMainSplitContainer.Size.Height / 2 - 8;
 
                 if (mainTabControl.TabPages[SessionsTabPage] != null)
                 {
@@ -369,62 +366,37 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             }
         }
 
-        public async Task<long> PurgeMessagesAsync()
+        public async Task PurgeMessagesAsync()
         {
-            using (var deleteForm = new DeleteForm($"Would you like to purge the {subscriptionWrapper.SubscriptionDescription.Name} subscription?"))
-            {
-                if (deleteForm.ShowDialog() != DialogResult.OK)
-                {
-                    return 0;
-                }
-            }
-            try
-            {
-                Application.UseWaitCursor = true;
-                var stopwatch = new Stopwatch();
-                stopwatch.Start();
-                var messagingPurger = new MessagingPurger(serviceBusHelper, subscriptionWrapper);
-                var count = await messagingPurger.Purge();
-                stopwatch.Stop();
-                MainForm.SingletonMainForm.refreshEntity_Click(null, null);
-                var entityPath = SubscriptionClient.FormatSubscriptionPath(subscriptionWrapper.SubscriptionDescription.TopicPath, 
-                    subscriptionWrapper.SubscriptionDescription.Name);
-                writeToLog($"[{count}] messages have been purged from the [{entityPath}] subscription in [{stopwatch.ElapsedMilliseconds}] milliseconds.");
-                return count;
-            }
-            finally
-            {
-                Application.UseWaitCursor = false;
-            }
+            await this.DoPurge(PurgeStrategies.Messages, $"Would you like to purge the {subscriptionWrapper.SubscriptionDescription.Name} subscription?");
         }
 
-        public async Task<long> PurgeDeadletterQueueMessagesAsync()
+        public async Task PurgeDeadletterQueueMessagesAsync()
         {
-            using (var deleteForm = new DeleteForm($"Would you like to purge the deadletter queue of the {subscriptionWrapper.SubscriptionDescription.Name} subscription?"))
+            await this.DoPurge(PurgeStrategies.DeadletteredMessages, $"Would you like to purge the dead-letter queue of the {subscriptionWrapper.SubscriptionDescription.Name} subscription?");
+        }
+
+        public async Task PurgeAllMessagesAsync()
+        {
+            await this.DoPurge(PurgeStrategies.All, $"Would you like to purge all (messages and dead-lettered messages) from the {subscriptionWrapper.SubscriptionDescription.Name} subscription?");
+        }
+
+        private async Task DoPurge(PurgeStrategies purgeStrategy, string deleteConfirmation)
+        {
+            if (!DeleteForm.ShowAndWaitUserConfirmation(this, deleteConfirmation))
             {
-                if (deleteForm.ShowDialog() != DialogResult.OK)
-                {
-                    return 0;
-                }
+                return;
             }
-            try
-            {
-                Application.UseWaitCursor = true;
-                var stopwatch = new Stopwatch();
-                stopwatch.Start();
-                var messagingPurger = new MessagingPurger(serviceBusHelper, subscriptionWrapper);
-                var count = await messagingPurger.Purge(purgeDeadLetterQueueInstead: true);
-                stopwatch.Stop();
-                var entityPath = SubscriptionClient.FormatSubscriptionPath(subscriptionWrapper.SubscriptionDescription.TopicPath,
-                                                                           subscriptionWrapper.SubscriptionDescription.Name);
-                MainForm.SingletonMainForm.refreshEntity_Click(null, null);
-                writeToLog($"[{count}] messages have been purged from the deadletter queue of the [{entityPath}] subscription in [{stopwatch.ElapsedMilliseconds}] milliseconds.");
-                return count;
-            }
-            finally
-            {
-                Application.UseWaitCursor = false;
-            }
+
+            Application.UseWaitCursor = true;
+
+            TopicSubscriptionServiceBusPurger purger = new TopicSubscriptionServiceBusPurger(this.serviceBusHelper.GetServiceBusHelper2());
+            purger.PurgeFailed += (o, e) => this.HandleException(e.Exception);
+            purger.PurgeCompleted += (o, e) => writeToLog($"[{e.TotalMessagesPurged}] messages have been purged from the{(e.IsDeadLetterQueue ? " dead-letter queue of the" : "")} [{e.EntityPath}] subscription in [{e.ElapsedMilliseconds / 1000}] seconds.");
+            await purger.Purge(purgeStrategy, await this.serviceBusHelper.GetSubscriptionProperties(subscriptionWrapper));
+
+            await MainForm.SingletonMainForm.RefreshSelectedEntity();
+            Application.UseWaitCursor = false;
         }
         #endregion
 
@@ -446,306 +418,337 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             DisablePage(MessagesTabPage);
             DisablePage(SessionsTabPage);
             DisablePage(DeadletterTabPage);
-            
+
             if (subscriptionWrapper != null &&
                 subscriptionWrapper.TopicDescription != null &&
                 subscriptionWrapper.SubscriptionDescription != null)
             {
-                // Initialize textboxes
-                txtName.ReadOnly = true;
-                txtName.BackColor = SystemColors.Window;
-                txtName.GotFocus += textBox_GotFocus;
 
-                txtFilter.ReadOnly = true;
-                txtFilter.BackColor = SystemColors.Window;
-                txtFilter.GotFocus += textBox_GotFocus;
-
-                txtAction.ReadOnly = true;
-                txtAction.BackColor = SystemColors.Window;
-                txtAction.GotFocus += textBox_GotFocus;
-
-                txtMessageText.ReadOnly = true;
-                txtMessageText.BackColor = SystemColors.Window;
-                txtMessageText.GotFocus += textBox_GotFocus;
-
-                txtDeadletterText.ReadOnly = true;
-                txtDeadletterText.BackColor = SystemColors.Window;
-                txtDeadletterText.GotFocus += textBox_GotFocus;
-
-                txtSessionState.ReadOnly = true;
-                txtSessionState.BackColor = SystemColors.Window;
-                txtSessionState.GotFocus += textBox_GotFocus;
-
-
-                // Initialize groupers
-                grouperDefaultRule.Visible = false;
-                grouperSubscriptionSettings.Location = grouperDefaultRule.Location;
-                grouperSubscriptionSettings.Size = new Size(grouperSubscriptionSettings.Size.Width, grouperSubscriptionSettings.Size.Height + grouperDefaultRule.Size.Height + 8);
-
-                // Initialize Data
-                InitializeData();
-
-                // Set Grid style
-                messagesDataGridView.EnableHeadersVisualStyles = false;
-                messagesDataGridView.AutoGenerateColumns = false;
-                messagesDataGridView.AutoSize = true;
-
-                // Create the MessageId column
-                var textBoxColumn = new DataGridViewTextBoxColumn
+                if (duplicateExistingSubscription)
                 {
-                    DataPropertyName = MessageId,
-                    Name = MessageId,
-                    Width = 120
-                };
-                messagesDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the SequenceNumber column
-                textBoxColumn = new DataGridViewTextBoxColumn
+                    ConfigureDuplicateUserInterface();
+                }
+                else
                 {
-                    DataPropertyName = SequenceNumberValue,
-                    Name = SequenceNumberName,
-                    Width = 52
-                };
-                messagesDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the Size column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = MessageSize,
-                    Name = MessageSize,
-                    Width = 52
-                };
-                messagesDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the Label column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = Label,
-                    Name = Label,
-                    Width = 120
-                };
-                messagesDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the EnqueuedTimeUtc column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = EnqueuedTimeUtc,
-                    Name = EnqueuedTimeUtc,
-                    Width = 120
-                };
-                messagesDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the ExpiresAtUtc column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = ExpiresAtUtc,
-                    Name = ExpiresAtUtc,
-                    Width = 120
-                };
-                messagesDataGridView.Columns.Add(textBoxColumn);
-
-                // Set the selection background color for all the cells.
-                messagesDataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(92, 125, 150);
-                messagesDataGridView.DefaultCellStyle.SelectionForeColor = SystemColors.Window;
-
-                // Set RowHeadersDefaultCellStyle.SelectionBackColor so that its default 
-                // value won't override DataGridView.DefaultCellStyle.SelectionBackColor.
-                messagesDataGridView.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(153, 180, 209);
-
-                // Set the background color for all rows and for alternating rows.  
-                // The value for alternating rows overrides the value for all rows. 
-                messagesDataGridView.RowsDefaultCellStyle.BackColor = SystemColors.Window;
-                messagesDataGridView.RowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
-                //messagesDataGridView.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
-                //messagesDataGridView.AlternatingRowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
-
-                // Set the row and column header styles.
-                messagesDataGridView.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(215, 228, 242);
-                messagesDataGridView.RowHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
-                messagesDataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(215, 228, 242);
-                messagesDataGridView.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
-
-                // Set Grid style
-                sessionsDataGridView.EnableHeadersVisualStyles = false;
-                sessionsDataGridView.AutoGenerateColumns = false;
-                sessionsDataGridView.AutoSize = true;
-
-                // Create the SessionId column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = SessionId,
-                    Name = SessionId,
-                    Width = 120
-                };
-                sessionsDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the Path column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = Path,
-                    Name = Path,
-                    Width = 120
-                };
-                sessionsDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the Mode column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = Mode,
-                    Name = Mode,
-                    Width = 120
-                };
-                sessionsDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the BatchFlushInterval column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = BatchFlushInterval,
-                    Name = BatchFlushInterval,
-                    Width = 120
-                };
-                sessionsDataGridView.Columns.Add(textBoxColumn);
-
-                // Set the selection background color for all the cells.
-                sessionsDataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(92, 125, 150);
-                sessionsDataGridView.DefaultCellStyle.SelectionForeColor = SystemColors.Window;
-
-                // Set RowHeadersDefaultCellStyle.SelectionBackColor so that its default 
-                sessionsDataGridView.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(153, 180, 209);
-
-                // Set the background color for all rows and for alternating rows.  
-                // The value for alternating rows overrides the value for all rows. 
-                sessionsDataGridView.RowsDefaultCellStyle.BackColor = SystemColors.Window;
-                sessionsDataGridView.RowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
-
-                // Set the row and column header styles.
-                sessionsDataGridView.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(215, 228, 242);
-                sessionsDataGridView.RowHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
-                sessionsDataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(215, 228, 242);
-                sessionsDataGridView.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
-
-                // Set Grid style
-                deadletterDataGridView.EnableHeadersVisualStyles = false;
-                deadletterDataGridView.AutoGenerateColumns = false;
-                deadletterDataGridView.AutoSize = true;
-
-                // Create the MessageId column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = MessageId,
-                    Name = MessageId,
-                    Width = 120
-                };
-                deadletterDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the SequenceNumber column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = SequenceNumberValue,
-                    Name = SequenceNumberName,
-                    Width = 52
-                };
-                deadletterDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the Size column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = MessageSize,
-                    Name = MessageSize,
-                    Width = 52
-                };
-                deadletterDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the Label column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = Label,
-                    Name = Label,
-                    Width = 120
-                };
-                deadletterDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the EnqueuedTimeUtc column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = EnqueuedTimeUtc,
-                    Name = EnqueuedTimeUtc,
-                    Width = 120
-                };
-                deadletterDataGridView.Columns.Add(textBoxColumn);
-
-                // Create the ExpiresAtUtc column
-                textBoxColumn = new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = ExpiresAtUtc,
-                    Name = ExpiresAtUtc,
-                    Width = 120
-                };
-                deadletterDataGridView.Columns.Add(textBoxColumn);
-
-                // Set the selection background color for all the cells.
-                deadletterDataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(92, 125, 150);
-                deadletterDataGridView.DefaultCellStyle.SelectionForeColor = SystemColors.Window;
-
-                // Set RowHeadersDefaultCellStyle.SelectionBackColor so that its default 
-                // value won't override DataGridView.DefaultCellStyle.SelectionBackColor.
-                deadletterDataGridView.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(153, 180, 209);
-
-                // Set the background color for all rows and for alternating rows.  
-                // The value for alternating rows overrides the value for all rows. 
-                deadletterDataGridView.RowsDefaultCellStyle.BackColor = SystemColors.Window;
-                deadletterDataGridView.RowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
-
-                // Set the row and column header styles.
-                deadletterDataGridView.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(215, 228, 242);
-                deadletterDataGridView.RowHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
-                deadletterDataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(215, 228, 242);
-                deadletterDataGridView.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
-
-                checkedListBox.ItemCheck += checkedListBox_ItemCheck;
-
-                toolTip.SetToolTip(txtName, NameTooltip);
-                toolTip.SetToolTip(txtUserMetadata, UserMetadataTooltip);
-                toolTip.SetToolTip(txtForwardTo, ForwardToTooltip);
-                toolTip.SetToolTip(txtForwardDeadLetteredMessagesTo, ForwardDeadLetteredMessagesToTooltip);
-                toolTip.SetToolTip(txtDefaultMessageTimeToLiveDays, DefaultMessageTimeToLiveTooltip);
-                toolTip.SetToolTip(txtDefaultMessageTimeToLiveHours, DefaultMessageTimeToLiveTooltip);
-                toolTip.SetToolTip(txtDefaultMessageTimeToLiveMinutes, DefaultMessageTimeToLiveTooltip);
-                toolTip.SetToolTip(txtDefaultMessageTimeToLiveSeconds, DefaultMessageTimeToLiveTooltip);
-                toolTip.SetToolTip(txtDefaultMessageTimeToLiveMilliseconds, DefaultMessageTimeToLiveTooltip);
-                toolTip.SetToolTip(txtFilter, FilterExpressionTooltip);
-                toolTip.SetToolTip(txtAction, FilterActionTooltip);
-                toolTip.SetToolTip(txtLockDurationDays, LockDurationTooltip);
-                toolTip.SetToolTip(txtLockDurationHours, LockDurationTooltip);
-                toolTip.SetToolTip(txtLockDurationMinutes, LockDurationTooltip);
-                toolTip.SetToolTip(txtLockDurationSeconds, LockDurationTooltip);
-                toolTip.SetToolTip(txtLockDurationMilliseconds, LockDurationTooltip);
-                toolTip.SetToolTip(txtMaxDeliveryCount, MaxDeliveryCountTooltip);
-                toolTip.SetToolTip(txtAutoDeleteOnIdleDays, AutoDeleteOnIdleTooltip);
-                toolTip.SetToolTip(txtAutoDeleteOnIdleHours, AutoDeleteOnIdleTooltip);
-                toolTip.SetToolTip(txtAutoDeleteOnIdleMinutes, AutoDeleteOnIdleTooltip);
-                toolTip.SetToolTip(txtAutoDeleteOnIdleSeconds, AutoDeleteOnIdleTooltip);
-                toolTip.SetToolTip(txtAutoDeleteOnIdleMilliseconds, AutoDeleteOnIdleTooltip);
+                    ConfigureReadUserInterface();
+                }
             }
             else
             {
-                // Initialize buttons
-                btnCreateDelete.Text = CreateText;
-                btnCancelUpdate.Text = CancelText;
-                btnRefresh.Visible = false;
-                btnChangeStatus.Visible = false;
-                btnMessages.Visible = false;
-                btnSessions.Visible = false;
-                btnDeadletter.Visible = false;
-                btnPurgeMessages.Visible = false;
-                btnPurgeDeadletterQueueMessages.Visible = false;
-                txtName.Focus();
+                ConfigureCreateUserInterface();
             }
+        }
+
+        private void ConfigureReadUserInterface()
+        {
+            // Initialize textboxes
+            txtName.ReadOnly = true;
+            txtName.BackColor = SystemColors.Window;
+            txtName.GotFocus += textBox_GotFocus;
+
+            txtFilter.ReadOnly = true;
+            txtFilter.BackColor = SystemColors.Window;
+            txtFilter.GotFocus += textBox_GotFocus;
+
+            txtAction.ReadOnly = true;
+            txtAction.BackColor = SystemColors.Window;
+            txtAction.GotFocus += textBox_GotFocus;
+
+            txtMessageText.ReadOnly = true;
+            txtMessageText.BackColor = SystemColors.Window;
+            txtMessageText.GotFocus += textBox_GotFocus;
+
+            txtDeadletterText.ReadOnly = true;
+            txtDeadletterText.BackColor = SystemColors.Window;
+            txtDeadletterText.GotFocus += textBox_GotFocus;
+
+            txtSessionState.ReadOnly = true;
+            txtSessionState.BackColor = SystemColors.Window;
+            txtSessionState.GotFocus += textBox_GotFocus;
+
+
+            // Initialize groupers
+            grouperDefaultRule.Visible = false;
+            grouperSubscriptionSettings.Location = grouperDefaultRule.Location;
+            grouperSubscriptionSettings.Size = new Size(grouperSubscriptionSettings.Size.Width, grouperSubscriptionSettings.Size.Height + grouperDefaultRule.Size.Height + 8);
+
+            // Initialize Data
+            InitializeData();
+
+            // Set Grid style
+            messagesDataGridView.EnableHeadersVisualStyles = false;
+            messagesDataGridView.AutoGenerateColumns = false;
+            messagesDataGridView.AutoSize = true;
+
+            // Create the MessageId column
+            var textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = MessageId,
+                Name = MessageId,
+                Width = 120
+            };
+            messagesDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the SequenceNumber column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = SequenceNumberValue,
+                Name = SequenceNumberName,
+                Width = 52
+            };
+            messagesDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the Size column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = MessageSize,
+                Name = MessageSize,
+                Width = 52
+            };
+            messagesDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the Label column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = Label,
+                Name = Label,
+                Width = 120
+            };
+            messagesDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the EnqueuedTimeUtc column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = EnqueuedTimeUtc,
+                Name = EnqueuedTimeUtc,
+                Width = 120
+            };
+            messagesDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the ExpiresAtUtc column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = ExpiresAtUtc,
+                Name = ExpiresAtUtc,
+                Width = 120
+            };
+            messagesDataGridView.Columns.Add(textBoxColumn);
+
+            // Set the selection background color for all the cells.
+            messagesDataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(92, 125, 150);
+            messagesDataGridView.DefaultCellStyle.SelectionForeColor = SystemColors.Window;
+
+            // Set RowHeadersDefaultCellStyle.SelectionBackColor so that its default 
+            // value won't override DataGridView.DefaultCellStyle.SelectionBackColor.
+            messagesDataGridView.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(153, 180, 209);
+
+            // Set the background color for all rows and for alternating rows.  
+            // The value for alternating rows overrides the value for all rows. 
+            messagesDataGridView.RowsDefaultCellStyle.BackColor = SystemColors.Window;
+            messagesDataGridView.RowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            //messagesDataGridView.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
+            //messagesDataGridView.AlternatingRowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            // Set the row and column header styles.
+            messagesDataGridView.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(215, 228, 242);
+            messagesDataGridView.RowHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            messagesDataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(215, 228, 242);
+            messagesDataGridView.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            // Set Grid style
+            sessionsDataGridView.EnableHeadersVisualStyles = false;
+            sessionsDataGridView.AutoGenerateColumns = false;
+            sessionsDataGridView.AutoSize = true;
+
+            // Create the SessionId column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = SessionId,
+                Name = SessionId,
+                Width = 120
+            };
+            sessionsDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the Path column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = Path,
+                Name = Path,
+                Width = 120
+            };
+            sessionsDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the Mode column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = Mode,
+                Name = Mode,
+                Width = 120
+            };
+            sessionsDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the BatchFlushInterval column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = BatchFlushInterval,
+                Name = BatchFlushInterval,
+                Width = 120
+            };
+            sessionsDataGridView.Columns.Add(textBoxColumn);
+
+            // Set the selection background color for all the cells.
+            sessionsDataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(92, 125, 150);
+            sessionsDataGridView.DefaultCellStyle.SelectionForeColor = SystemColors.Window;
+
+            // Set RowHeadersDefaultCellStyle.SelectionBackColor so that its default 
+            sessionsDataGridView.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(153, 180, 209);
+
+            // Set the background color for all rows and for alternating rows.  
+            // The value for alternating rows overrides the value for all rows. 
+            sessionsDataGridView.RowsDefaultCellStyle.BackColor = SystemColors.Window;
+            sessionsDataGridView.RowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            // Set the row and column header styles.
+            sessionsDataGridView.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(215, 228, 242);
+            sessionsDataGridView.RowHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            sessionsDataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(215, 228, 242);
+            sessionsDataGridView.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            // Set Grid style
+            deadletterDataGridView.EnableHeadersVisualStyles = false;
+            deadletterDataGridView.AutoGenerateColumns = false;
+            deadletterDataGridView.AutoSize = true;
+
+            // Create the MessageId column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = MessageId,
+                Name = MessageId,
+                Width = 120
+            };
+            deadletterDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the SequenceNumber column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = SequenceNumberValue,
+                Name = SequenceNumberName,
+                Width = 52
+            };
+            deadletterDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the Size column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = MessageSize,
+                Name = MessageSize,
+                Width = 52
+            };
+            deadletterDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the Label column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = Label,
+                Name = Label,
+                Width = 120
+            };
+            deadletterDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the EnqueuedTimeUtc column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = EnqueuedTimeUtc,
+                Name = EnqueuedTimeUtc,
+                Width = 120
+            };
+            deadletterDataGridView.Columns.Add(textBoxColumn);
+
+            // Create the ExpiresAtUtc column
+            textBoxColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = ExpiresAtUtc,
+                Name = ExpiresAtUtc,
+                Width = 120
+            };
+            deadletterDataGridView.Columns.Add(textBoxColumn);
+
+            // Set the selection background color for all the cells.
+            deadletterDataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(92, 125, 150);
+            deadletterDataGridView.DefaultCellStyle.SelectionForeColor = SystemColors.Window;
+
+            // Set RowHeadersDefaultCellStyle.SelectionBackColor so that its default 
+            // value won't override DataGridView.DefaultCellStyle.SelectionBackColor.
+            deadletterDataGridView.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(153, 180, 209);
+
+            // Set the background color for all rows and for alternating rows.  
+            // The value for alternating rows overrides the value for all rows. 
+            deadletterDataGridView.RowsDefaultCellStyle.BackColor = SystemColors.Window;
+            deadletterDataGridView.RowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            // Set the row and column header styles.
+            deadletterDataGridView.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(215, 228, 242);
+            deadletterDataGridView.RowHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            deadletterDataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(215, 228, 242);
+            deadletterDataGridView.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            checkedListBox.ItemCheck += checkedListBox_ItemCheck;
+
+            toolTip.SetToolTip(txtName, NameTooltip);
+            toolTip.SetToolTip(txtUserMetadata, UserMetadataTooltip);
+            toolTip.SetToolTip(txtForwardTo, ForwardToTooltip);
+            toolTip.SetToolTip(txtForwardDeadLetteredMessagesTo, ForwardDeadLetteredMessagesToTooltip);
+            toolTip.SetToolTip(tsDefaultMessageTimeToLive, DefaultMessageTimeToLiveTooltip);
+            toolTip.SetToolTip(txtFilter, FilterExpressionTooltip);
+            toolTip.SetToolTip(txtAction, FilterActionTooltip);
+            toolTip.SetToolTip(tsLockDuration, LockDurationTooltip);
+            toolTip.SetToolTip(txtMaxDeliveryCount, MaxDeliveryCountTooltip);
+            toolTip.SetToolTip(tsAutoDeleteOnIdle, AutoDeleteOnIdleTooltip);
+        }
+
+        /// <summary>
+        /// Configure this control as a "Create" form.
+        /// </summary>
+        private void ConfigureCreateUserInterface()
+        {
+            btnCreateDelete.Text = CreateText;
+            btnCancelUpdate.Text = CancelText;
+            btnRefresh.Visible = false;
+            btnChangeStatus.Visible = false;
+            btnMessages.Visible = false;
+            btnSessions.Visible = false;
+            btnDeadletter.Visible = false;
+            btnPurgeMessages.Visible = false;
+            btnPurgeDeadletterQueueMessages.Visible = false;
+            txtName.Focus();
+        }
+
+        /// <summary>
+        /// Configure this control as a "Duplicate" form.
+        /// This re-enables some textboxes that would be read only in a "Read" form.
+        /// </summary>
+        private void ConfigureDuplicateUserInterface()
+        {
+            ConfigureReadUserInterface();
+
+            txtName.ReadOnly = false;
+            txtName.GotFocus -= textBox_GotFocus;
+            txtMessageText.ReadOnly = false;
+            txtMessageText.GotFocus -= textBox_GotFocus;
+            txtDeadletterText.ReadOnly = false;
+            txtDeadletterText.GotFocus -= textBox_GotFocus;
+            txtSessionState.ReadOnly = false;
+            txtSessionState.GotFocus -= textBox_GotFocus;
+            propertyListView.Items.Clear();
+
+            ConfigureCreateUserInterface();
         }
 
         private void InitializeData()
         {
             // Initialize buttons
+            var forwardTo = subscriptionWrapper.SubscriptionDescription.ForwardTo;
+            var forwardDeadLetteredMessagesTo = subscriptionWrapper.SubscriptionDescription.ForwardDeadLetteredMessagesTo;
             btnCreateDelete.Text = DeleteText;
             btnCancelUpdate.Text = UpdateText;
             btnChangeStatus.Text = subscriptionWrapper.SubscriptionDescription.Status == EntityStatus.Active ? DisableText : EnableText;
@@ -753,8 +756,8 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             btnChangeStatus.Visible = true;
             btnMessages.Visible = true;
             btnSessions.Visible = subscriptionWrapper.SubscriptionDescription.RequiresSession;
-            btnMessages.Visible = string.IsNullOrWhiteSpace(subscriptionWrapper.SubscriptionDescription.ForwardTo);
-            btnDeadletter.Visible = string.IsNullOrWhiteSpace(subscriptionWrapper.SubscriptionDescription.ForwardDeadLetteredMessagesTo);
+            btnMessages.Visible = string.IsNullOrWhiteSpace(forwardTo);
+            btnDeadletter.Visible = string.IsNullOrWhiteSpace(forwardDeadLetteredMessagesTo);
 
             if (btnMessages.Visible && !btnSessions.Visible && !buttonsMoved)
             {
@@ -769,18 +772,20 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
 
             // Initialize property grid
             var propertyList = new List<string[]>();
-
-            propertyList.AddRange(new[]{new[]{Status, subscriptionWrapper.SubscriptionDescription.Status.ToString()},
-                                            new[]{IsReadOnly, subscriptionWrapper.SubscriptionDescription.IsReadOnly.ToString()},
-                                            new[]{CreatedAt, subscriptionWrapper.SubscriptionDescription.CreatedAt.ToString(CultureInfo.CurrentCulture)},
-                                            new[]{AccessedAt, subscriptionWrapper.SubscriptionDescription.AccessedAt.ToString(CultureInfo.CurrentCulture)},
-                                            new[]{UpdatedAt, subscriptionWrapper.SubscriptionDescription.UpdatedAt.ToString(CultureInfo.CurrentCulture)},
-                                            new[]{ActiveMessageCount, subscriptionWrapper.SubscriptionDescription.MessageCountDetails.ActiveMessageCount.ToString("N0")},
-                                            new[]{DeadletterMessageCount, subscriptionWrapper.SubscriptionDescription.MessageCountDetails.DeadLetterMessageCount.ToString("N0")},
-                                            new[]{ScheduledMessageCount, subscriptionWrapper.SubscriptionDescription.MessageCountDetails.ScheduledMessageCount.ToString("N0")},
-                                            new[]{TransferMessageCount, subscriptionWrapper.SubscriptionDescription.MessageCountDetails.TransferMessageCount.ToString("N0")},
-                                            new[]{TransferDeadLetterMessageCount, subscriptionWrapper.SubscriptionDescription.MessageCountDetails.TransferDeadLetterMessageCount.ToString("N0")},
-                                            new[]{MessageCount, subscriptionWrapper.SubscriptionDescription.MessageCount.ToString("N0")}});
+            propertyList.AddRange(new[]
+            {
+                    new[] {Status, subscriptionWrapper.SubscriptionDescription.Status.ToString()},
+                    new[] {IsReadOnly, subscriptionWrapper.SubscriptionDescription.IsReadOnly.ToString()},
+                    new[] {CreatedAt, subscriptionWrapper.SubscriptionDescription.CreatedAt.ToString(CultureInfo.CurrentCulture)},
+                    new[] {AccessedAt, subscriptionWrapper.SubscriptionDescription.AccessedAt.ToString(CultureInfo.CurrentCulture)},
+                    new[] {UpdatedAt, subscriptionWrapper.SubscriptionDescription.UpdatedAt.ToString(CultureInfo.CurrentCulture)},
+                    new[] {ActiveMessageCount, subscriptionWrapper.SubscriptionDescription.MessageCountDetails.ActiveMessageCount.ToString("N0")},
+                    new[] {DeadletterMessageCount, subscriptionWrapper.SubscriptionDescription.MessageCountDetails.DeadLetterMessageCount.ToString("N0")},
+                    new[] {ScheduledMessageCount, subscriptionWrapper.SubscriptionDescription.MessageCountDetails.ScheduledMessageCount.ToString("N0")},
+                    new[] {TransferMessageCount, subscriptionWrapper.SubscriptionDescription.MessageCountDetails.TransferMessageCount.ToString("N0")},
+                    new[] {TransferDeadLetterMessageCount, subscriptionWrapper.SubscriptionDescription.MessageCountDetails.TransferDeadLetterMessageCount.ToString("N0")},
+                    new[] {MessageCount, subscriptionWrapper.SubscriptionDescription.MessageCount.ToString("N0")}
+                });
 
             propertyListView.Items.Clear();
             foreach (var array in propertyList)
@@ -801,50 +806,28 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             }
 
             // ForwardTo
-            if (!string.IsNullOrWhiteSpace(subscriptionWrapper.SubscriptionDescription.ForwardTo))
+            if (!string.IsNullOrWhiteSpace(forwardTo))
             {
-                int i;
-                txtForwardTo.Text = !string.IsNullOrWhiteSpace(subscriptionWrapper.SubscriptionDescription.ForwardTo) &&
-                                    (i = subscriptionWrapper.SubscriptionDescription.ForwardTo.IndexOf('/')) > 0 &&
-                                    i < subscriptionWrapper.SubscriptionDescription.ForwardTo.Length - 1 ?
-                                    subscriptionWrapper.SubscriptionDescription.ForwardTo.Substring(subscriptionWrapper.SubscriptionDescription.ForwardTo.LastIndexOf('/') + 1) :
-                                    subscriptionWrapper.SubscriptionDescription.ForwardTo;
+                txtForwardTo.Text = serviceBusHelper.GetAddressRelativeToNamespace(forwardTo);
             }
 
             // ForwardDeadLetteredMessagesTo
-            if (!string.IsNullOrWhiteSpace(subscriptionWrapper.SubscriptionDescription.ForwardDeadLetteredMessagesTo))
+            if (!string.IsNullOrWhiteSpace(forwardDeadLetteredMessagesTo))
             {
-                int i;
-                txtForwardDeadLetteredMessagesTo.Text = !string.IsNullOrWhiteSpace(subscriptionWrapper.SubscriptionDescription.ForwardDeadLetteredMessagesTo) &&
-                                    (i = subscriptionWrapper.SubscriptionDescription.ForwardDeadLetteredMessagesTo.IndexOf('/')) > 0 &&
-                                    i < subscriptionWrapper.SubscriptionDescription.ForwardDeadLetteredMessagesTo.Length - 1 ?
-                                    subscriptionWrapper.SubscriptionDescription.ForwardDeadLetteredMessagesTo.Substring(subscriptionWrapper.SubscriptionDescription.ForwardDeadLetteredMessagesTo.LastIndexOf('/') + 1) :
-                                    subscriptionWrapper.SubscriptionDescription.ForwardDeadLetteredMessagesTo;
+                txtForwardDeadLetteredMessagesTo.Text = serviceBusHelper.GetAddressRelativeToNamespace(forwardDeadLetteredMessagesTo);
             }
 
             // MaxDeliveryCount
             txtMaxDeliveryCount.Text = subscriptionWrapper.SubscriptionDescription.MaxDeliveryCount.ToString(CultureInfo.InvariantCulture);
 
             // DefaultMessageTimeToLive
-            txtDefaultMessageTimeToLiveDays.Text = subscriptionWrapper.SubscriptionDescription.DefaultMessageTimeToLive.Days.ToString(CultureInfo.InvariantCulture);
-            txtDefaultMessageTimeToLiveHours.Text = subscriptionWrapper.SubscriptionDescription.DefaultMessageTimeToLive.Hours.ToString(CultureInfo.InvariantCulture);
-            txtDefaultMessageTimeToLiveMinutes.Text = subscriptionWrapper.SubscriptionDescription.DefaultMessageTimeToLive.Minutes.ToString(CultureInfo.InvariantCulture);
-            txtDefaultMessageTimeToLiveSeconds.Text = subscriptionWrapper.SubscriptionDescription.DefaultMessageTimeToLive.Seconds.ToString(CultureInfo.InvariantCulture);
-            txtDefaultMessageTimeToLiveMilliseconds.Text = subscriptionWrapper.SubscriptionDescription.DefaultMessageTimeToLive.Milliseconds.ToString(CultureInfo.InvariantCulture);
+            tsDefaultMessageTimeToLive.TimeSpanValue = subscriptionWrapper.SubscriptionDescription.DefaultMessageTimeToLive;
 
             // LockDuration
-            txtLockDurationDays.Text = subscriptionWrapper.SubscriptionDescription.LockDuration.Days.ToString(CultureInfo.InvariantCulture);
-            txtLockDurationHours.Text = subscriptionWrapper.SubscriptionDescription.LockDuration.Hours.ToString(CultureInfo.InvariantCulture);
-            txtLockDurationMinutes.Text = subscriptionWrapper.SubscriptionDescription.LockDuration.Minutes.ToString(CultureInfo.InvariantCulture);
-            txtLockDurationSeconds.Text = subscriptionWrapper.SubscriptionDescription.LockDuration.Seconds.ToString(CultureInfo.InvariantCulture);
-            txtLockDurationMilliseconds.Text = subscriptionWrapper.SubscriptionDescription.LockDuration.Milliseconds.ToString(CultureInfo.InvariantCulture);
+            tsLockDuration.TimeSpanValue = subscriptionWrapper.SubscriptionDescription.LockDuration;
 
             // AutoDeleteOnIdle
-            txtAutoDeleteOnIdleDays.Text = subscriptionWrapper.SubscriptionDescription.AutoDeleteOnIdle.Days.ToString(CultureInfo.InvariantCulture);
-            txtAutoDeleteOnIdleHours.Text = subscriptionWrapper.SubscriptionDescription.AutoDeleteOnIdle.Hours.ToString(CultureInfo.InvariantCulture);
-            txtAutoDeleteOnIdleMinutes.Text = subscriptionWrapper.SubscriptionDescription.AutoDeleteOnIdle.Minutes.ToString(CultureInfo.InvariantCulture);
-            txtAutoDeleteOnIdleSeconds.Text = subscriptionWrapper.SubscriptionDescription.AutoDeleteOnIdle.Seconds.ToString(CultureInfo.InvariantCulture);
-            txtAutoDeleteOnIdleMilliseconds.Text = subscriptionWrapper.SubscriptionDescription.AutoDeleteOnIdle.Milliseconds.ToString(CultureInfo.InvariantCulture);
+            tsAutoDeleteOnIdle.TimeSpanValue = subscriptionWrapper.SubscriptionDescription.AutoDeleteOnIdle;
 
             // EnableDeadLetteringOnFilterEvaluationExceptions
             checkedListBox.SetItemChecked(EnableBatchedOperationsIndex,
@@ -863,7 +846,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                                           subscriptionWrapper.SubscriptionDescription.RequiresSession);
         }
 
-        private void GetMessages(bool peek, bool all, int count, IBrokeredMessageInspector messageInspector)
+        private void GetMessages(bool peek, bool all, int count, IBrokeredMessageInspector messageInspector, long? fromSequenceNumber)
         {
             try
             {
@@ -882,7 +865,17 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                     var totalRetrieved = 0;
                     while (totalRetrieved < count)
                     {
-                        var messageEnumerable = subscriptionClient.PeekBatch(count);
+                        IEnumerable<BrokeredMessage> messageEnumerable;
+
+                        if (totalRetrieved == 0 && fromSequenceNumber.HasValue)
+                        {
+                            messageEnumerable = subscriptionClient.PeekBatch(fromSequenceNumber.Value, count);
+                        }
+                        else
+                        {
+                            messageEnumerable = subscriptionClient.PeekBatch(count);
+                        }
+
                         if (messageEnumerable == null)
                         {
                             break;
@@ -968,13 +961,13 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             }
             catch (TimeoutException)
             {
-                writeToLog(string.Format(NoMessageReceivedFromTheSubscription, 
-                                         MainForm.SingletonMainForm.ReceiveTimeout,  
+                writeToLog(string.Format(NoMessageReceivedFromTheSubscription,
+                                         MainForm.SingletonMainForm.ReceiveTimeout,
                                          subscriptionWrapper.SubscriptionDescription.Name));
             }
             catch (NotSupportedException)
             {
-                ReadMessagesOneAtTheTime(peek, all, count, messageInspector);
+                ReadMessagesOneAtTheTime(peek, all, count, messageInspector, fromSequenceNumber);
             }
             catch (Exception ex)
             {
@@ -990,7 +983,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             }
         }
 
-        private void ReadMessagesOneAtTheTime(bool peek, bool all, int count, IBrokeredMessageInspector messageInspector)
+        private void ReadMessagesOneAtTheTime(bool peek, bool all, int count, IBrokeredMessageInspector messageInspector, long? fromSequenceNumber)
         {
             try
             {
@@ -1002,7 +995,17 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                                                                                                  ReceiveMode.PeekLock);
                     for (var i = 0; i < count; i++)
                     {
-                        var message = subscriptionClient.Peek();
+                        BrokeredMessage message;
+
+                        if (i == 0 && fromSequenceNumber.HasValue)
+                        {
+                            message = subscriptionClient.Peek(fromSequenceNumber.Value);
+                        }
+                        else
+                        {
+                            message = subscriptionClient.Peek();
+                        }
+
                         if (message != null)
                         {
                             if (messageInspector != null)
@@ -1010,6 +1013,10 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                                 message = messageInspector.AfterReceiveMessage(message);
                             }
                             brokeredMessages.Add(message);
+                        }
+                        else
+                        {
+                            break;
                         }
                     }
                     writeToLog(string.Format(MessagesPeekedFromTheSubscription, brokeredMessages.Count, subscriptionWrapper.SubscriptionDescription.Name));
@@ -1089,7 +1096,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             }
         }
 
-        private void GetDeadletterMessages(bool peek, bool all, int count, IBrokeredMessageInspector messageInspector)
+        private void GetDeadletterMessages(bool peek, bool all, int count, IBrokeredMessageInspector messageInspector, long? fromSequenceNumber)
         {
             try
             {
@@ -1107,12 +1114,25 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                                                                                                                               subscriptionWrapper.SubscriptionDescription.Name),
                                                                                               ReceiveMode.PeekLock);
                     var totalRetrieved = 0;
-                    int retrieved;
+                    var retrieved = 0;
+
                     do
                     {
-                        var messages = messageReceiver.PeekBatch(all ?
-                                                                    MainForm.SingletonMainForm.TopCount :
-                                                                    count - totalRetrieved);
+                        IEnumerable<BrokeredMessage> messages;
+
+                        if (retrieved == 0 && fromSequenceNumber.HasValue)
+                        {
+                            messages = messageReceiver.PeekBatch(fromSequenceNumber.Value, all ?
+                                MainForm.SingletonMainForm.TopCount :
+                                count - totalRetrieved);
+                        }
+                        else
+                        {
+                            messages = messageReceiver.PeekBatch(all ?
+                                MainForm.SingletonMainForm.TopCount :
+                                count - totalRetrieved);
+                        }
+
                         var enumerable = messages as BrokeredMessage[] ?? messages.ToArray();
                         retrieved = enumerable.Count();
                         if (retrieved == 0)
@@ -1190,7 +1210,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             }
             catch (NotSupportedException)
             {
-                ReadDeadletterMessagesOneAtTheTime(peek, all, count, messageInspector);
+                ReadDeadletterMessagesOneAtTheTime(peek, all, count, messageInspector, fromSequenceNumber);
             }
             catch (Exception ex)
             {
@@ -1206,7 +1226,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             }
         }
 
-        private void ReadDeadletterMessagesOneAtTheTime(bool peek, bool all, int count, IBrokeredMessageInspector messageInspector)
+        private void ReadDeadletterMessagesOneAtTheTime(bool peek, bool all, int count, IBrokeredMessageInspector messageInspector, long? fromSequenceNumber)
         {
             try
             {
@@ -1217,9 +1237,20 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                     var messageReceiver = serviceBusHelper.MessagingFactory.CreateMessageReceiver(SubscriptionClient.FormatDeadLetterPath(subscriptionWrapper.SubscriptionDescription.TopicPath,
                                                                                                                               subscriptionWrapper.SubscriptionDescription.Name),
                                                                                                   ReceiveMode.PeekLock);
+
                     for (var i = 0; i < count; i++)
                     {
-                        var message = messageReceiver.Peek();
+                        BrokeredMessage message;
+
+                        if (i == 0 && fromSequenceNumber.HasValue)
+                        {
+                            message = messageReceiver.Peek(fromSequenceNumber.Value);
+                        }
+                        else
+                        {
+                            message = messageReceiver.Peek();
+                        }
+
                         if (message != null)
                         {
                             if (messageInspector != null)
@@ -1227,6 +1258,10 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                                 message = messageInspector.AfterReceiveMessage(message);
                             }
                             brokeredMessages.Add(message);
+                        }
+                        else
+                        {
+                            break;
                         }
                     }
                     writeToLog(string.Format(MessagesPeekedFromTheDeadletterQueue, brokeredMessages.Count, subscriptionWrapper.SubscriptionDescription.Name));
@@ -1310,6 +1345,17 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 {
                     using (var deleteForm = new DeleteForm(subscriptionWrapper.SubscriptionDescription.Name, SubscriptionEntity.ToLower()))
                     {
+                        var configuration = TwoFilesConfiguration.Create(TwoFilesConfiguration.GetCurrentConfigFileUse(), writeToLog);
+
+                        bool disableAccidentalDeletionPrevention = configuration.GetBoolValue(
+                                                               ConfigurationParameters.DisableAccidentalDeletionPrevention,
+                                                               defaultValue: false);
+
+                        if (!disableAccidentalDeletionPrevention)
+                        {
+                            deleteForm.ShowAccidentalDeletionPreventionCheck(configuration, $"Delete {subscriptionWrapper.SubscriptionDescription.Name} {SubscriptionEntity.ToLower()}");
+                        }
+
                         if (deleteForm.ShowDialog() == DialogResult.OK)
                         {
                             await serviceBusHelper.DeleteSubscription(subscriptionWrapper.SubscriptionDescription);
@@ -1350,169 +1396,43 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                         }
                     }
 
-                    var days = 0;
-                    var hours = 0;
-                    var minutes = 0;
-                    var seconds = 0;
-                    var milliseconds = 0;
-
-                    if (!string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveDays.Text) ||
-                        !string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveHours.Text) ||
-                        !string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveMinutes.Text) ||
-                        !string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveSeconds.Text) ||
-                        !string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveMilliseconds.Text))
+                    if (tsDefaultMessageTimeToLive.IsFilled)
                     {
-                        if (!string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveDays.Text))
+                        if (tsDefaultMessageTimeToLive.TimeSpanValue.HasValue)
                         {
-                            if (!int.TryParse(txtDefaultMessageTimeToLiveDays.Text, out days))
-                            {
-                                writeToLog(DefaultMessageTimeToLiveDaysMustBeANumber);
-                                return;
-                            }
+                            subscriptionDescription.DefaultMessageTimeToLive = tsDefaultMessageTimeToLive.TimeSpanValue.Value;
                         }
-                        if (!string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveHours.Text))
+                        else
                         {
-                            if (!int.TryParse(txtDefaultMessageTimeToLiveHours.Text, out hours))
-                            {
-                                writeToLog(DefaultMessageTimeToLiveHoursMustBeANumber);
-                                return;
-                            }
+                            writeToLog(tsDefaultMessageTimeToLive.GetErrorMessage(DefaultMessageTimeToLive));
+                            return;
                         }
-                        if (!string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveMinutes.Text))
-                        {
-                            if (!int.TryParse(txtDefaultMessageTimeToLiveMinutes.Text, out minutes))
-                            {
-                                writeToLog(DefaultMessageTimeToLiveMinutesMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveSeconds.Text))
-                        {
-                            if (!int.TryParse(txtDefaultMessageTimeToLiveSeconds.Text, out seconds))
-                            {
-                                writeToLog(DefaultMessageTimeToLiveSecondsMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveMilliseconds.Text))
-                        {
-                            if (!int.TryParse(txtDefaultMessageTimeToLiveMilliseconds.Text, out milliseconds))
-                            {
-                                writeToLog(DefaultMessageTimeToLiveMillisecondsMustBeANumber);
-                                return;
-                            }
-                        }
-                        subscriptionDescription.DefaultMessageTimeToLive = new TimeSpan(days, hours, minutes, seconds, milliseconds);
                     }
 
-                    days = 0;
-                    hours = 0;
-                    minutes = 0;
-                    seconds = 0;
-                    milliseconds = 0;
-
-                    if (!string.IsNullOrWhiteSpace(txtLockDurationDays.Text) ||
-                        !string.IsNullOrWhiteSpace(txtLockDurationHours.Text) ||
-                        !string.IsNullOrWhiteSpace(txtLockDurationMinutes.Text) ||
-                        !string.IsNullOrWhiteSpace(txtLockDurationSeconds.Text) ||
-                        !string.IsNullOrWhiteSpace(txtLockDurationMilliseconds.Text))
+                    if (tsLockDuration.IsFilled)
                     {
-                        if (!string.IsNullOrWhiteSpace(txtLockDurationDays.Text))
+                        if (tsLockDuration.TimeSpanValue.HasValue)
                         {
-                            if (!int.TryParse(txtLockDurationDays.Text, out days))
-                            {
-                                writeToLog(LockDurationDaysMustBeANumber);
-                                return;
-                            }
+                            subscriptionDescription.LockDuration = tsLockDuration.TimeSpanValue.Value;
                         }
-                        if (!string.IsNullOrWhiteSpace(txtLockDurationHours.Text))
+                        else
                         {
-                            if (!int.TryParse(txtLockDurationHours.Text, out hours))
-                            {
-                                writeToLog(LockDurationHoursMustBeANumber);
-                                return;
-                            }
+                            writeToLog(tsLockDuration.GetErrorMessage(LockDuration));
+                            return;
                         }
-                        if (!string.IsNullOrWhiteSpace(txtLockDurationMinutes.Text))
-                        {
-                            if (!int.TryParse(txtLockDurationMinutes.Text, out minutes))
-                            {
-                                writeToLog(LockDurationMinutesMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtLockDurationSeconds.Text))
-                        {
-                            if (!int.TryParse(txtLockDurationSeconds.Text, out seconds))
-                            {
-                                writeToLog(LockDurationSecondsMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtLockDurationMilliseconds.Text))
-                        {
-                            if (!int.TryParse(txtLockDurationMilliseconds.Text, out milliseconds))
-                            {
-                                writeToLog(LockDurationMillisecondsMustBeANumber);
-                                return;
-                            }
-                        }
-                        subscriptionDescription.LockDuration = new TimeSpan(days, hours, minutes, seconds, milliseconds);
                     }
 
-                    days = 0;
-                    hours = 0;
-                    minutes = 0;
-                    seconds = 0;
-                    milliseconds = 0;
-
-                    if (!string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleDays.Text) ||
-                        !string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleHours.Text) ||
-                        !string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleMinutes.Text) ||
-                        !string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleSeconds.Text) ||
-                        !string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleMilliseconds.Text))
+                    if (tsAutoDeleteOnIdle.IsFilled)
                     {
-                        if (!string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleDays.Text))
+                        if (tsAutoDeleteOnIdle.TimeSpanValue.HasValue)
                         {
-                            if (!int.TryParse(txtAutoDeleteOnIdleDays.Text, out days))
-                            {
-                                writeToLog(AutoDeleteOnIdleDaysMustBeANumber);
-                                return;
-                            }
+                            subscriptionDescription.AutoDeleteOnIdle = tsAutoDeleteOnIdle.TimeSpanValue.Value;
                         }
-                        if (!string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleHours.Text))
+                        else
                         {
-                            if (!int.TryParse(txtAutoDeleteOnIdleHours.Text, out hours))
-                            {
-                                writeToLog(AutoDeleteOnIdleHoursMustBeANumber);
-                                return;
-                            }
+                            writeToLog(tsAutoDeleteOnIdle.GetErrorMessage(AutoDeleteOnIdle));
+                            return;
                         }
-                        if (!string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleMinutes.Text))
-                        {
-                            if (!int.TryParse(txtAutoDeleteOnIdleMinutes.Text, out minutes))
-                            {
-                                writeToLog(AutoDeleteOnIdleMinutesMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleSeconds.Text))
-                        {
-                            if (!int.TryParse(txtAutoDeleteOnIdleSeconds.Text, out seconds))
-                            {
-                                writeToLog(AutoDeleteOnIdleSecondsMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleMilliseconds.Text))
-                        {
-                            if (!int.TryParse(txtAutoDeleteOnIdleMilliseconds.Text, out milliseconds))
-                            {
-                                writeToLog(AutoDeleteOnIdleMillisecondsMustBeANumber);
-                                return;
-                            }
-                        }
-                        subscriptionDescription.AutoDeleteOnIdle = new TimeSpan(days, hours, minutes, seconds, milliseconds);
                     }
 
                     subscriptionDescription.EnableBatchedOperations = checkedListBox.GetItemChecked(EnableBatchedOperationsIndex);
@@ -1520,26 +1440,75 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                     subscriptionDescription.EnableDeadLetteringOnMessageExpiration = checkedListBox.GetItemChecked(EnableDeadLetteringOnMessageExpirationIndex);
                     subscriptionDescription.RequiresSession = checkedListBox.GetItemChecked(RequiresSessionIndex);
 
-                    var ruleDescription = new RuleDescription();
 
-                    if (!string.IsNullOrWhiteSpace(txtFilter.Text))
+                    if (!duplicateExistingSubscription)
                     {
-                        ruleDescription.Filter = new SqlFilter(txtFilter.Text);
+                        CreateSubscription(subscriptionDescription);
                     }
-                    if (!string.IsNullOrWhiteSpace(txtAction.Text))
+                    else
                     {
-                        ruleDescription.Action = new SqlRuleAction(txtAction.Text);
+                        CreateSubscriptionCopyRules(subscriptionDescription);
+
                     }
 
-                    subscriptionWrapper.SubscriptionDescription = serviceBusHelper.CreateSubscription(subscriptionWrapper.TopicDescription, 
-                                                                                          subscriptionDescription, 
-                                                                                          ruleDescription);
                     InitializeData();
                 }
             }
             catch (Exception ex)
             {
                 HandleException(ex);
+            }
+        }
+
+        /// <summary>
+        /// Create the given subscription using the text box values for default filter and action.
+        /// </summary>
+        /// <param name="subscriptionDescription">Description object that will be created in the service bus.</param>
+        private void CreateSubscription(SubscriptionDescription subscriptionDescription)
+        {
+            var ruleDescription = new RuleDescription();
+
+            if (!string.IsNullOrWhiteSpace(txtFilter.Text))
+            {
+                ruleDescription.Filter = new SqlFilter(txtFilter.Text);
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtAction.Text))
+            {
+                ruleDescription.Action = new SqlRuleAction(txtAction.Text);
+            }
+
+            subscriptionWrapper.SubscriptionDescription = serviceBusHelper.CreateSubscription(subscriptionWrapper.TopicDescription,
+                subscriptionDescription,
+                ruleDescription);
+        }
+
+        /// <summary>
+        /// Create the given subscription and copy all rules from the subscription description previously attached the the subscription wrapper for this control.
+        /// </summary>
+        /// <param name="subscriptionDescription">Description object that will be created in the service bus</param>
+        private void CreateSubscriptionCopyRules(SubscriptionDescription subscriptionDescription)
+        {
+            // copy rule descriptions from existing subscription to new duplicated one
+            var ruleDescriptions = serviceBusHelper.GetRules(subscriptionWrapper.SubscriptionDescription).ToArray();
+
+            if (ruleDescriptions.Length >= 1)
+            {
+                subscriptionWrapper.SubscriptionDescription = serviceBusHelper.CreateSubscription(
+                    subscriptionWrapper.TopicDescription,
+                    subscriptionDescription,
+                    ruleDescriptions[0]);
+
+                for (var i = 1; i < ruleDescriptions.Length; i++)
+                {
+                    serviceBusHelper.AddRule(subscriptionWrapper.SubscriptionDescription, ruleDescriptions[i]);
+                }
+            }
+            else
+            {
+                subscriptionWrapper.SubscriptionDescription = serviceBusHelper.CreateSubscription(
+                    subscriptionWrapper.TopicDescription,
+                    subscriptionDescription);
             }
         }
 
@@ -1604,177 +1573,42 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                         }
                     }
 
-                    var days = 0;
-                    var hours = 0;
-                    var minutes = 0;
-                    var seconds = 0;
-                    var milliseconds = 0;
-
-                    if (!string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveDays.Text) ||
-                        !string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveHours.Text) ||
-                        !string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveMinutes.Text) ||
-                        !string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveSeconds.Text) ||
-                        !string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveMilliseconds.Text))
+                    if (tsDefaultMessageTimeToLive.IsFilled)
                     {
-                        if (!string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveDays.Text))
+                        if (tsDefaultMessageTimeToLive.TimeSpanValue.HasValue)
                         {
-                            if (!int.TryParse(txtDefaultMessageTimeToLiveDays.Text, out days))
-                            {
-                                writeToLog(DefaultMessageTimeToLiveDaysMustBeANumber);
-                                return;
-                            }
+                            subscriptionWrapper.SubscriptionDescription.DefaultMessageTimeToLive = tsDefaultMessageTimeToLive.TimeSpanValue.Value;
                         }
-                        if (!string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveHours.Text))
+                        else
                         {
-                            if (!int.TryParse(txtDefaultMessageTimeToLiveHours.Text, out hours))
-                            {
-                                writeToLog(DefaultMessageTimeToLiveHoursMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveMinutes.Text))
-                        {
-                            if (!int.TryParse(txtDefaultMessageTimeToLiveMinutes.Text, out minutes))
-                            {
-                                writeToLog(DefaultMessageTimeToLiveMinutesMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveSeconds.Text))
-                        {
-                            if (!int.TryParse(txtDefaultMessageTimeToLiveSeconds.Text, out seconds))
-                            {
-                                writeToLog(DefaultMessageTimeToLiveSecondsMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtDefaultMessageTimeToLiveMilliseconds.Text))
-                        {
-                            if (!int.TryParse(txtDefaultMessageTimeToLiveMilliseconds.Text, out milliseconds))
-                            {
-                                writeToLog(DefaultMessageTimeToLiveMillisecondsMustBeANumber);
-                                return;
-                            }
-                        }
-                        subscriptionWrapper.SubscriptionDescription.DefaultMessageTimeToLive = new TimeSpan(days, hours, minutes, seconds,
-                                                                                 milliseconds);
-                    }
-
-                    days = 0;
-                    hours = 0;
-                    minutes = 0;
-                    seconds = 0;
-                    milliseconds = 0;
-
-                    if (!string.IsNullOrWhiteSpace(txtLockDurationDays.Text) ||
-                        !string.IsNullOrWhiteSpace(txtLockDurationHours.Text) ||
-                        !string.IsNullOrWhiteSpace(txtLockDurationMinutes.Text) ||
-                        !string.IsNullOrWhiteSpace(txtLockDurationSeconds.Text) ||
-                        !string.IsNullOrWhiteSpace(txtLockDurationMilliseconds.Text))
-                    {
-                        if (!string.IsNullOrWhiteSpace(txtLockDurationDays.Text))
-                        {
-                            if (!int.TryParse(txtLockDurationDays.Text, out days))
-                            {
-                                writeToLog(LockDurationDaysMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtLockDurationHours.Text))
-                        {
-                            if (!int.TryParse(txtLockDurationHours.Text, out hours))
-                            {
-                                writeToLog(LockDurationHoursMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtLockDurationMinutes.Text))
-                        {
-                            if (!int.TryParse(txtLockDurationMinutes.Text, out minutes))
-                            {
-                                writeToLog(LockDurationMinutesMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtLockDurationSeconds.Text))
-                        {
-                            if (!int.TryParse(txtLockDurationSeconds.Text, out seconds))
-                            {
-                                writeToLog(LockDurationSecondsMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtLockDurationMilliseconds.Text))
-                        {
-                            if (!int.TryParse(txtLockDurationMilliseconds.Text, out milliseconds))
-                            {
-                                writeToLog(LockDurationMillisecondsMustBeANumber);
-                                return;
-                            }
-                        }
-                        var timeSpan = new TimeSpan(days, hours, minutes, seconds, milliseconds);
-                        if (!timeSpan.IsMaxValue())
-                        {
-                            subscriptionWrapper.SubscriptionDescription.LockDuration = timeSpan;
+                            writeToLog(tsDefaultMessageTimeToLive.GetErrorMessage(DefaultMessageTimeToLive));
+                            return;
                         }
                     }
 
-                    days = 0;
-                    hours = 0;
-                    minutes = 0;
-                    seconds = 0;
-                    milliseconds = 0;
-
-                    if (!string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleDays.Text) ||
-                        !string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleHours.Text) ||
-                        !string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleMinutes.Text) ||
-                        !string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleSeconds.Text) ||
-                        !string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleMilliseconds.Text))
+                    if (tsLockDuration.IsFilled)
                     {
-                        if (!string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleDays.Text))
+                        if (tsLockDuration.TimeSpanValue.HasValue)
                         {
-                            if (!int.TryParse(txtAutoDeleteOnIdleDays.Text, out days))
-                            {
-                                writeToLog(AutoDeleteOnIdleDaysMustBeANumber);
-                                return;
-                            }
+                            subscriptionWrapper.SubscriptionDescription.LockDuration = tsLockDuration.TimeSpanValue.Value;
                         }
-                        if (!string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleHours.Text))
+                        else
                         {
-                            if (!int.TryParse(txtAutoDeleteOnIdleHours.Text, out hours))
-                            {
-                                writeToLog(AutoDeleteOnIdleHoursMustBeANumber);
-                                return;
-                            }
+                            writeToLog(tsLockDuration.GetErrorMessage(LockDuration));
+                            return;
                         }
-                        if (!string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleMinutes.Text))
+                    }
+
+                    if (tsAutoDeleteOnIdle.IsFilled)
+                    {
+                        if (tsAutoDeleteOnIdle.TimeSpanValue.HasValue)
                         {
-                            if (!int.TryParse(txtAutoDeleteOnIdleMinutes.Text, out minutes))
-                            {
-                                writeToLog(AutoDeleteOnIdleMinutesMustBeANumber);
-                                return;
-                            }
+                            subscriptionWrapper.SubscriptionDescription.AutoDeleteOnIdle = tsAutoDeleteOnIdle.TimeSpanValue.Value;
                         }
-                        if (!string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleSeconds.Text))
+                        else
                         {
-                            if (!int.TryParse(txtAutoDeleteOnIdleSeconds.Text, out seconds))
-                            {
-                                writeToLog(AutoDeleteOnIdleSecondsMustBeANumber);
-                                return;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(txtAutoDeleteOnIdleMilliseconds.Text))
-                        {
-                            if (!int.TryParse(txtAutoDeleteOnIdleMilliseconds.Text, out milliseconds))
-                            {
-                                writeToLog(AutoDeleteOnIdleMillisecondsMustBeANumber);
-                                return;
-                            }
-                        }
-                        var timeSpan = new TimeSpan(days, hours, minutes, seconds, milliseconds);
-                        if (!timeSpan.IsMaxValue())
-                        {
-                            subscriptionWrapper.SubscriptionDescription.AutoDeleteOnIdle = timeSpan;   
+                            writeToLog(tsAutoDeleteOnIdle.GetErrorMessage(AutoDeleteOnIdle));
+                            return;
                         }
                     }
 
@@ -1869,7 +1703,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
 
         private void btnOpenForwardToForm_Click(object sender, EventArgs e)
         {
-            using (var form = new SelectEntityForm(SelectEntityDialogTitle, SelectEntityGrouperTitle, SelectEntityLabelText))
+            using (var form = creteSelectEntityFormForPath(txtForwardTo.Text))
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -1880,13 +1714,47 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
 
         private void btnOpenForwardDeadLetteredMessagesToForm_Click(object sender, EventArgs e)
         {
-            using (var form = new SelectEntityForm(SelectEntityDialogTitle, SelectEntityGrouperTitle, SelectEntityLabelText))
+            using (var form = creteSelectEntityFormForPath(txtForwardDeadLetteredMessagesTo.Text))
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     txtForwardDeadLetteredMessagesTo.Text = form.Path;
                 }
             }
+        }
+
+        private SelectEntityForm creteSelectEntityFormForPath(string path)
+        {
+            if (!string.IsNullOrWhiteSpace(path))
+            {
+                QueueDescription queueDescriptionSource = null;
+                try
+                {
+                    queueDescriptionSource = serviceBusHelper.GetQueue(path);
+                }
+                catch (Exception)
+                {
+                    // we might have found a topic, and the sdk will throw with an indistinguishable MessagingException error.
+                }
+                if (queueDescriptionSource != null)
+                {
+                    return new SelectEntityForm(SelectEntityDialogTitle, SelectEntityGrouperTitle, SelectEntityLabelText, queueDescriptionSource);
+                }
+                TopicDescription topicDescriptionSource = null;
+                try
+                {
+                    topicDescriptionSource = serviceBusHelper.GetTopic(path);
+                }
+                catch (Exception)
+                {
+                    // we might have found a queue, and the sdk will throw with an indistinguishable MessagingException error.
+                }
+                if (topicDescriptionSource != null)
+                {
+                    return new SelectEntityForm(SelectEntityDialogTitle, SelectEntityGrouperTitle, SelectEntityLabelText, topicDescriptionSource);
+                }
+            }
+            return new SelectEntityForm(SelectEntityDialogTitle, SelectEntityGrouperTitle, SelectEntityLabelText);
         }
 
         private void mainTabControl_DrawItem(object sender, DrawItemEventArgs e)
@@ -2065,6 +1933,29 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             CalculateLastColumnWidth(sender);
         }
 
+        private void dataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            var rowIdx = (e.RowIndex + 1).ToString();
+
+            var centerFormat = new StringFormat()
+            {
+                Alignment = StringAlignment.Far,
+
+                LineAlignment = StringAlignment.Center
+            };
+
+            Size textSize = TextRenderer.MeasureText(rowIdx, this.Font);
+
+            if (grid.RowHeadersWidth < textSize.Width + 20)
+            {
+                grid.RowHeadersWidth = textSize.Width + 20;
+            }
+
+            var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth - 4, e.RowBounds.Height);
+            e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
+        }
+
         private void dataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             //var textBox = (TextBox)e.Control;
@@ -2113,10 +2004,10 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                     var columnWidth = width / 4;
                     dataGridView.Columns[0].Width = columnWidth - 20;
                     dataGridView.Columns[3].Width = columnWidth;
-                    dataGridView.Columns[4].Width = columnWidth +(width - (columnWidth * 4)) + 10;
+                    dataGridView.Columns[4].Width = columnWidth + (width - (columnWidth * 4)) + 10;
                     dataGridView.Columns[5].Width = columnWidth + 10;
                 }
-                if (dataGridView == sessionsDataGridView && 
+                if (dataGridView == sessionsDataGridView &&
                     dataGridView.ColumnCount == 4)
                 {
                     var width = dataGridView.Width - dataGridView.RowHeadersWidth;
@@ -2166,9 +2057,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
 
                 LanguageDetector.SetFormattedMessage(serviceBusHelper, brokeredMessage, txtMessageText);
 
-                var listViewItems = brokeredMessage.Properties.Select(p => new ListViewItem(new[] { p.Key, Convert.ToString(p.Value) })).ToArray();
-                messagePropertyListView.Items.Clear();
-                messagePropertyListView.Items.AddRange(listViewItems);
+                messageCustomPropertyGrid.SelectedObject = new DictionaryPropertyGridAdapter<string, object>(brokeredMessage.Properties);
             }
         }
 
@@ -2261,9 +2150,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
 
                 LanguageDetector.SetFormattedMessage(serviceBusHelper, deadletterMessage, txtDeadletterText);
 
-                var listViewItems = deadletterMessage.Properties.Select(p => new ListViewItem(new[] { p.Key, Convert.ToString(p.Value) })).ToArray();
-                deadletterPropertyListView.Items.Clear();
-                deadletterPropertyListView.Items.AddRange(listViewItems);
+                deadletterCustomPropertyGrid.SelectedObject = new DictionaryPropertyGridAdapter<string, object>(deadletterMessage.Properties);
             }
         }
 
@@ -2289,41 +2176,6 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             hiddenPages.Add(page);
         }
 
-        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            OnKeyPress(e);
-
-            var numberFormatInfo = CultureInfo.CurrentCulture.NumberFormat;
-            var decimalSeparator = numberFormatInfo.NumberDecimalSeparator;
-            var groupSeparator = numberFormatInfo.NumberGroupSeparator;
-            var negativeSign = numberFormatInfo.NegativeSign;
-
-            var keyInput = e.KeyChar.ToString(CultureInfo.InvariantCulture);
-
-            if (char.IsDigit(e.KeyChar))
-            {
-                // Digits are OK
-            }
-            else if (keyInput.Equals(decimalSeparator) || keyInput.Equals(groupSeparator) ||
-                     keyInput.Equals(negativeSign))
-            {
-                // Decimal separator is OK
-            }
-            else if (e.KeyChar == '\b')
-            {
-                // Backspace key is OK
-            }
-            else if (e.KeyChar == ' ')
-            {
-
-            }
-            else
-            {
-                // Swallow this invalid key and beep
-                e.Handled = true;
-            }
-        }
-
         private void messagesDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
@@ -2335,7 +2187,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             {
                 return;
             }
-            using (var messageForm = new MessageForm(bindingList[e.RowIndex], serviceBusHelper, writeToLog))
+            using (var messageForm = new MessageForm(subscriptionWrapper, bindingList[e.RowIndex], serviceBusHelper, writeToLog))
             {
                 messageForm.ShowDialog();
             }
@@ -2352,7 +2204,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             {
                 return;
             }
-            using (var messageForm = new MessageForm(subscriptionWrapper, bindingList[e.RowIndex], 
+            using (var messageForm = new MessageForm(subscriptionWrapper, bindingList[e.RowIndex],
                 serviceBusHelper, writeToLog))
             {
                 messageForm.ShowDialog();
@@ -2369,9 +2221,6 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 {
                     Application.UseWaitCursor = false;
                 }
-
-                MainForm.SingletonMainForm.RefreshQueues();
-                MainForm.SingletonMainForm.RefreshTopics();
             }
         }
 
@@ -2395,8 +2244,8 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
 
         private void grouperMessageCustomProperties_CustomPaint(PaintEventArgs obj)
         {
-            messagePropertyListView.Size = new Size(grouperMessageCustomProperties.Size.Width - (messagePropertyListView.Location.X * 2),
-                                                    grouperMessageCustomProperties.Size.Height - messagePropertyListView.Location.Y - messagePropertyListView.Location.X);
+            messageCustomPropertyGrid.Size = new Size(grouperMessageCustomProperties.Size.Width - (messageCustomPropertyGrid.Location.X * 2),
+                                                    grouperMessageCustomProperties.Size.Height - messageCustomPropertyGrid.Location.Y - messageCustomPropertyGrid.Location.X);
         }
 
         private void grouperMessageProperties_CustomPaint(PaintEventArgs obj)
@@ -2413,8 +2262,8 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
 
         private void grouperDeadletterCustomProperties_CustomPaint(PaintEventArgs obj)
         {
-            deadletterPropertyListView.Size = new Size(grouperDeadletterCustomProperties.Size.Width - (deadletterPropertyListView.Location.X * 2),
-                                                       grouperDeadletterCustomProperties.Size.Height - deadletterPropertyListView.Location.Y - deadletterPropertyListView.Location.X);
+            deadletterCustomPropertyGrid.Size = new Size(grouperDeadletterCustomProperties.Size.Width - (deadletterCustomPropertyGrid.Location.X * 2),
+                                                       grouperDeadletterCustomProperties.Size.Height - deadletterCustomPropertyGrid.Location.Y - deadletterCustomPropertyGrid.Location.X);
         }
 
         private void grouperDeadletterSystemProperties_CustomPaint(PaintEventArgs obj)
@@ -2444,6 +2293,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             messagesDataGridView.Rows[e.RowIndex].Selected = true;
             var multipleSelectedRows = messagesDataGridView.SelectedRows.Count > 1;
             repairAndResubmitMessageToolStripMenuItem.Visible = !multipleSelectedRows;
+            resubmitMessageToolStripMenuItem.Visible = !multipleSelectedRows;
             saveSelectedMessageToolStripMenuItem.Visible = !multipleSelectedRows;
             resubmitSelectedMessagesInBatchModeToolStripMenuItem.Visible = multipleSelectedRows;
             saveSelectedMessagesToolStripMenuItem.Visible = multipleSelectedRows;
@@ -2455,7 +2305,17 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             messagesDataGridView_CellDoubleClick(messagesDataGridView, new DataGridViewCellEventArgs(0, currentMessageRowIndex));
         }
 
+        private void resubmitMessageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResubmitSelectedMessages();
+        }
+
         private void resubmitSelectedMessagesInBatchModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResubmitSelectedMessages();
+        }
+
+        private void ResubmitSelectedMessages()
         {
             try
             {
@@ -2463,8 +2323,9 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 {
                     return;
                 }
-                using (var form = new MessageForm(messagesDataGridView.SelectedRows.Cast<DataGridViewRow>()
-                                .Select(r => (BrokeredMessage)r.DataBoundItem), serviceBusHelper, writeToLog))
+
+                using (var form = new MessageForm(subscriptionWrapper, messagesDataGridView.SelectedRows.Cast<DataGridViewRow>()
+                           .Select(r => (BrokeredMessage)r.DataBoundItem), serviceBusHelper, writeToLog))
                 {
                     form.ShowDialog();
                 }
@@ -2495,12 +2356,12 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             if (messages.Count() == 1)
             {
                 confirmationText = "Are you sure you want to delete the selected message from the " +
-                    $"deadletter subqueue for the {subscriptionWrapper.SubscriptionDescription.Name} subscription?";
+                    $"dead-letter subqueue for the {subscriptionWrapper.SubscriptionDescription.Name} subscription?";
             }
             else
             {
                 confirmationText = $"Are you sure you want to delete {messages.Count()} messages from the " +
-                    $"deadletter subqueue for {subscriptionWrapper.SubscriptionDescription.Name} subscription?";
+                    $"dead-letter subqueue for {subscriptionWrapper.SubscriptionDescription.Name} subscription?";
             }
 
             using (var deleteForm = new DeleteForm(confirmationText))
@@ -2511,7 +2372,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 }
             }
 
-            var sequenceNumbersToDelete = messages.Select(s => s.SequenceNumber).ToList();
+            var sequenceNumbersToDelete = messages.Select(s => s?.SequenceNumber).ToList();
             var deadLetterMessageHandler = new DeadLetterMessageHandler(writeToLog, serviceBusHelper,
                 MainForm.SingletonMainForm.ReceiveTimeout, subscriptionWrapper);
 
@@ -2544,7 +2405,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 Application.UseWaitCursor = false;
             }
 
-            MainForm.SingletonMainForm.refreshEntity_Click(null, null);
+            await MainForm.SingletonMainForm.RefreshSelectedEntity();
         }
 
         private void deadletterDataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -2557,6 +2418,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             var multipleSelectedRows = deadletterDataGridView.SelectedRows.Count > 1;
 
             repairAndResubmitDeadletterToolStripMenuItem.Visible = !multipleSelectedRows;
+            resubmitDeadletterToolStripMenuItem.Visible = !multipleSelectedRows;
             saveSelectedDeadletteredMessageToolStripMenuItem.Visible = !multipleSelectedRows;
             deleteSelectedMessageToolStripMenuItem.Visible = !multipleSelectedRows;
 
@@ -2572,7 +2434,17 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             deadletterDataGridView_CellDoubleClick(deadletterDataGridView, new DataGridViewCellEventArgs(0, currentDeadletterMessageRowIndex));
         }
 
-        private void resubmitSelectedDeadletterMessagesInBatchModeToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void resubmitDeadletterMessageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await ResubmitSelectedDeadletterMessages();
+        }
+
+        private async void resubmitSelectedDeadletterMessagesInBatchModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await ResubmitSelectedDeadletterMessages();
+        }
+
+        private async Task ResubmitSelectedDeadletterMessages()
         {
             try
             {
@@ -2580,8 +2452,9 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 {
                     return;
                 }
+
                 using (var form = new MessageForm(subscriptionWrapper, deadletterDataGridView.SelectedRows.Cast<DataGridViewRow>()
-                                .Select(r => (BrokeredMessage)r.DataBoundItem), serviceBusHelper, writeToLog))
+                           .Select(r => (BrokeredMessage)r.DataBoundItem), serviceBusHelper, writeToLog))
                 {
                     form.ShowDialog();
                     if (form.RemovedSequenceNumbers != null && form.RemovedSequenceNumbers.Any())
@@ -2597,8 +2470,178 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
 
             // Rather than getting the updated entities from the forms we refresh all queues and topics to keep things 
             // simple.
-            MainForm.SingletonMainForm.RefreshQueues();
-            MainForm.SingletonMainForm.RefreshTopics();
+            await MainForm.SingletonMainForm.RefreshQueues();
+            await MainForm.SingletonMainForm.RefreshTopics();
+        }
+
+        private void pictFindMessagesByDate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                messagesDataGridView.SuspendDrawing();
+                messagesDataGridView.SuspendLayout();
+                if (messageBindingList == null)
+                {
+                    return;
+                }
+                using (var form = new DateTimeRangeForm(messagesFilterFromDate, messagesFilterToDate))
+                {
+                    if (form.ShowDialog() != DialogResult.OK)
+                    {
+                        return;
+                    }
+                    messagesFilterFromDate = form.DateTimeFrom;
+                    messagesFilterToDate = form.DateTimeTo;
+                    FilterMessages();
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+            finally
+            {
+                messagesDataGridView.ResumeLayout();
+                messagesDataGridView.ResumeDrawing();
+            }
+        }
+
+        private void pictFindDeadletterByDate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                deadletterDataGridView.SuspendDrawing();
+                deadletterDataGridView.SuspendLayout();
+                if (deadletterBindingList == null)
+                {
+                    return;
+                }
+                using (var form = new DateTimeRangeForm(deadletterFilterFromDate, deadletterFilterToDate))
+                {
+                    if (form.ShowDialog() != DialogResult.OK)
+                    {
+                        return;
+                    }
+                    deadletterFilterFromDate = form.DateTimeFrom;
+                    deadletterFilterToDate = form.DateTimeTo;
+                    FilterDeadletters();
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+            finally
+            {
+                deadletterDataGridView.ResumeLayout();
+                deadletterDataGridView.ResumeDrawing();
+            }
+        }
+
+        private void FilterMessages()
+        {
+            if (messagesFilterFromDate == null && messagesFilterToDate == null && string.IsNullOrWhiteSpace(messagesFilterExpression))
+            {
+                messagesBindingSource.DataSource = messageBindingList;
+                messagesDataGridView.DataSource = messagesBindingSource;
+                writeToLog(FilterExpressionRemovedMessage);
+            }
+            else
+            {
+                var filteredList = messageBindingList.ToList();
+                if (!string.IsNullOrWhiteSpace(messagesFilterExpression))
+                {
+                    Filter filter;
+                    try
+                    {
+                        var sqlFilter = new SqlFilter(messagesFilterExpression);
+                        sqlFilter.Validate();
+                        filter = sqlFilter.Preprocess();
+                    }
+                    catch (Exception ex)
+                    {
+                        writeToLog(string.Format(FilterExpressionNotValidMessage, messagesFilterExpression,
+                            ex.Message));
+                        return;
+                    }
+
+                    filteredList = filteredList.Where(filter.Match).ToList();
+                }
+
+                if (messagesFilterFromDate != null || messagesFilterToDate != null)
+                {
+                    filteredList = filteredList.Where(msg => IsWithinDateTimeRange(msg, messagesFilterFromDate, messagesFilterToDate)).ToList();
+                }
+
+                var bindingList = new SortableBindingList<BrokeredMessage>(filteredList)
+                {
+                    AllowEdit = false,
+                    AllowNew = false,
+                    AllowRemove = false
+                };
+                messagesBindingSource.DataSource = bindingList;
+                messagesDataGridView.DataSource = messagesBindingSource;
+                writeToLog(string.Format(FilterExpressionAppliedMessage, messagesFilterExpression, messagesFilterFromDate ?? DateTime.MinValue, messagesFilterToDate ?? DateTime.MaxValue, bindingList.Count));
+            }
+        }
+
+        private void FilterDeadletters()
+        {
+            if (deadletterFilterFromDate == null && deadletterFilterToDate == null && string.IsNullOrWhiteSpace(deadletterFilterExpression))
+            {
+                deadletterBindingSource.DataSource = deadletterBindingList;
+                deadletterDataGridView.DataSource = deadletterBindingSource;
+                writeToLog(FilterExpressionRemovedMessage);
+            }
+            else
+            {
+                var filteredList = deadletterBindingList.ToList();
+                if (!string.IsNullOrWhiteSpace(deadletterFilterExpression))
+                {
+                    Filter filter;
+                    try
+                    {
+                        var sqlFilter = new SqlFilter(deadletterFilterExpression);
+                        sqlFilter.Validate();
+                        filter = sqlFilter.Preprocess();
+                    }
+                    catch (Exception ex)
+                    {
+                        writeToLog(string.Format(FilterExpressionNotValidMessage, deadletterFilterExpression,
+                            ex.Message));
+                        return;
+                    }
+                    filteredList = filteredList.Where(filter.Match).ToList();
+                }
+
+                if (deadletterFilterFromDate != null || deadletterFilterToDate != null)
+                {
+                    filteredList = filteredList.Where(msg => IsWithinDateTimeRange(msg, deadletterFilterFromDate, deadletterFilterToDate)).ToList();
+                }
+
+                var bindingList = new SortableBindingList<BrokeredMessage>(filteredList)
+                {
+                    AllowEdit = false,
+                    AllowNew = false,
+                    AllowRemove = false
+                };
+                deadletterBindingSource.DataSource = bindingList;
+                deadletterDataGridView.DataSource = deadletterBindingSource;
+                writeToLog(string.Format(FilterExpressionAppliedMessage, deadletterFilterExpression, deadletterFilterFromDate ?? DateTime.MinValue, deadletterFilterToDate ?? DateTime.MaxValue, bindingList.Count));
+            }
+        }
+
+        private static bool IsWithinDateTimeRange(BrokeredMessage message, DateTime? fromDateTime, DateTime? toDateTime)
+        {
+            if (message.EnqueuedTimeUtc < (fromDateTime ?? DateTime.MinValue))
+            {
+                return false;
+            }
+            if (message.EnqueuedTimeUtc > (toDateTime ?? DateTime.MaxValue))
+            {
+                return false;
+            }
+            return true;
         }
 
         private void pictFindMessages_Click(object sender, EventArgs e)
@@ -2619,37 +2662,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                         return;
                     }
                     messagesFilterExpression = form.Content;
-                    if (string.IsNullOrWhiteSpace(messagesFilterExpression))
-                    {
-                        messagesBindingSource.DataSource = messageBindingList;
-                        messagesDataGridView.DataSource = messagesBindingSource;
-                        writeToLog(FilterExpressionRemovedMessage);
-                    }
-                    else
-                    {
-                        Filter filter;
-                        try
-                        {
-                            var sqlFilter = new SqlFilter(messagesFilterExpression);
-                            sqlFilter.Validate();
-                            filter = sqlFilter.Preprocess();
-                        }
-                        catch (Exception ex)
-                        {
-                            writeToLog(string.Format(FilterExpressionNotValidMessage, messagesFilterExpression, ex.Message));
-                            return;
-                        }
-                        var filteredList = messageBindingList.Where(filter.Match).ToList();
-                        var bindingList = new SortableBindingList<BrokeredMessage>(filteredList)
-                        {
-                            AllowEdit = false,
-                            AllowNew = false,
-                            AllowRemove = false
-                        };
-                        messagesBindingSource.DataSource = bindingList;
-                        messagesDataGridView.DataSource = messagesBindingSource;
-                        writeToLog(string.Format(FilterExpressionAppliedMessage, messagesFilterExpression, bindingList.Count));
-                    }
+                    FilterMessages();
                 }
             }
             catch (Exception ex)
@@ -2681,37 +2694,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                         return;
                     }
                     deadletterFilterExpression = form.Content;
-                    if (string.IsNullOrWhiteSpace(deadletterFilterExpression))
-                    {
-                        deadletterBindingSource.DataSource = deadletterBindingList;
-                        deadletterDataGridView.DataSource = deadletterBindingSource;
-                        writeToLog(FilterExpressionRemovedMessage);
-                    }
-                    else
-                    {
-                        Filter filter;
-                        try
-                        {
-                            var sqlFilter = new SqlFilter(deadletterFilterExpression);
-                            sqlFilter.Validate();
-                            filter = sqlFilter.Preprocess();
-                        }
-                        catch (Exception ex)
-                        {
-                            writeToLog(string.Format(FilterExpressionNotValidMessage, deadletterFilterExpression, ex.Message));
-                            return;
-                        }
-                        var filteredList = deadletterBindingList.Where(filter.Match).ToList();
-                        var bindingList = new SortableBindingList<BrokeredMessage>(filteredList)
-                        {
-                            AllowEdit = false,
-                            AllowNew = false,
-                            AllowRemove = false
-                        };
-                        deadletterBindingSource.DataSource = bindingList;
-                        deadletterDataGridView.DataSource = deadletterBindingSource;
-                        writeToLog(string.Format(FilterExpressionAppliedMessage, deadletterFilterExpression, bindingList.Count));
-                    }
+                    FilterDeadletters();
                 }
             }
             catch (Exception ex)
@@ -2740,6 +2723,24 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
             if (pictureBox != null)
             {
                 pictureBox.Image = Properties.Resources.FindExtension;
+            }
+        }
+
+        private void pictureBoxByDate_MouseEnter(object sender, EventArgs e)
+        {
+            var pictureBox = sender as PictureBox;
+            if (pictureBox != null)
+            {
+                pictureBox.Image = Properties.Resources.FindByDateExtensionRaised;
+            }
+        }
+
+        private void pictureBoxByDate_MouseLeave(object sender, EventArgs e)
+        {
+            var pictureBox = sender as PictureBox;
+            if (pictureBox != null)
+            {
+                pictureBox.Image = Properties.Resources.FindByDateExtension;
             }
         }
 
@@ -2830,7 +2831,7 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 }
                 using (var writer = new StreamWriter(saveFileDialog.FileName))
                 {
-                    writer.Write(MessageSerializationHelper.Serialize(bindingList[currentMessageRowIndex], txtMessageText.Text));
+                    writer.Write(MessageSerializationHelper.Serialize(bindingList[currentMessageRowIndex], txtMessageText.Text, doNotSerializeBody: true));
                 }
             }
             catch (Exception ex)
@@ -2868,8 +2869,9 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 }
                 using (var writer = new StreamWriter(saveFileDialog.FileName))
                 {
-                    var bodies = brokeredMessages.Select(bm => serviceBusHelper.GetMessageText(bm, out _));
-                    writer.Write(MessageSerializationHelper.Serialize(brokeredMessages, bodies));
+                    var bodies = brokeredMessages.Select(bm => serviceBusHelper.GetMessageText(bm,
+                         MainForm.SingletonMainForm.UseAscii, out _));
+                    writer.Write(MessageSerializationHelper.Serialize(brokeredMessages, bodies, doNotSerializeBody: true));
                 }
             }
             catch (Exception ex)
@@ -2948,8 +2950,9 @@ namespace Microsoft.Azure.ServiceBusExplorer.Controls
                 }
                 using (var writer = new StreamWriter(saveFileDialog.FileName))
                 {
-                    var bodies = brokeredMessages.Select(bm => serviceBusHelper.GetMessageText(bm, out _));
-                    writer.Write(MessageSerializationHelper.Serialize(brokeredMessages, bodies));
+                    var bodies = brokeredMessages.Select(bm => serviceBusHelper.GetMessageText(bm,
+                         MainForm.SingletonMainForm.UseAscii, out _));
+                    writer.Write(MessageSerializationHelper.Serialize(brokeredMessages, bodies, doNotSerializeBody: true));
                 }
             }
             catch (Exception ex)

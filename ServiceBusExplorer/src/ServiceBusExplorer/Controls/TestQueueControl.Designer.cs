@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Azure.ServiceBusExplorer.Controls
+﻿namespace ServiceBusExplorer.Controls
 {
     partial class TestQueueControl
     {
@@ -32,12 +32,13 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.messageTabControl = new System.Windows.Forms.TabControl();
             this.tabMessagePage = new System.Windows.Forms.TabPage();
-            this.grouperMessageFormat = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessageFormat = new ServiceBusExplorer.Controls.Grouper();
             this.cboMessageFormat = new System.Windows.Forms.ComboBox();
-            this.grouperMessageText = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessageText = new ServiceBusExplorer.Controls.Grouper();
             this.txtMessageText = new FastColoredTextBoxNS.FastColoredTextBox();
             this.tabFilesPage = new System.Windows.Forms.TabPage();
-            this.grouperMessageFiles = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.label2 = new System.Windows.Forms.Label();
+            this.grouperMessageFiles = new ServiceBusExplorer.Controls.Grouper();
             this.radioButtonBinaryFile = new System.Windows.Forms.RadioButton();
             this.radioButtonXmlTemplate = new System.Windows.Forms.RadioButton();
             this.radioButtonJsonTemplate = new System.Windows.Forms.RadioButton();
@@ -47,20 +48,20 @@
             this.nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.sizeColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabGeneratorPage = new System.Windows.Forms.TabPage();
-            this.grouperBrokeredMessageGenerator = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperBrokeredMessageGenerator = new ServiceBusExplorer.Controls.Grouper();
             this.lblRegistration = new System.Windows.Forms.Label();
             this.brokeredMessageGeneratorPropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.cboBrokeredMessageGeneratorType = new System.Windows.Forms.ComboBox();
             this.lblRegistrationType = new System.Windows.Forms.Label();
-            this.grouperMessageProperties = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessageProperties = new ServiceBusExplorer.Controls.Grouper();
             this.propertiesDataGridView = new System.Windows.Forms.DataGridView();
             this.mainTabSenderPage = new System.Windows.Forms.TabPage();
             this.senderEnabledCheckBox = new System.Windows.Forms.CheckBox();
-            this.grouperSender = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperSender = new ServiceBusExplorer.Controls.Grouper();
             this.checkBoxSendNewFactory = new System.Windows.Forms.CheckBox();
             this.cboSenderInspector = new System.Windows.Forms.ComboBox();
             this.lblSenderInspector = new System.Windows.Forms.Label();
-            this.txtMessageCount = new Microsoft.Azure.ServiceBusExplorer.Controls.NumericTextBox();
+            this.txtMessageCount = new ServiceBusExplorer.Controls.NumericTextBox();
             this.txtSenderThinkTime = new System.Windows.Forms.TextBox();
             this.lblSenderThinkTime = new System.Windows.Forms.Label();
             this.checkBoxSenderThinkTime = new System.Windows.Forms.CheckBox();
@@ -81,7 +82,7 @@
             this.cboBodyType = new System.Windows.Forms.ComboBox();
             this.lblSendTaskCount = new System.Windows.Forms.Label();
             this.lblCount = new System.Windows.Forms.Label();
-            this.grouperMessage = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperMessage = new ServiceBusExplorer.Controls.Grouper();
             this.checkBoxForcePersistence = new System.Windows.Forms.CheckBox();
             this.lblForcePersistence = new System.Windows.Forms.Label();
             this.lblContentType = new System.Windows.Forms.Label();
@@ -106,7 +107,7 @@
             this.txtMessageId = new System.Windows.Forms.TextBox();
             this.mainTabReceiverPage = new System.Windows.Forms.TabPage();
             this.receiverEnabledCheckBox = new System.Windows.Forms.CheckBox();
-            this.grouperReceiver = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperReceiver = new ServiceBusExplorer.Controls.Grouper();
             this.checkBoxReceiveNewFactory = new System.Windows.Forms.CheckBox();
             this.cboReceiverInspector = new System.Windows.Forms.ComboBox();
             this.lblReceiverInspector = new System.Windows.Forms.Label();
@@ -139,7 +140,7 @@
             this.checkBoxReceiverCommitTransaction = new System.Windows.Forms.CheckBox();
             this.checkBoxEnableReceiverLogging = new System.Windows.Forms.CheckBox();
             this.tabPageGraph = new System.Windows.Forms.TabPage();
-            this.grouperReceiverStatistics = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperReceiverStatistics = new ServiceBusExplorer.Controls.Grouper();
             this.receiverLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
             this.lblReceiverLastTime = new System.Windows.Forms.Label();
@@ -159,7 +160,7 @@
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.lblReceiverMessageNumber = new System.Windows.Forms.Label();
             this.lblReceiverCallsSuccessedCaption = new System.Windows.Forms.Label();
-            this.grouperSenderStatistics = new Microsoft.Azure.ServiceBusExplorer.Controls.Grouper();
+            this.grouperSenderStatistics = new ServiceBusExplorer.Controls.Grouper();
             this.senderLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSenderAverageTime = new System.Windows.Forms.Label();
@@ -238,7 +239,7 @@
             this.btnStart.Location = new System.Drawing.Point(840, 438);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(72, 24);
-            this.btnStart.TabIndex = 3;
+            this.btnStart.TabIndex = 4;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -257,7 +258,7 @@
             this.btnCancel.Location = new System.Drawing.Point(920, 438);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(72, 24);
-            this.btnCancel.TabIndex = 4;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -279,7 +280,7 @@
             this.mainTabControl.Name = "mainTabControl";
             this.mainTabControl.SelectedIndex = 0;
             this.mainTabControl.Size = new System.Drawing.Size(976, 414);
-            this.mainTabControl.TabIndex = 2;
+            this.mainTabControl.TabIndex = 0;
             this.mainTabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.mainTabControl_DrawItem);
             // 
             // mainTabMessagePage
@@ -326,7 +327,7 @@
             this.messageTabControl.Name = "messageTabControl";
             this.messageTabControl.SelectedIndex = 0;
             this.messageTabControl.Size = new System.Drawing.Size(459, 366);
-            this.messageTabControl.TabIndex = 10;
+            this.messageTabControl.TabIndex = 0;
             this.messageTabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.messageTabControl_DrawItem);
             // 
             // tabMessagePage
@@ -347,7 +348,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperMessageFormat.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageFormat.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageFormat.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageFormat.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageFormat.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageFormat.BorderThickness = 1F;
             this.grouperMessageFormat.Controls.Add(this.cboMessageFormat);
@@ -365,7 +366,7 @@
             this.grouperMessageFormat.ShadowControl = false;
             this.grouperMessageFormat.ShadowThickness = 1;
             this.grouperMessageFormat.Size = new System.Drawing.Size(416, 70);
-            this.grouperMessageFormat.TabIndex = 20;
+            this.grouperMessageFormat.TabIndex = 1;
             this.grouperMessageFormat.CustomPaint += new System.Action<System.Windows.Forms.PaintEventArgs>(this.grouperMessageFormat_CustomPaint);
             // 
             // cboMessageFormat
@@ -388,7 +389,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperMessageText.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageText.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageText.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageText.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageText.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageText.BorderThickness = 1F;
             this.grouperMessageText.Controls.Add(this.txtMessageText);
@@ -406,7 +407,7 @@
             this.grouperMessageText.ShadowControl = false;
             this.grouperMessageText.ShadowThickness = 1;
             this.grouperMessageText.Size = new System.Drawing.Size(416, 240);
-            this.grouperMessageText.TabIndex = 19;
+            this.grouperMessageText.TabIndex = 0;
             // 
             // txtMessageText
             // 
@@ -446,6 +447,7 @@
             // tabFilesPage
             // 
             this.tabFilesPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.tabFilesPage.Controls.Add(this.label2);
             this.tabFilesPage.Controls.Add(this.grouperMessageFiles);
             this.tabFilesPage.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabFilesPage.Location = new System.Drawing.Point(4, 24);
@@ -455,6 +457,17 @@
             this.tabFilesPage.TabIndex = 5;
             this.tabFilesPage.Text = "Files";
             // 
+            // label2
+            // 
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label2.Location = new System.Drawing.Point(16, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(416, 56);
+            this.label2.TabIndex = 33;
+            this.label2.Text = "The default is to just send one message so if you have selected muliple files and" +
+    " want to send all of them you have to change the Message Count on the Sender tab" +
+    ".";
+            // 
             // grouperMessageFiles
             // 
             this.grouperMessageFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -462,7 +475,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperMessageFiles.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageFiles.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageFiles.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageFiles.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageFiles.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageFiles.BorderThickness = 1F;
             this.grouperMessageFiles.Controls.Add(this.radioButtonBinaryFile);
@@ -476,7 +489,7 @@
             this.grouperMessageFiles.ForeColor = System.Drawing.Color.White;
             this.grouperMessageFiles.GroupImage = null;
             this.grouperMessageFiles.GroupTitle = "Message Files";
-            this.grouperMessageFiles.Location = new System.Drawing.Point(16, 8);
+            this.grouperMessageFiles.Location = new System.Drawing.Point(16, 81);
             this.grouperMessageFiles.Name = "grouperMessageFiles";
             this.grouperMessageFiles.Padding = new System.Windows.Forms.Padding(20);
             this.grouperMessageFiles.PaintGroupBox = true;
@@ -484,7 +497,7 @@
             this.grouperMessageFiles.ShadowColor = System.Drawing.Color.DarkGray;
             this.grouperMessageFiles.ShadowControl = false;
             this.grouperMessageFiles.ShadowThickness = 1;
-            this.grouperMessageFiles.Size = new System.Drawing.Size(416, 317);
+            this.grouperMessageFiles.Size = new System.Drawing.Size(416, 244);
             this.grouperMessageFiles.TabIndex = 16;
             this.grouperMessageFiles.CustomPaint += new System.Action<System.Windows.Forms.PaintEventArgs>(this.grouperMessageFiles_CustomPaint);
             // 
@@ -494,7 +507,7 @@
             this.radioButtonBinaryFile.AutoSize = true;
             this.radioButtonBinaryFile.Checked = true;
             this.radioButtonBinaryFile.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.radioButtonBinaryFile.Location = new System.Drawing.Point(104, 286);
+            this.radioButtonBinaryFile.Location = new System.Drawing.Point(104, 213);
             this.radioButtonBinaryFile.Name = "radioButtonBinaryFile";
             this.radioButtonBinaryFile.Size = new System.Drawing.Size(73, 17);
             this.radioButtonBinaryFile.TabIndex = 13;
@@ -507,12 +520,12 @@
             this.radioButtonXmlTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButtonXmlTemplate.AutoSize = true;
             this.radioButtonXmlTemplate.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.radioButtonXmlTemplate.Location = new System.Drawing.Point(310, 286);
+            this.radioButtonXmlTemplate.Location = new System.Drawing.Point(305, 213);
             this.radioButtonXmlTemplate.Name = "radioButtonXmlTemplate";
-            this.radioButtonXmlTemplate.Size = new System.Drawing.Size(89, 17);
+            this.radioButtonXmlTemplate.Size = new System.Drawing.Size(94, 17);
             this.radioButtonXmlTemplate.TabIndex = 12;
             this.radioButtonXmlTemplate.TabStop = true;
-            this.radioButtonXmlTemplate.Text = "Xml Template";
+            this.radioButtonXmlTemplate.Text = "XML Template";
             this.radioButtonXmlTemplate.UseVisualStyleBackColor = true;
             // 
             // radioButtonJsonTemplate
@@ -520,12 +533,12 @@
             this.radioButtonJsonTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButtonJsonTemplate.AutoSize = true;
             this.radioButtonJsonTemplate.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.radioButtonJsonTemplate.Location = new System.Drawing.Point(192, 286);
+            this.radioButtonJsonTemplate.Location = new System.Drawing.Point(192, 213);
             this.radioButtonJsonTemplate.Name = "radioButtonJsonTemplate";
-            this.radioButtonJsonTemplate.Size = new System.Drawing.Size(94, 17);
+            this.radioButtonJsonTemplate.Size = new System.Drawing.Size(100, 17);
             this.radioButtonJsonTemplate.TabIndex = 11;
             this.radioButtonJsonTemplate.TabStop = true;
-            this.radioButtonJsonTemplate.Text = "Json Template";
+            this.radioButtonJsonTemplate.Text = "JSON Template";
             this.radioButtonJsonTemplate.UseVisualStyleBackColor = true;
             // 
             // radioButtonTextFile
@@ -534,7 +547,7 @@
             this.radioButtonTextFile.AutoSize = true;
             this.radioButtonTextFile.Checked = true;
             this.radioButtonTextFile.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.radioButtonTextFile.Location = new System.Drawing.Point(16, 286);
+            this.radioButtonTextFile.Location = new System.Drawing.Point(16, 213);
             this.radioButtonTextFile.Name = "radioButtonTextFile";
             this.radioButtonTextFile.Size = new System.Drawing.Size(65, 17);
             this.radioButtonTextFile.TabIndex = 10;
@@ -564,10 +577,11 @@
             this.nameColumnHeader,
             this.sizeColumnHeader});
             this.messageFileListView.FullRowSelect = true;
+            this.messageFileListView.HideSelection = false;
             this.messageFileListView.Location = new System.Drawing.Point(16, 32);
             this.messageFileListView.Name = "messageFileListView";
             this.messageFileListView.OwnerDraw = true;
-            this.messageFileListView.Size = new System.Drawing.Size(384, 246);
+            this.messageFileListView.Size = new System.Drawing.Size(384, 173);
             this.messageFileListView.TabIndex = 2;
             this.messageFileListView.UseCompatibleStateImageBehavior = false;
             this.messageFileListView.View = System.Windows.Forms.View.Details;
@@ -604,7 +618,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperBrokeredMessageGenerator.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperBrokeredMessageGenerator.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperBrokeredMessageGenerator.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperBrokeredMessageGenerator.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperBrokeredMessageGenerator.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperBrokeredMessageGenerator.BorderThickness = 1F;
             this.grouperBrokeredMessageGenerator.Controls.Add(this.lblRegistration);
@@ -681,7 +695,7 @@
             // 
             this.grouperMessageProperties.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessageProperties.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessageProperties.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessageProperties.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessageProperties.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessageProperties.BorderThickness = 1F;
             this.grouperMessageProperties.Controls.Add(this.propertiesDataGridView);
@@ -757,7 +771,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperSender.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperSender.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperSender.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperSender.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperSender.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperSender.BorderThickness = 1F;
             this.grouperSender.Controls.Add(this.checkBoxSendNewFactory);
@@ -834,7 +848,10 @@
             // 
             // txtMessageCount
             // 
+            this.txtMessageCount.AllowDecimal = false;
+            this.txtMessageCount.AllowNegative = false;
             this.txtMessageCount.AllowSpace = false;
+            this.txtMessageCount.IsZeroWhenEmpty = false;
             this.txtMessageCount.Location = new System.Drawing.Point(96, 264);
             this.txtMessageCount.Name = "txtMessageCount";
             this.txtMessageCount.Size = new System.Drawing.Size(72, 20);
@@ -1071,7 +1088,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperMessage.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperMessage.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperMessage.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperMessage.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperMessage.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperMessage.BorderThickness = 1F;
             this.grouperMessage.Controls.Add(this.checkBoxForcePersistence);
@@ -1150,6 +1167,7 @@
             this.txtContentType.Name = "txtContentType";
             this.txtContentType.Size = new System.Drawing.Size(176, 20);
             this.txtContentType.TabIndex = 5;
+            this.txtContentType.TextChanged += new System.EventHandler(this.txtContentType_TextChanged);
             // 
             // txtScheduledEnqueueTimeUtc
             // 
@@ -1349,7 +1367,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperReceiver.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperReceiver.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperReceiver.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperReceiver.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperReceiver.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperReceiver.BorderThickness = 1F;
             this.grouperReceiver.Controls.Add(this.checkBoxReceiveNewFactory);
@@ -1779,7 +1797,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grouperReceiverStatistics.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperReceiverStatistics.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperReceiverStatistics.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperReceiverStatistics.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperReceiverStatistics.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperReceiverStatistics.BorderThickness = 1F;
             this.grouperReceiverStatistics.Controls.Add(this.receiverLayoutPanel);
@@ -2074,7 +2092,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.grouperSenderStatistics.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.grouperSenderStatistics.BackgroundGradientColor = System.Drawing.Color.White;
-            this.grouperSenderStatistics.BackgroundGradientMode = Microsoft.Azure.ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
+            this.grouperSenderStatistics.BackgroundGradientMode = ServiceBusExplorer.Controls.Grouper.GroupBoxGradientMode.None;
             this.grouperSenderStatistics.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
             this.grouperSenderStatistics.BorderThickness = 1F;
             this.grouperSenderStatistics.Controls.Add(this.senderLayoutPanel);
@@ -2472,7 +2490,7 @@
             this.btnOpenFile.Location = new System.Drawing.Point(760, 438);
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(72, 24);
-            this.btnOpenFile.TabIndex = 2;
+            this.btnOpenFile.TabIndex = 3;
             this.btnOpenFile.Text = "Open";
             this.btnOpenFile.UseVisualStyleBackColor = false;
             this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
@@ -2491,7 +2509,7 @@
             this.btnSelectFiles.Location = new System.Drawing.Point(600, 438);
             this.btnSelectFiles.Name = "btnSelectFiles";
             this.btnSelectFiles.Size = new System.Drawing.Size(72, 24);
-            this.btnSelectFiles.TabIndex = 0;
+            this.btnSelectFiles.TabIndex = 1;
             this.btnSelectFiles.Text = "Select Files";
             this.btnSelectFiles.UseVisualStyleBackColor = false;
             this.btnSelectFiles.Click += new System.EventHandler(this.btnSelectFiles_Click);
@@ -2509,7 +2527,7 @@
             this.btnClearFiles.Location = new System.Drawing.Point(679, 438);
             this.btnClearFiles.Name = "btnClearFiles";
             this.btnClearFiles.Size = new System.Drawing.Size(72, 24);
-            this.btnClearFiles.TabIndex = 1;
+            this.btnClearFiles.TabIndex = 2;
             this.btnClearFiles.Text = "Clear Files";
             this.btnClearFiles.UseVisualStyleBackColor = false;
             this.btnClearFiles.Click += new System.EventHandler(this.btnClearFiles_Click);
@@ -2741,5 +2759,6 @@
         private System.Windows.Forms.ComboBox cboMessageFormat;
         private Grouper grouperMessageText;
         private FastColoredTextBoxNS.FastColoredTextBox txtMessageText;
+        private System.Windows.Forms.Label label2;
     }
 }
