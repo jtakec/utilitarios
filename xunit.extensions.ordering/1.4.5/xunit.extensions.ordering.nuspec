@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Xunit.Extensions.Ordering</id>
+    <version>1.4.5</version>
+    <authors>Tomáš Zeman</authors>
+    <owners>Tomáš Zeman</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">Apache-2.0</license>
+    <licenseUrl>https://licenses.nuget.org/Apache-2.0</licenseUrl>
+    <projectUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</projectUrl>
+    <iconUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering/raw/master/logo.png</iconUrl>
+    <description>Extensions for ordered testing with Xunit. Full support for ordering at all levels - test collections, test classes and test cases. Support for AssemblyFixture including IMessageSink injection and IAsyncLifetime. Supports .NET Core 1.x, .NET Core 2.x. and .NET 4.5.2+</description>
+    <releaseNotes>HotFix for CollectionPerAssembly CollectionBehavior</releaseNotes>
+    <copyright>Tomáš Zeman @2019</copyright>
+    <tags>Xunit Ordered Tests Ordering Priority Core .Net Unit Testing Collections AssemblyFixture Assembly Fixture</tags>
+    <repository type="git" url="https://github.com/tomaszeman/Xunit.Extensions.Ordering" />
+    <dependencies>
+      <group targetFramework=".NETCoreApp1.0">
+        <dependency id="Microsoft.NETCore.App" version="1.0.5" exclude="Build,Analyzers" />
+        <dependency id="xunit.core" version="2.4.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.5.2">
+        <dependency id="xunit.core" version="2.4.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

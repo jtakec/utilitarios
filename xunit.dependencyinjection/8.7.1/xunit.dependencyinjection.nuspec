@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Xunit.DependencyInjection</id>
+    <version>8.7.1</version>
+    <authors>Wei Peng</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/pengweiqhca/Xunit.DependencyInjection/src/Xunit.DependencyInjection</projectUrl>
+    <description>Use Microsoft.Extensions.DependencyInjection to inject xunit testclass. If you want write Microsoft.Extensions.Logging to ITestOutputHelper, please install Xunit.DependencyInjection.Logging
+Release notes:
+8.7: Allow missing default startup in some case.
+8.6: Support any awaitable type of async test method.
+8.5: Change analyzer category.
+8.4: Fix #63: allow modify default service from DI container.
+8.3: Add ActivitySource(name: Xunit.DependencyInjection) and ValueTask/ValueTask&lt;&gt; support.
+8.2: Fix #60: support IAsyncDisposable.
+8.1: Startup allow static method or class (like Asp.Net Core startup).
+8.0: New feature: Support multiple startup.
+7.7: Add [MethodData], like [MemberData], support injection.
+7.6: Fix #48, each TestRunner should have a different scope.
+7.5: Add XunitTestCaseRunnerAdapter, It will be support more XunitTestCase type.
+7.4: Always set applicationName, unwarp TargetInvocationException.
+7.3: Fix #41, activate ITestOutputHelperAccessor on tests without a constructor.
+7.2: Add Startup analyzer.
+7.1: Fix can't run test case when host.StartAsync() throw exception.
+7.0: Add fixture injection and refactor DependencyInjectionTestFramework, you don't have to declare the [assembly: TestFrameworkAttribute] on normal case.</description>
+    <releaseNotes>Use Microsoft.Extensions.DependencyInjection to inject xunit testclass. If you want write Microsoft.Extensions.Logging to ITestOutputHelper, please install Xunit.DependencyInjection.Logging
+Release notes:
+8.7: Allow missing default startup in some case.
+8.6: Support any awaitable type of async test method.
+8.5: Change analyzer category.
+8.4: Fix #63: allow modify default service from DI container.
+8.3: Add ActivitySource(name: Xunit.DependencyInjection) and ValueTask/ValueTask&lt;&gt; support.
+8.2: Fix #60: support IAsyncDisposable.
+8.1: Startup allow static method or class (like Asp.Net Core startup).
+8.0: New feature: Support multiple startup.
+7.7: Add [MethodData], like [MemberData], support injection.
+7.6: Fix #48, each TestRunner should have a different scope.
+7.5: Add XunitTestCaseRunnerAdapter, It will be support more XunitTestCase type.
+7.4: Always set applicationName, unwarp TargetInvocationException.
+7.3: Fix #41, activate ITestOutputHelperAccessor on tests without a constructor.
+7.2: Add Startup analyzer.
+7.1: Fix can't run test case when host.StartAsync() throw exception.
+7.0: Add fixture injection and refactor DependencyInjectionTestFramework, you don't have to declare the [assembly: TestFrameworkAttribute] on normal case.</releaseNotes>
+    <copyright>Copyright © 2019</copyright>
+    <tags>xunit ioc di DependencyInjection test</tags>
+    <repository type="git" url="https://github.com/pengweiqhca/Xunit.DependencyInjection" commit="3513af57cb7a3e63788c390084507aee33817653" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1">
+        <dependency id="Microsoft.Bcl.AsyncInterfaces" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Diagnostics.DiagnosticSource" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="xunit.extensibility.execution" version="[2.4.2, 3.0.0)" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Microsoft.Bcl.AsyncInterfaces" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Diagnostics.DiagnosticSource" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="xunit.extensibility.execution" version="[2.4.2, 3.0.0)" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
