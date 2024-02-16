@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>bunit.web</id>
+    <version>1.26.64</version>
+    <title>bUnit.web</title>
+    <authors>Egil Hansen</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>bunit-logo.png</icon>
+    <readme>README.md</readme>
+    <projectUrl>https://bunit.egilhansen.com/</projectUrl>
+    <description>bUnit.web is the web specific parts of bUnit, that enables you to easily test and verify the output of Blazor (web) component.</description>
+    <releaseNotes>Changes in bUnit 1.26.64
+
+### Changed
+
+-   Upgraded AngleSharp to 1.0.7.
+
+### Fixed
+
+-   When the `TestContext` was disposed, the Blazor Renderer itself didn't dispose components under test. By [@linkdotnet](https://github.com/linkdotnet).
+-   When navigating, the `HistoryEntryState` on `NavigationManager` will be populated. By [@linkdotnet](https://github.com/linkdotnet).
+
+### Added
+
+-   New overloads for `IRenderedFragmentBase.InvokeAsync` that allow retrieving the work item's return value. By [@jcparkyn](https://github.com/jcparkyn).
+
+See the full changelog at https://github.com/bUnit-dev/bUnit/releases</releaseNotes>
+    <copyright>Egil Hansen</copyright>
+    <tags>bUnit razor components blazor components unit testing testing blazor components blazor server blazor wasm</tags>
+    <repository type="git" url="https://github.com/bUnit-dev/bUnit" commit="2849c0f59d0989a6f95d71bc1f550949a76591a9" />
+    <dependencies>
+      <group targetFramework="net5.0">
+        <dependency id="bunit.core" version="1.26.64" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp" version="0.17.1" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp.Diffing" version="0.18.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.Authorization" version="5.0.17" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.Web" version="5.0.17" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebAssembly" version="5.0.17" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebAssembly.Authentication" version="5.0.17" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Caching.Memory" version="5.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Localization.Abstractions" version="5.0.17" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0">
+        <dependency id="bunit.core" version="1.26.64" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp" version="1.0.7" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp.Css" version="1.0.0-alpha-99" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp.Diffing" version="0.18.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.Authorization" version="6.0.25" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.Web" version="6.0.25" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebAssembly" version="6.0.25" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebAssembly.Authentication" version="6.0.25" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Caching.Memory" version="6.0.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Localization.Abstractions" version="6.0.25" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net7.0">
+        <dependency id="bunit.core" version="1.26.64" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp" version="1.0.7" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp.Css" version="1.0.0-alpha-99" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp.Diffing" version="0.18.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.Authorization" version="7.0.14" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.Web" version="7.0.14" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebAssembly" version="7.0.14" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebAssembly.Authentication" version="7.0.14" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Caching.Memory" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Localization.Abstractions" version="7.0.14" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net8.0">
+        <dependency id="bunit.core" version="1.26.64" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp" version="1.0.7" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp.Css" version="1.0.0-alpha-99" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp.Diffing" version="0.18.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.Authorization" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.Web" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebAssembly" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebAssembly.Authentication" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Caching.Memory" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Localization.Abstractions" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="bunit.core" version="1.26.64" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp" version="0.17.1" exclude="Build,Analyzers" />
+        <dependency id="AngleSharp.Diffing" version="0.18.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.Authorization" version="3.1.32" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.Web" version="3.1.32" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebAssembly" version="3.2.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebAssembly.Authentication" version="3.2.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Caching.Memory" version="3.1.32" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Localization.Abstractions" version="3.1.32" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

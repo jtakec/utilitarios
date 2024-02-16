@@ -1,0 +1,11 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\js\blazoradeCore.js">
+      <SourceType>Package</SourceType>
+      <SourceId>Blazorade.Core</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Blazorade.Core</BasePath>
+      <RelativePath>js\blazoradeCore.js</RelativePath>
+    </StaticWebAsset>
+  </ItemGroup>
+</Project>

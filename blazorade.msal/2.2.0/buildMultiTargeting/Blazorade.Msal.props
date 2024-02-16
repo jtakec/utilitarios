@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Blazorade.Msal.props" />
+</Project>

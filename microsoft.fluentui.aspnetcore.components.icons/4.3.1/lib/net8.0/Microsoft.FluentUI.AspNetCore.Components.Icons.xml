@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.FluentUI.AspNetCore.Components.Icons</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.FluentUI.AspNetCore.Components.CustomIcon">
+            <summary>
+            Custom icon loaded from <see cref="M:Microsoft.FluentUI.AspNetCore.Components.Icons.GetInstance(Microsoft.FluentUI.AspNetCore.Components.IconInfo)"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.FluentUI.AspNetCore.Components.CustomIcon.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.FluentUI.AspNetCore.Components.CustomIcon"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.FluentUI.AspNetCore.Components.CustomIcon.#ctor(Microsoft.FluentUI.AspNetCore.Components.Icon)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.FluentUI.AspNetCore.Components.CustomIcon"/> class.
+            </summary>
+            <param name="icon"></param>
+        </member>
+        <member name="T:Microsoft.FluentUI.AspNetCore.Components.Icons">
+            <summary />
+        </member>
+        <member name="M:Microsoft.FluentUI.AspNetCore.Components.Icons.GetInstance(Microsoft.FluentUI.AspNetCore.Components.IconInfo)">
+            <summary>
+            Returns a new instance of the icon.
+            </summary>
+            <remarks>
+            This method requires dynamic access to code. This code may be removed by the trimmer.
+            </remarks>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">Raised when the <see cref="P:Microsoft.FluentUI.AspNetCore.Components.IconInfo.Name"/> is not found in predefined icons.</exception>
+        </member>
+        <member name="M:Microsoft.FluentUI.AspNetCore.Components.Icons.GetAllIcons">
+            <summary>
+            Returns a new instance of the icon.
+            </summary>
+            <remarks>
+            This method requires dynamic access to code. This code may be removed by the trimmer.
+            </remarks>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">Raised when the <see cref="P:Microsoft.FluentUI.AspNetCore.Components.IconInfo.Name"/> is not found in predefined icons.</exception>
+        </member>
+        <member name="P:Microsoft.FluentUI.AspNetCore.Components.Icons.AllIcons">
+            <summary />
+        </member>
+    </members>
+</doc>

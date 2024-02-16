@@ -1,0 +1,18 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\Blazorade-Icon-128.png">
+      <SourceType>Package</SourceType>
+      <SourceId>Blazorade.Msal</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Blazorade.Msal</BasePath>
+      <RelativePath>Blazorade-Icon-128.png</RelativePath>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\js\blazoradeMsal.js">
+      <SourceType>Package</SourceType>
+      <SourceId>Blazorade.Msal</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Blazorade.Msal</BasePath>
+      <RelativePath>js\blazoradeMsal.js</RelativePath>
+    </StaticWebAsset>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.FluentUI.AspNetCore.Components.Emoji</id>
+    <version>4.3.1</version>
+    <title>A Blazor wrapper library for the official Microsoft Fluent UI Emoji set.</title>
+    <authors>Microsoft</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>icon.png</icon>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/microsoft/fluentui-blazor</projectUrl>
+    <description>A Blazor wrapper library for the official Microsoft Fluent UI Emoji set.</description>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>Emoji, Fluent UI, Blazor, .NET8</tags>
+    <repository type="git" url="https://github.com/microsoft/fluentui-blazor" commit="cd4b7716ec2a4c5574d0525fbc0c5aeb0e563a88" />
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="Microsoft.FluentUI.AspNetCore.Components" version="4.2.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.Kiota.Abstractions</id>
+    <version>1.3.1</version>
+    <authors>Microsoft</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="file">LICENSE</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <readme>README.md</readme>
+    <projectUrl>https://aka.ms/kiota/docs</projectUrl>
+    <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</iconUrl>
+    <description>Abstractions library for the Kiota generated SDKs in dotnet.</description>
+    <releaseNotes>https://github.com/microsoft/kiota-abstractions-dotnet/releases</releaseNotes>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <repository type="git" url="https://github.com/microsoft/kiota-abstractions-dotnet" commit="4ca20976695a511631b6cb77f5398e0450a0eaba" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="System.Diagnostics.DiagnosticSource" version="[6.0.0, 8.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Tavis.UriTemplates" version="2.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="System.Diagnostics.DiagnosticSource" version="[6.0.0, 8.0.0)" exclude="Build,Analyzers" />
+        <dependency id="Tavis.UriTemplates" version="2.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

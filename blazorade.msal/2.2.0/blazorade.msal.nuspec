@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Blazorade.Msal</id>
+    <version>2.2.0</version>
+    <authors>Mika Berglund</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>Blazorade-Icon-128.png</icon>
+    <readme>readme.md</readme>
+    <projectUrl>https://github.com/Blazorade/Blazorade-MSAL/wiki</projectUrl>
+    <description>Provides easy to use authentication and token acquisition for Blazor applications with the help of Microsoft Authentication Library. Supports both Blazor Server and Blazor WebAssembly applications.</description>
+    <copyright>Copyright (c) Mika Berglund 2022</copyright>
+    <tags>Blazor, Blazor Server, Blazor WASM, MSAL, Authentication</tags>
+    <repository type="GitHub" url="https://github.com/Blazorade/Blazorade-MSAL" />
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="Blazorade.Core" version="3.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.Web" version="6.0.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <contentFiles>
+      <files include="any/net6.0/Blazorade-Icon-128.png" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+</package>

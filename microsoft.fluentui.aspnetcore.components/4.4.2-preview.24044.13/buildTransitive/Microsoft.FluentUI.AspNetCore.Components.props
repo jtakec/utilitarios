@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Microsoft.FluentUI.AspNetCore.Components.props" />
+</Project>
