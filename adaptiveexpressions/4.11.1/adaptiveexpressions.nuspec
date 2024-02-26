@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>AdaptiveExpressions</id>
+    <version>4.11.1</version>
+    <authors>Microsoft</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/Microsoft/BotBuilder/blob/master/LICENSE</licenseUrl>
+    <icon>icon.png</icon>
+    <projectUrl>https://github.com/Microsoft/botbuilder-dotnet</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png</iconUrl>
+    <description>This library implements Microsoft Bot Builder Expression evaluator for .NET</description>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>bots ai botframework botbuilder</tags>
+    <repository type="git" url="https://github.com/Microsoft/botbuilder-dotnet" commit="a8da71ae12d60f07b870937d11ff3dc364db46ab" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Antlr4.Runtime.Standard" version="4.8.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.CSharp" version="4.5.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Recognizers.Text.DataTypes.TimexExpression" version="1.2.9" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="12.0.3" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
