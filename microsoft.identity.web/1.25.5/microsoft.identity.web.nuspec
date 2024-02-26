@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.Identity.Web</id>
+    <version>1.25.5</version>
+    <title>Microsoft Identity Web</title>
+    <authors>Microsoft</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/AzureAD/microsoft-identity-web</projectUrl>
+    <description>This package enables ASP.NET Core web apps and web APIs to use the Microsoft identity platform (formerly Azure AD v2.0).
+      This package is specifically used for web applications, which sign-in users, and protected web APIs, which optionally call downstream web APIs.</description>
+    <releaseNotes>The release notes are available at https://github.com/AzureAD/microsoft-identity-web/releases and the roadmap at https://github.com/AzureAD/microsoft-identity-web/wiki#roadmap</releaseNotes>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>Microsoft Identity Web UI Microsoft identity platform Microsoft Identity Web .NET ASP.NET Core Web App Web API B2C Azure Active Directory AAD Identity Authentication Authorization</tags>
+    <repository type="git" url="https://github.com/AzureAD/microsoft-identity-web" commit="d9c2ed62b4621e256eda5ef0136ad3e09a64d014" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.2">
+        <dependency id="Microsoft.Identity.Web.Certificateless" version="1.25.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Identity.Web.Certificate" version="1.25.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Identity.Web.TokenCache" version="1.25.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.DataProtection" version="5.0.8" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Caching.Memory" version="5.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting" version="5.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Logging" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.LoggingExtensions" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Protocols.OpenIdConnect" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Validators" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="System.Drawing.Common" version="4.7.2" exclude="Build,Analyzers" />
+        <dependency id="System.IdentityModel.Tokens.Jwt" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="System.Security.Cryptography.Xml" version="6.0.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.7.2">
+        <dependency id="Microsoft.Identity.Web.Certificateless" version="1.25.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Identity.Web.Certificate" version="1.25.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Identity.Web.TokenCache" version="1.25.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.DataProtection" version="5.0.8" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Caching.Memory" version="5.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting" version="5.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Logging" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.LoggingExtensions" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Protocols.OpenIdConnect" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Validators" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="System.Drawing.Common" version="4.7.2" exclude="Build,Analyzers" />
+        <dependency id="System.IdentityModel.Tokens.Jwt" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="System.Security.Cryptography.Xml" version="6.0.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="Microsoft.Identity.Web.Certificateless" version="1.25.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Identity.Web.Certificate" version="1.25.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Identity.Web.TokenCache" version="1.25.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Authentication.JwtBearer" version="3.1.18" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Authentication.OpenIdConnect" version="3.1.18" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Logging" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.LoggingExtensions" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Protocols.OpenIdConnect" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Validators" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="System.Drawing.Common" version="4.7.2" exclude="Build,Analyzers" />
+        <dependency id="System.IdentityModel.Tokens.Jwt" version="6.25.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net5.0">
+        <dependency id="Microsoft.Identity.Web.Certificateless" version="1.25.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Identity.Web.Certificate" version="1.25.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Identity.Web.TokenCache" version="1.25.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Authentication.JwtBearer" version="5.0.12" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Authentication.OpenIdConnect" version="5.0.12" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Logging" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.LoggingExtensions" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Protocols.OpenIdConnect" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Validators" version="6.25.0" exclude="Build,Analyzers" />
+        <dependency id="System.Drawing.Common" version="4.7.2" exclude="Build,Analyzers" />
+        <dependency id="System.IdentityModel.Tokens.Jwt" version="6.25.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.IO" targetFramework=".NETFramework4.7.2" />
+      <frameworkAssembly assemblyName="System.Runtime" targetFramework=".NETFramework4.7.2" />
+      <frameworkAssembly assemblyName="System.Runtime.InteropServices.RuntimeInformation" targetFramework=".NETFramework4.7.2" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.Algorithms" targetFramework=".NETFramework4.7.2" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.Encoding" targetFramework=".NETFramework4.7.2" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.Primitives" targetFramework=".NETFramework4.7.2" />
+    </frameworkAssemblies>
+  </metadata>
+</package>
