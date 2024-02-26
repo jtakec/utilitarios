@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.Kiota.Http.HttpClientLibrary</id>
+    <version>1.0.1</version>
+    <authors>Microsoft</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="file">LICENSE</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <readme>README.md</readme>
+    <projectUrl>https://microsoft.github.io/kiota/</projectUrl>
+    <description>Kiota Http provider implementation for dotnet with HttpClient.</description>
+    <releaseNotes>https://github.com/microsoft/kiota-http-dotnet/blob/main/CHANGELOG.md</releaseNotes>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <repository type="git" url="https://github.com/microsoft/kiota-http-dotnet" commit="7ed8126bbcef1691fdffd8af19071410f2bc4ddd" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Microsoft.Kiota.Abstractions" version="1.0.1" exclude="Build,Analyzers" />
+        <dependency id="System.Diagnostics.DiagnosticSource" version="[6.0.0, 8.0.0)" exclude="Build,Analyzers" />
+        <dependency id="System.Text.Json" version="[6.0.0, 8.0.0)" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="Microsoft.Kiota.Abstractions" version="1.0.1" exclude="Build,Analyzers" />
+        <dependency id="System.Diagnostics.DiagnosticSource" version="[6.0.0, 8.0.0)" exclude="Build,Analyzers" />
+        <dependency id="System.Text.Json" version="[6.0.0, 8.0.0)" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
