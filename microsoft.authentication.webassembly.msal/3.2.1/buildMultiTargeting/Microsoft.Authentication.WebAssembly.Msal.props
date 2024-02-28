@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Microsoft.Authentication.WebAssembly.Msal.props" />
-</Project>
