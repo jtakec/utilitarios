@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Azure.Security.KeyVault.Certificates</id>
+    <version>4.1.0</version>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>pkgicon.png</icon>
+    <projectUrl>https://github.com/Azure/azure-sdk-for-net/blob/2d11c6664e68c145a988729e6598449bba130694/sdk/keyvault/Azure.Security.KeyVault.Certificates/README.md</projectUrl>
+    <description>This is the Microsoft Azure Key Vault Certificates client library</description>
+    <releaseNotes>### Added
+- Added `RecoverableDays` property to `CertificateProperties`.
+### Changed
+- Default service version is now 7.1.
+
+https://github.com/Azure/azure-sdk-for-net/blob/2d11c6664e68c145a988729e6598449bba130694/sdk/keyvault/Azure.Security.KeyVault.Certificates/CHANGELOG.md</releaseNotes>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>Microsoft Azure Key Vault Certificates windowsazureofficial azureofficial</tags>
+    <repository type="git" url="https://github.com/Azure/azure-sdk-for-net" commit="2d11c6664e68c145a988729e6598449bba130694" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Azure.Core" version="1.0.2" exclude="Build,Analyzers" />
+        <dependency id="System.Memory" version="4.5.3" exclude="Build,Analyzers" />
+        <dependency id="System.Text.Json" version="4.6.0" exclude="Build,Analyzers" />
+        <dependency id="System.Threading.Tasks.Extensions" version="4.5.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
