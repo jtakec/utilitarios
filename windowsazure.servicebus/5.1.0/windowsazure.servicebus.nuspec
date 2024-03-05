@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>WindowsAzure.ServiceBus</id>
+    <version>5.1.0</version>
+    <title>Microsoft Azure Service Bus</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>http://go.microsoft.com/fwlink/?LinkId=218949</licenseUrl>
+    <projectUrl>http://go.microsoft.com/fwlink/?LinkId=218964</projectUrl>
+    <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</iconUrl>
+    <description>Use this for Microsoft Azure Service Bus Queues, Topics, EventHub and Relay backend operations. 
+        
+It adds Microsoft.ServiceBus.dll along with related configuration files to your project. This library allows AMQP 1.0 to be used as one of the protocols for communication with Microsoft Azure Service Bus. 
+        
+For more information on Messaging features, please visit: http://azure.microsoft.com/en-us/documentation/services/service-bus/
+For more information on Event Hub features, please visit: http://go.microsoft.com/fwlink/?LinkID=403957
+        
+Please note that this package requires .Net Framework 4.6.</description>
+    <summary>Client library for Microsoft Azure Service Bus Queues, Topics, EventHub and Relay backend operations.</summary>
+    <releaseNotes>Build: 3.0.51272.15
+• EventHub: Added PartitionRuntimeInformation.IsEmpty property to indicate if the partition is empty or not. This property is useful because a partition can be emptied from retention policy enforcement even if you have a previously valid offset.</releaseNotes>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>ServiceBus Microsoft Azure AppFabric Messaging PubSub Publish Subscribe Queue Topic Relay Service Bus AMQP OASIS windowsazureofficial EventHub Event;</tags>
+    <dependencies>
+      <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="3.19.8" />
+      <dependency id="Microsoft.Azure.Services.AppAuthentication" version="1.0.3" />
+      <dependency id="System.IdentityModel.Tokens.Jwt" version="4.0.4.403061554" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.ServiceModel" targetFramework=".NETFramework4.6" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework=".NETFramework4.6" />
+      <frameworkAssembly assemblyName="System.Runtime.Serialization" targetFramework=".NETFramework4.6" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

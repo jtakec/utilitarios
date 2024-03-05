@@ -1,0 +1,340 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Wolverine.AzureServiceBus</name>
+    </assembly>
+    <members>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusConfiguration.ConfigureQueue(System.String,System.Action{Azure.Messaging.ServiceBus.Administration.CreateQueueOptions})">
+            <summary>
+                Add explicit configuration to an AzureServiceBus queue that is being created by
+                this application
+            </summary>
+            <param name="queueName"></param>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusConfiguration.UseTopicAndSubscriptionConventionalRouting(System.Action{Wolverine.AzureServiceBus.AzureServiceBusTopicBroadcastingRoutingConvention})">
+            <summary>
+            Opt into using conventional message routing using topics and topic
+            subscriptions based on message type names
+            </summary>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusConfiguration.UseConventionalRouting(System.Action{Wolverine.AzureServiceBus.AzureServiceBusMessageRoutingConvention})">
+            <summary>
+            Opt into using conventional message routing using
+            queues based on message type names
+            </summary>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusConfiguration.SystemQueuesAreEnabled(System.Boolean)">
+            <summary>
+            Is Wolverine enabled to create system queues automatically for responses and retries? This
+            should probably be set to false if the application does not have permissions to create queues
+            </summary>
+            <param name="enabled"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusMessageRoutingConvention.QueueNameForSender(System.Func{System.Type,System.String})">
+            <summary>
+                Specify naming rules for the subscribing queue for message types
+            </summary>
+            <param name="namingRule"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusQueueListenerConfiguration.CircuitBreaker(System.Action{Wolverine.ErrorHandling.CircuitBreakerOptions})">
+            <summary>
+                Add circuit breaker exception handling to this listener
+            </summary>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusQueueListenerConfiguration.ConfigureQueue(System.Action{Azure.Messaging.ServiceBus.Administration.CreateQueueOptions})">
+            <summary>
+                Configure the underlying Azure Service Bus queue. This is only applicable when
+                Wolverine is creating the queues
+            </summary>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusQueueListenerConfiguration.MaximumMessagesToReceive(System.Int32)">
+            <summary>
+                The maximum number of messages to receive in a single batch when listening
+                in either buffered or durable modes. The default is 20.
+            </summary>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusQueueListenerConfiguration.MaximumWaitTime(System.TimeSpan)">
+            <summary>
+                The duration for which the listener waits for a message to arrive in the
+                queue before returning. If a message is available, the call returns sooner than this time.
+                If no messages are available and the wait time expires, the call returns successfully
+                with an empty list of messages. Default is 5 seconds.
+            </summary>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusQueueListenerConfiguration.DisableDeadLetterQueueing">
+            <summary>
+            Completely disable all SQS dead letter queueing for just this queue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusQueueListenerConfiguration.ConfigureDeadLetterQueue(System.String,System.Action{Wolverine.AzureServiceBus.Internal.AzureServiceBusQueue})">
+            <summary>
+            Customize the dead letter queueing for just this queue
+            </summary>
+            <param name="deadLetterQueue"></param>
+            <param name="configure">Optionally configure properties of the dead letter queue itself</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusQueueListenerConfiguration.RequireSessions(System.Nullable{System.Int32})">
+            <summary>
+            Force this queue to require session identifiers. Use this for FIFO semantics
+            </summary>
+            <param name="listenerCount">The maximum number of parallel sessions that can be processed at any one time</param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusQueueListenerConfiguration.InteropWith(Wolverine.AzureServiceBus.IAzureServiceBusEnvelopeMapper)">
+            <summary>
+            Utilize custom envelope mapping for Amazon Service Bus interoperability with external non-Wolverine systems
+            </summary>
+            <param name="mapper"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusQueueSubscriberConfiguration.ConfigureQueue(System.Action{Azure.Messaging.ServiceBus.Administration.CreateQueueOptions})">
+            <summary>
+                Configure the underlying Azure Service Bus queue. This is only applicable when
+                Wolverine is creating the queues
+            </summary>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusQueueSubscriberConfiguration.RequireSessions(System.Nullable{System.Int32})">
+            <summary>
+            Force this queue to require session identifiers. Use this for FIFO semantics
+            </summary>
+            <param name="listenerCount">The maximum number of parallel sessions that can be processed at any one time</param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusQueueSubscriberConfiguration.InteropWith(Wolverine.AzureServiceBus.IAzureServiceBusEnvelopeMapper)">
+            <summary>
+            Utilize custom envelope mapping for Amazon Service Bus interoperability with external non-Wolverine systems
+            </summary>
+            <param name="mapper"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusSubscriptionListenerConfiguration.CircuitBreaker(System.Action{Wolverine.ErrorHandling.CircuitBreakerOptions})">
+            <summary>
+                Add circuit breaker exception handling to this listener
+            </summary>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusSubscriptionListenerConfiguration.ConfigureSubscription(System.Action{Azure.Messaging.ServiceBus.Administration.CreateSubscriptionOptions})">
+            <summary>
+                Configure the underlying Azure Service Bus Subscription. This is only applicable when
+                Wolverine is creating the Subscriptions
+            </summary>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusSubscriptionListenerConfiguration.ConfigureTopic(System.Action{Azure.Messaging.ServiceBus.Administration.CreateTopicOptions})">
+            <summary>
+                Configure the underlying Azure Service Bus Subscription. This is only applicable when
+                Wolverine is creating the Subscriptions
+            </summary>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusSubscriptionListenerConfiguration.MaximumMessagesToReceive(System.Int32)">
+            <summary>
+                The maximum number of messages to receive in a single batch when listening
+                in either buffered or durable modes. The default is 20.
+            </summary>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusSubscriptionListenerConfiguration.MaximumWaitTime(System.TimeSpan)">
+            <summary>
+                The duration for which the listener waits for a message to arrive in the
+                Subscription before returning. If a message is available, the call returns sooner than this time.
+                If no messages are available and the wait time expires, the call returns successfully
+                with an empty list of messages. Default is 5 seconds.
+            </summary>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusSubscriptionListenerConfiguration.RequireSessions(System.Nullable{System.Int32})">
+            <summary>
+            Force this subscription listener to require session identifiers. Use this for FIFO semantics
+            </summary>
+            <param name="listenerCount">The maximum number of parallel sessions that can be processed at any one time</param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusSubscriptionListenerConfiguration.InteropWith(Wolverine.AzureServiceBus.IAzureServiceBusEnvelopeMapper)">
+            <summary>
+            Utilize custom envelope mapping for Amazon Service Bus interoperability with external non-Wolverine systems
+            </summary>
+            <param name="mapper"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTopicBroadcastingRoutingConvention.TopicNameForSender(System.Func{System.Type,System.String})">
+            <summary>
+            Override the naming convention for topics. Identical in functionality to IdentifierForSender()
+            </summary>
+            <param name="nameSource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTopicBroadcastingRoutingConvention.SubscriptionNameForListener(System.Func{System.Type,System.String})">
+            <summary>
+            Override the subscription name for a message type. By default this would be the same as the topic
+            </summary>
+            <param name="nameSource"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTopicBroadcastingRoutingConvention.TopicNameForListener(System.Func{System.Type,System.String})">
+            <summary>
+            Override the topic name by message type for listeners. This has the same functionality as IdentifierForListener()
+            </summary>
+            <param name="nameSource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTopicSubscriberConfiguration.ConfigureTopic(System.Action{Azure.Messaging.ServiceBus.Administration.CreateTopicOptions})">
+            <summary>
+                Configure the underlying Azure Service Bus Topic. This is only applicable when
+                Wolverine is creating the Topics
+            </summary>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTopicSubscriberConfiguration.InteropWith(Wolverine.AzureServiceBus.IAzureServiceBusEnvelopeMapper)">
+            <summary>
+            Utilize custom envelope mapping for Amazon Service Bus interoperability with external non-Wolverine systems
+            </summary>
+            <param name="mapper"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Wolverine.AzureServiceBus.AzureServiceBusTransport.SystemQueuesEnabled">
+            <summary>
+            Is this transport connection allowed to build and use response and retry queues
+            for just this node?
+            </summary>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTransportExtensions.AzureServiceBusTransport(Wolverine.WolverineOptions)">
+            <summary>
+                Quick access to the Rabbit MQ Transport within this application.
+                This is for advanced usage
+            </summary>
+            <param name="endpoints"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTransportExtensions.UseAzureServiceBus(Wolverine.WolverineOptions,System.String,System.Action{Azure.Messaging.ServiceBus.ServiceBusClientOptions})">
+            <summary>
+            Connect to Azure Service Bus with a connection string
+            </summary>
+            <param name="endpoints"></param>
+            <param name="connectionString"></param>
+            <param name="configure"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTransportExtensions.UseAzureServiceBus(Wolverine.WolverineOptions,System.String,Azure.Core.TokenCredential,System.Action{Azure.Messaging.ServiceBus.ServiceBusClientOptions})">
+            <summary>
+            Connect to Azure Service Bus using a namespace and secured through a TokenCredential
+            </summary>
+            <param name="endpoints"></param>
+            <param name="fullyQualifiedNamespace"></param>
+            <param name="tokenCredential"></param>
+            <param name="configure"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTransportExtensions.UseAzureServiceBus(Wolverine.WolverineOptions,System.String,Azure.AzureNamedKeyCredential,System.Action{Azure.Messaging.ServiceBus.ServiceBusClientOptions})">
+            <summary>
+            Connect to Azure Service Bus using a namespace and secured through an AzureNamedKeyCredential
+            </summary>
+            <param name="endpoints"></param>
+            <param name="fullyQualifiedNamespace"></param>
+            <param name="namedKeyCredential"></param>
+            <param name="configure"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTransportExtensions.UseAzureServiceBus(Wolverine.WolverineOptions,System.String,Azure.AzureSasCredential,System.Action{Azure.Messaging.ServiceBus.ServiceBusClientOptions})">
+            <summary>
+            Connect to Azure Service Bus using a namespace and secured through an AzureSasCredential
+            </summary>
+            <param name="endpoints"></param>
+            <param name="fullyQualifiedNamespace"></param>
+            <param name="sasCredential"></param>
+            <param name="configure"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Wolverine.AzureServiceBus.AzureServiceBusTransportExtensions.ListenToAzureServiceBusQueue(Wolverine.WolverineOptions,System.String,System.Action{Wolverine.AzureServiceBus.Internal.AzureServiceBusQueue})" -->
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTransportExtensions.ListenToAzureServiceBusSubscription(Wolverine.WolverineOptions,System.String,System.Action{Azure.Messaging.ServiceBus.Administration.CreateSubscriptionOptions})">
+            <summary>
+            Listen for messages from an Azure Service Bus topic subscription
+            </summary>
+            <param name="endpoints"></param>
+            <param name="subscriptionName"></param>
+            <param name="topicName"></param>
+            <param name="configureTopic">Optionally apply customizations to the Azure Service Bus topic</param>
+            <param name="configureSubscriptions">Optionally apply customizations to the actual Azure Service Bus subscription</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTransportExtensions.ToAzureServiceBusQueue(Wolverine.Configuration.IPublishToExpression,System.String)">
+            <summary>
+            Publish the designated messages directly to an Azure Service Bus queue
+            </summary>
+            <param name="publishing"></param>
+            <param name="queueName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Wolverine.AzureServiceBus.AzureServiceBusTransportExtensions.ToAzureServiceBusTopic(Wolverine.Configuration.IPublishToExpression,System.String)">
+            <summary>
+            Publish the designated messages to an Azure Service Bus topic
+            </summary>
+            <param name="publishing"></param>
+            <param name="topicName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Wolverine.AzureServiceBus.Internal.IAzureServiceBusListeningEndpoint.MaximumMessagesToReceive">
+            <summary>
+                The maximum number of messages to receive in a single batch when listening
+                in either buffered or durable modes. The default is 20.
+            </summary>
+        </member>
+        <member name="P:Wolverine.AzureServiceBus.Internal.IAzureServiceBusListeningEndpoint.MaximumWaitTime">
+            <summary>
+                The duration for which the listener waits for a message to arrive in the
+                queue before returning. If a message is available, the call returns sooner than this time.
+                If no messages are available and the wait time expires, the call returns successfully
+                with an empty list of messages. Default is 5 seconds.
+            </summary>
+        </member>
+        <member name="P:Wolverine.AzureServiceBus.Internal.AzureServiceBusEndpoint.MaximumMessagesToReceive">
+            <summary>
+                The maximum number of messages to receive in a single batch when listening
+                in either buffered or durable modes. The default is 20.
+            </summary>
+        </member>
+        <member name="P:Wolverine.AzureServiceBus.Internal.AzureServiceBusEndpoint.MaximumWaitTime">
+            <summary>
+                The duration for which the listener waits for a message to arrive in the
+                queue before returning. If a message is available, the call returns sooner than this time.
+                If no messages are available and the wait time expires, the call returns successfully
+                with an empty list of messages. Default is 5 seconds.
+            </summary>
+        </member>
+        <member name="P:Wolverine.AzureServiceBus.Internal.AzureServiceBusEndpoint.Mapper">
+            <summary>
+            If specified, applies a custom envelope mapper to this endp[oint
+            </summary>
+        </member>
+        <member name="P:Wolverine.AzureServiceBus.Internal.AzureServiceBusQueue.DeadLetterQueueName">
+            <summary>
+            Name of the dead letter queue for this SQS queue where failed messages will be moved
+            </summary>
+        </member>
+    </members>
+</doc>
