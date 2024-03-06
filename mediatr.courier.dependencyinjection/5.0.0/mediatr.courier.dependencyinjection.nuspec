@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>MediatR.Courier.DependencyInjection</id>
+    <version>5.0.0</version>
+    <authors>Kurai András</authors>
+    <license type="expression">Apache-2.0</license>
+    <licenseUrl>https://licenses.nuget.org/Apache-2.0</licenseUrl>
+    <description>A simple library to treat MediatR notifications sort of like events.
+
+      Main usage target is client applications.</description>
+    <repository type="git" url="https://github.com/KuraiAndras/MediatR.Courier" commit="ad3814340fa95c5956f6511685b7b7d61a1f2226" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="MediatR.Courier" version="5.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
