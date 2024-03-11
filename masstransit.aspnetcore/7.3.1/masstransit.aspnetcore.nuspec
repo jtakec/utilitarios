@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>MassTransit.AspNetCore</id>
+    <version>7.3.1</version>
+    <title>MassTransit.AspNetCore</title>
+    <authors>Chris Patterson</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">Apache-2.0</license>
+    <licenseUrl>https://licenses.nuget.org/Apache-2.0</licenseUrl>
+    <icon>mt-logo-small.png</icon>
+    <description>MassTransit hosting for ASP.NET Core; MassTransit is a message-based distributed application framework for .NET http://masstransit-project.com</description>
+    <copyright>Copyright 2007-2021 Chris Patterson</copyright>
+    <tags>MassTransit AspNetCore</tags>
+    <repository type="git" url="https://github.com/MassTransit/MassTransit" commit="f4cee8c2fc0ebd1a03d6ae932cc80ca5cbc540df" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="MassTransit.Extensions.DependencyInjection" version="7.3.1" exclude="Build,Analyzers" />
+        <dependency id="MassTransit" version="7.3.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Diagnostics.HealthChecks" version="3.1.18" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting.Abstractions" version="3.1.18" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

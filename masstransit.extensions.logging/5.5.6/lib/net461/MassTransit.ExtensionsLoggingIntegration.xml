@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MassTransit.ExtensionsLoggingIntegration</name>
+    </assembly>
+    <members>
+        <member name="M:MassTransit.ExtensionsLoggingIntegration.ExtensionsLogger.Use(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Use Microsoft.Extensions.Logging for logging in MassTransit. If no LoggerFactory is provided,
+            one will be created.
+            </summary>
+            <param name="loggerFactory">The (optional) logger factory.</param>
+        </member>
+        <member name="M:MassTransit.ExtensionsLoggingConfiguratorExtensions.UseExtensionsLogging(MassTransit.IBusFactoryConfigurator,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary> Configure the Mass Transit Service Bus to use Microsoft.Extensions.Logging. </summary>
+            <param name="configurator">The configurator to act on. </param>
+            <param name="loggerFactory">The ILoggerFactory. If none supplied, will be created.</param>
+        </member>
+    </members>
+</doc>

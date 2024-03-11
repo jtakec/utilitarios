@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>MassTransit.Newtonsoft</id>
+    <version>8.0.11</version>
+    <title>MassTransit.Newtonsoft</title>
+    <authors>Chris Patterson</authors>
+    <license type="expression">Apache-2.0</license>
+    <licenseUrl>https://licenses.nuget.org/Apache-2.0</licenseUrl>
+    <icon>mt-logo-small.png</icon>
+    <description>MassTransit Newtonsoft JSON/BSON support; MassTransit is a message-based distributed application framework for .NET http://masstransit-project.com</description>
+    <copyright>Copyright 2007-2022 Chris Patterson</copyright>
+    <tags>MassTransit Newtonsoft JSON.NET</tags>
+    <repository type="git" url="https://github.com/MassTransit/MassTransit" commit="c1961b6dbc07debf80ebfdeca15a3b7cd3a1796b" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1">
+        <dependency id="MassTransit" version="8.0.11" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="13.0.2" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json.Bson" version="1.0.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0">
+        <dependency id="MassTransit" version="8.0.11" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="13.0.2" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json.Bson" version="1.0.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="MassTransit" version="8.0.11" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="13.0.2" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json.Bson" version="1.0.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

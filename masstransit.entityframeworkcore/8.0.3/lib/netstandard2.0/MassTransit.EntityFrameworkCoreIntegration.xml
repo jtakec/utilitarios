@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MassTransit.EntityFrameworkCoreIntegration</name>
+    </assembly>
+    <members>
+        <member name="M:MassTransit.EntityFrameworkAuditStoreConfiguratorExtensions.UseEntityFrameworkCoreAuditStore(MassTransit.IBusFactoryConfigurator,Microsoft.EntityFrameworkCore.DbContextOptionsBuilder,System.String,System.Action{MassTransit.IMessageFilterConfigurator})">
+            <summary>
+            Configure Audit Store against Entity Framework Core
+            </summary>
+            <param name="configurator"></param>
+            <param name="dbContextOptions">The DB Context Options configuration builder</param>
+            <param name="auditTableName">Name of the table to store audit records.</param>
+            <param name="configureFilter">Configure messages to exclude or include from auditing.</param>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkAuditStoreConfiguratorExtensions.UseEntityFrameworkCoreAuditStore(MassTransit.IBusFactoryConfigurator,Microsoft.EntityFrameworkCore.DbContextOptionsBuilder,System.String)">
+            <summary>
+            Configure Audit Store against Entity Framework Core
+            </summary>
+            <param name="configurator"></param>
+            <param name="dbContextOptions">The DB Context Options configuration builder</param>
+            <param name="auditTableName">Name of the table to store audit records.</param>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreSagaRepositoryRegistrationExtensions.EntityFrameworkRepository``1(MassTransit.ISagaRegistrationConfigurator{``0},System.Action{MassTransit.IEntityFrameworkSagaRepositoryConfigurator{``0}})">
+            <summary>
+            Adds a EntityFramework saga repository to the registration
+            </summary>
+            <param name="configurator"></param>
+            <param name="configure"></param>
+            <typeparam name="TSaga"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreSagaRepositoryRegistrationExtensions.EntityFrameworkRepository``1(MassTransit.ISagaRegistrationConfigurator{``0},MassTransit.IEntityFrameworkSagaRepository,System.Action{MassTransit.IEntityFrameworkSagaRepositoryConfigurator{``0}},System.Action{Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{``0}})">
+            <summary>
+            Adds a EntityFramework saga repository to the registration
+            </summary>
+            <param name="configurator"></param>
+            <param name="sagaRepository"></param>
+            <param name="configure"></param>
+            <param name="configureSagaMapping"></param>
+            <typeparam name="TSaga"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreSagaRepositoryRegistrationExtensions.EntityFrameworkRepository``1(MassTransit.ISagaRegistrationConfigurator{``0},MassTransit.IEntityFrameworkSagaRepository,System.Action{MassTransit.IEntityFrameworkSagaRepositoryConfigurator{``0}},MassTransit.EntityFrameworkCoreIntegration.ISagaClassMap{``0})">
+            <summary>
+            Adds a EntityFramework saga repository to the registration
+            </summary>
+            <param name="configurator"></param>
+            <param name="sagaRepository"></param>
+            <param name="configure"></param>
+            <param name="sagaClassMap"></param>
+            <typeparam name="TSaga"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreSagaRepositoryRegistrationExtensions.SetEntityFrameworkSagaRepositoryProvider(MassTransit.IRegistrationConfigurator,System.Action{MassTransit.IEntityFrameworkSagaRepositoryConfigurator})">
+            <summary>
+            Use the EntityFramework saga repository for sagas configured by type (without a specific generic call to AddSaga/AddSagaStateMachine)
+            </summary>
+            <param name="configurator"></param>
+            <param name="configure"></param>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreSagaRepositoryRegistrationExtensions.UseSqlServer``1(MassTransit.IEntityFrameworkSagaRepositoryConfigurator{``0})">
+            <summary>
+            Configure the repository for use with SQL Server
+            </summary>
+            <param name="configurator"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreSagaRepositoryRegistrationExtensions.UseSqlServer(MassTransit.IEntityFrameworkSagaRepositoryConfigurator)">
+            <summary>
+            Configure the repository for use with SQL Server
+            </summary>
+            <param name="configurator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreSagaRepositoryRegistrationExtensions.UsePostgres``1(MassTransit.IEntityFrameworkSagaRepositoryConfigurator{``0})">
+            <summary>
+            Configure the repository for use with Postgres
+            </summary>
+            <param name="configurator"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreSagaRepositoryRegistrationExtensions.UsePostgres(MassTransit.IEntityFrameworkSagaRepositoryConfigurator)">
+            <summary>
+            Configure the repository for use with Postgres
+            </summary>
+            <param name="configurator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreSagaRepositoryRegistrationExtensions.UseMySql``1(MassTransit.IEntityFrameworkSagaRepositoryConfigurator{``0})">
+            <summary>
+            Configure the repository for use with MySQL
+            </summary>
+            <param name="configurator"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreSagaRepositoryRegistrationExtensions.UseMySql(MassTransit.IEntityFrameworkSagaRepositoryConfigurator)">
+            <summary>
+            Configure the repository for use with MySQL
+            </summary>
+            <param name="configurator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreSagaRepositoryRegistrationExtensions.CreateEntityFrameworkSagaRepository(MassTransit.IRegistrationConfigurator,System.Action{Microsoft.EntityFrameworkCore.DbContextOptionsBuilder})">
+            <summary>
+            Create EntityFramework saga repository
+            </summary>
+            <param name="registrationConfigurator"></param>
+            <param name="configure"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:MassTransit.IEntityFrameworkSagaRepositoryConfigurator.AddDbContext``2(System.Action{System.IServiceProvider,Microsoft.EntityFrameworkCore.DbContextOptionsBuilder{``1}})">
+            <summary>
+            Add the DbContext to the container, and configure the repository to use it
+            </summary>
+            <param name="optionsAction"></param>
+            <typeparam name="TContext"></typeparam>
+            <typeparam name="TImplementation"></typeparam>
+        </member>
+        <member name="M:MassTransit.IEntityFrameworkSagaRepositoryConfigurator.DatabaseFactory(System.Func{Microsoft.EntityFrameworkCore.DbContext})">
+            <summary>
+            Use a simple factory method to create the database
+            </summary>
+            <param name="databaseFactory"></param>
+        </member>
+        <member name="M:MassTransit.IEntityFrameworkSagaRepositoryConfigurator.DatabaseFactory(System.Func{System.IServiceProvider,System.Func{Microsoft.EntityFrameworkCore.DbContext}})">
+            <summary>
+            Use the configuration service provider to resolve the database factory
+            </summary>
+            <param name="databaseFactory"></param>
+        </member>
+        <member name="M:MassTransit.IEntityFrameworkSagaRepositoryConfigurator.ExistingDbContext``1">
+            <summary>
+            Use an existing (already configured in the container) DbContext that will be resolved
+            within the container scope
+            </summary>
+            <typeparam name="TContext"></typeparam>
+        </member>
+        <member name="M:MassTransit.IEntityFrameworkSagaRepositoryConfigurator`1.CustomizeQuery(System.Func{System.Linq.IQueryable{`0},System.Linq.IQueryable{`0}})">
+            <summary>
+            Use custom query
+            </summary>
+            <param name="queryCustomization"></param>
+        </member>
+        <member name="T:MassTransit.EntityFrameworkCoreIntegration.ISagaDbContextFactory`1">
+            <summary>
+            Creates a DbContext for the saga repository
+            </summary>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreIntegration.ISagaDbContextFactory`1.Create">
+            <summary>
+            Create a standalone DbContext
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreIntegration.ISagaDbContextFactory`1.CreateScoped``1(MassTransit.ConsumeContext{``0})">
+            <summary>
+            Create a scoped DbContext within the lifetime scope of the saga repository
+            </summary>
+            <param name="context"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreIntegration.ISagaDbContextFactory`1.ReleaseAsync(Microsoft.EntityFrameworkCore.DbContext)">
+            <summary>
+            Release the DbContext once it is no longer needed
+            </summary>
+            <param name="dbContext"></param>
+        </member>
+        <member name="T:MassTransit.EntityFrameworkCoreIntegration.Saga.OptimisticSagaLockContext`1">
+            <summary>
+            Defers loading the sagas until the transaction is started
+            </summary>
+            <typeparam name="TSaga"></typeparam>
+        </member>
+        <member name="T:MassTransit.EntityFrameworkCoreIntegration.Saga.PessimisticSagaLockContext`1">
+            <summary>
+            Queries the list of saga ids prior to the transaction, and then loads/locks them individually
+            </summary>
+            <typeparam name="TSaga"></typeparam>
+        </member>
+        <member name="M:MassTransit.EntityFrameworkCoreIntegration.Saga.SagaLockContext`1.Load">
+            <summary>
+            Execute the callback on each saga instance, and return a Task that waits on the results
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MassTransit.SagaClassMap`1.ConfigureCorrelationIdKey(Microsoft.EntityFrameworkCore.Metadata.Builders.KeyBuilder)">
+            <summary>
+            Override to configure the primary CorrelationId key, to add things like clustering
+            </summary>
+            <param name="keyBuilder"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
