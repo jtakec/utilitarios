@@ -1,0 +1,3086 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Bot.Builder.LanguageGeneration</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.Analyzer">
+            <summary>
+            LG template analyzer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Analyzer.#ctor(Microsoft.Bot.Builder.LanguageGeneration.Templates,Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Analyzer"/> class.
+            </summary>
+            <param name="templates">Templates.</param>
+            <param name="opt">Options for LG. </param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Analyzer.Templates">
+            <summary>
+            Gets templates.
+            </summary>
+            <value>
+            Templates.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Analyzer.AnalyzeTemplate(System.String)">
+            <summary>
+            Analyzes a template to get the static analyzer results. 
+            </summary>
+            <param name="templateName">Template name.</param>
+            <returns>Analyze result including variables and template references.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Analyzer.VisitNormalBody(LGTemplateParser.NormalBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Analyzer.VisitNormalTemplateBody(LGTemplateParser.NormalTemplateBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Analyzer.VisitStructuredTemplateBody(LGTemplateParser.StructuredTemplateBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Analyzer.VisitIfElseBody(LGTemplateParser.IfElseBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Analyzer.VisitSwitchCaseBody(LGTemplateParser.SwitchCaseBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Analyzer.VisitNormalTemplateString(LGTemplateParser.NormalTemplateStringContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Analyzer.AnalyzeExpressionDirectly(AdaptiveExpressions.Expression)">
+            <summary>
+            Extract the templates ref out from an expression
+            return only those without parameters.
+            </summary>
+            <param name="exp">Expression.</param>
+            <returns>Template refs.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.AnalyzerResult">
+            <summary>
+            Analyzer result. Contains variables and template references.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.AnalyzerResult.#ctor(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.AnalyzerResult"/> class.
+            </summary>
+            <param name="variables">Init varibales.</param>
+            <param name="templateReferences">Init template references.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.AnalyzerResult.Variables">
+            <summary>
+            Gets or sets variables that this template contains.
+            </summary>
+            <value>
+            Variables that this template contains.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.AnalyzerResult.TemplateReferences">
+            <summary>
+            Gets or sets template references that this template contains.
+            </summary>
+            <value>
+            Template references that this template contains.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.AnalyzerResult.Union(Microsoft.Bot.Builder.LanguageGeneration.AnalyzerResult)">
+            <summary>
+            Combine two analyzer results.
+            </summary>
+            <param name="outputItem">Another analyzer result.</param>
+            <returns>Combined analyzer result.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.CustomizedMemory">
+            <summary>
+            A customized memory designed for LG evaluation, in which
+            we want to make sure the global memory (the first memory passed in) can be
+            accessible at any sub evaluation process. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.CustomizedMemory.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.CustomizedMemory"/> class.
+            </summary>
+            <param name="scope">Scope.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.CustomizedMemory.#ctor(AdaptiveExpressions.Memory.IMemory,AdaptiveExpressions.Memory.IMemory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.CustomizedMemory"/> class.
+            </summary>
+            <param name="globalMemory">Global memory.</param>
+            <param name="localMemory">Local memory.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.CustomizedMemory.GlobalMemory">
+            <summary>
+            Gets or sets global memory.
+            </summary>
+            <value>
+            Global memory.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.CustomizedMemory.LocalMemory">
+            <summary>
+            Gets or sets local memory.
+            </summary>
+            <value>
+            Local memory.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.CustomizedMemory.TryGetValue(System.String,System.Object@)">
+            <summary>
+            Try to get the value from a given path. Firstly, get result from local memory,
+            if local memory does not contain, get from global memory.
+            </summary>
+            <param name="path">Memory path.</param>
+            <param name="value">Resolved value.</param>
+            <returns>True if the memory contains an element with the specified key, otherwise, false.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.DiagnosticSeverity">
+            <summary>
+            Represents the severity of diagnostics.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.DiagnosticSeverity.Error">
+            <summary>
+            Catch Error info.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.DiagnosticSeverity.Warning">
+            <summary>
+            Catch Warning info.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.DiagnosticSeverity.Information">
+            <summary>
+            Something to inform about but not a problem.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.DiagnosticSeverity.Hint">
+            <summary>
+            Something to hint to a better way of doing it, like proposing
+            a refactoring.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.Diagnostic">
+            <summary>
+            Error/Warning report when parsing/evaluating template/inlineText.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Diagnostic.#ctor(Microsoft.Bot.Builder.LanguageGeneration.Range,System.String,Microsoft.Bot.Builder.LanguageGeneration.DiagnosticSeverity,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Diagnostic"/> class.
+            </summary>
+            <param name="range">Range where the error or warning occurred.</param>
+            <param name="message">Error message of the error or warning.</param>
+            <param name="severity">Severity of the error or warning.</param>
+            <param name="source">Source of the error or warning occurred.</param>
+            <param name="code">Code or identifier of the error or warning.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Diagnostic.Code">
+            <summary>
+             Gets or sets a code or identifier for this diagnostics.
+            </summary>
+            <value>
+            A code or identifier for this diagnostics.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Diagnostic.Range">
+            <summary>
+             Gets or sets the range to which this diagnostic applies.
+            </summary>
+            <value>
+            The range to which this diagnostic applies.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Diagnostic.Severity">
+            <summary>
+            Gets or sets the severity, default is <see cref="F:Microsoft.Bot.Builder.LanguageGeneration.DiagnosticSeverity.Error"/>.
+            </summary>
+            <value>
+            The severity, default is <see cref="F:Microsoft.Bot.Builder.LanguageGeneration.DiagnosticSeverity.Error"/>.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Diagnostic.Source">
+            <summary>
+            Gets or sets a human-readable string describing the source of this diagnostic.
+            </summary>
+            <value>
+            A human-readable string describing the source.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Diagnostic.Message">
+            <summary>
+            Gets the human-readable message.
+            </summary>
+            <value>
+            The human-readable message.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Diagnostic.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.ErrorListener">
+            <summary>
+            LG parser error listener.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.ErrorListener.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.ErrorListener"/> class.
+            </summary>
+            <param name="errorSource">String value that represents the source of the error.</param>
+            <param name="lineOffset">Offset of the line where the error occurred.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.ErrorListener.SyntaxError(System.IO.TextWriter,Antlr4.Runtime.IRecognizer,Antlr4.Runtime.IToken,System.Int32,System.Int32,System.String,Antlr4.Runtime.RecognitionException)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.LGLineBreakStyle">
+            <summary>
+            Options for LG rendering the line break in text.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.LGLineBreakStyle.Default">
+            <summary>
+            Default mode.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.LGLineBreakStyle.Markdown">
+            <summary>
+            Markdown mode.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.LGCacheScope">
+            <summary>
+            LG cache scope options.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.LGCacheScope.Global">
+            <summary>
+            Global template cache scope.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.LGCacheScope.Local">
+            <summary>
+            Only cache result in the same layer of children in template.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.LGCacheScope.None">
+            <summary>
+            Without cache.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions">
+            <summary>
+            Options for evaluating LG templates.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions.#ctor(Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions"/> class.
+            </summary>
+            <param name="opt">Instance to copy initial settings from.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions.#ctor(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions"/> class.
+            </summary>
+            <param name="optionsList">List of strings containing the options from a LG file.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions.LineBreakStyle">
+            <summary>
+            Gets or sets the option of rendering new line characters.
+            </summary>
+            <value>
+            A string value represents the line break style in LG.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions.StrictMode">
+            <summary>
+            Gets or sets the option of whether throwing an error when evaluating a null reference.
+            </summary>
+            <value>
+            A boolean or null value.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions.Locale">
+            <summary>
+            Gets or sets the locale for evaluating LG.
+            </summary>
+            <value>
+            A CultureInfo or null object.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions.NullSubstitution">
+            <summary>
+            Gets or sets the option of a function to replace a null value. If nullSubstitution is specified,
+            LG evaluator will not throw null exception even the strictMode is on. 
+            </summary>
+            <value>
+            A function.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions.OnEvent">
+            <summary>
+            Gets or sets an event handler that handles the emitted events in the evaluation process.
+            </summary>
+            <value>
+            An event handler that handles the emitted events in the evaluation process.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions.CacheScope">
+            <summary>
+            Gets or sets cache scope of the evaluation result.
+            </summary>
+            <value>
+            Cache scope of the evaluation result.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions.Merge(Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions)">
+            <summary>
+            Merge a incoming option to current option. If a property in incoming option is not null while it is null in current
+            option, then the value of this property will be overwritten.
+            </summary>
+            <param name="opt">Incoming option for merging.</param>
+            <returns>Result after merging.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.EvaluationTarget">
+            <summary>
+            Runtime template state.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.EvaluationTarget.#ctor(System.String,AdaptiveExpressions.Memory.IMemory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.EvaluationTarget"/> class.
+            </summary>
+            <param name="templateName">Template name.</param>
+            <param name="scope">Template scope.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.EvaluationTarget.CachedEvaluatedChildren">
+            <summary>
+            Gets or sets the children template that this template has evaluated and cached currently. 
+            </summary>
+            <value>
+            The children template that this template has evaluated currently. 
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.EvaluationTarget.TemplateName">
+            <summary>
+            Gets or sets template name.
+            </summary>
+            <value>
+            Template name.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.EvaluationTarget.Scope">
+            <summary>
+            Gets or sets scope.
+            </summary>
+            <value>
+            Scope.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.EvaluationTarget.GetId">
+            <summary>
+            Get current instance id. If two target has the same Id,
+            we can say they have the same template evaluation.
+            </summary>
+            <returns>Id.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.Evaluator">
+            <summary>
+            LG template Evaluator.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.#ctor(Microsoft.Bot.Builder.LanguageGeneration.Templates,Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Evaluator"/> class.
+            </summary>
+            <param name="templates">Templates.</param>
+            <param name="opt">Options for LG. </param>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.FileFormat.Evaluated">
+            <summary>
+            Get the evaluated result from the <see cref="F:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.FileFormat.Raw"/> Result.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.FileFormat.Raw">
+            <summary>
+            Get raw text content of the file.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.FileFormat.Binary">
+            <summary>
+            Get binary result from the file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.Templates">
+            <summary>
+            Gets templates.
+            </summary>
+            <value>
+            Templates.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.ExpressionParser">
+            <summary>
+            Gets expression parser.
+            </summary>
+            <value>
+            Expression parser.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.TemplateMap">
+            <summary>
+            Gets templateMap.
+            </summary>
+            <value>
+            TemplateMap.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.EvaluateTemplate(System.String,System.Object)">
+            <summary>
+            Evaluate a template with given name and scope.
+            Throws errors if certain errors detected <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.TemplateErrors"/>.
+            </summary>
+            <param name="inputTemplateName">Template name.</param>
+            <param name="scope">Scope.</param>
+            <returns>Evaluate result.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.VisitStructuredTemplateBody(LGTemplateParser.StructuredTemplateBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.VisitNormalBody(LGTemplateParser.NormalBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.VisitNormalTemplateBody(LGTemplateParser.NormalTemplateBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.VisitIfElseBody(LGTemplateParser.IfElseBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.VisitSwitchCaseBody(LGTemplateParser.SwitchCaseBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.VisitNormalTemplateString(LGTemplateParser.NormalTemplateStringContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Evaluator.ConstructScope(System.String,System.Collections.Generic.List{System.Object},System.Collections.Generic.IList{Microsoft.Bot.Builder.LanguageGeneration.Template})">
+            <summary>
+            Constructs the scope for mapping the values of arguments to the parameters of the template.
+            Throws errors if certain errors detected <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.TemplateErrors"/>.
+            </summary>
+            <param name="inputTemplateName">Template name to evaluate.</param>
+            <param name="args">Arguments to map to the template parameters.</param>
+            <param name="allTemplates">All templates.</param>
+            <returns>
+            An object. 
+            If the number of arguments is 0, returns the current scope.
+            Otherwise, returns an CustomizedMemory that the mapping of the parameter name to the argument value added to the scope.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.BeginExpressionEvaluationArgs">
+            <summary>
+            Provide event data when expression is evaluated.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.BeginExpressionEvaluationArgs.Expression">
+            <summary>
+            Gets or sets expression string.
+            </summary>
+            <value>
+            Expression string.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.BeginTemplateEvaluationArgs">
+            <summary>
+            Provide event data when a certain template is evaluated.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.BeginTemplateEvaluationArgs.TemplateName">
+            <summary>
+            Gets or sets template name.
+            </summary>
+            <value>
+            Template name.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.ExpressionRef">
+            <summary>
+            Expression container with source range.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.ExpressionRef.#ctor(System.String,Microsoft.Bot.Builder.LanguageGeneration.SourceRange)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.ExpressionRef"/> class.
+            </summary>
+            <param name="expression">Expression string.</param>
+            <param name="sourceRange">Expression source range.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.ExpressionRef.Expression">
+            <summary>
+            Gets or sets expression string.
+            </summary>
+            <value>
+            Expression string.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.ExpressionRef.SourceRange">
+            <summary>
+            Gets or sets expression source range.
+            </summary>
+            <value>
+            Expression source range.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.ExpressionRef.ToString">
+            <summary>
+            Return the Expression string.
+            </summary>
+            <returns>To string method.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.ExpressionRef.GetId">
+            <summary>
+            Get the unique id of expression context.
+            </summary>
+            <returns>id string.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.LGEventArgs">
+            <summary>
+            Provide basic event data of LG.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.LGEventArgs.Source">
+            <summary>
+            Gets or sets source id of the lg file.
+            </summary>
+            <value>
+            source id of the lg file.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.MessageArgs">
+            <summary>
+            Provide message data.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.MessageArgs.Text">
+            <summary>
+            Gets or sets message content.
+            </summary>
+            <value>
+            Message content.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.Expander">
+            <summary>
+            LG template expander.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Expander.#ctor(Microsoft.Bot.Builder.LanguageGeneration.Templates,Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Expander"/> class.
+            </summary>
+            <param name="templates">Templates.</param>
+            <param name="opt">Options for LG. </param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Expander.Templates">
+            <summary>
+            Gets templates.
+            </summary>
+            <value>
+            Templates.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Expander.ExpanderExpressionParser">
+            <summary>
+            Gets expander expression parser.
+            </summary>
+            <value>
+            Expression parser.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Expander.EvaluatorExpressionParser">
+            <summary>
+            Gets evaluator expression parser.
+            </summary>
+            <value>
+            Expression parser.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Expander.TemplateMap">
+            <summary>
+            Gets templateMap.
+            </summary>
+            <value>
+            TemplateMap.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Expander.ExpandTemplate(System.String,System.Object)">
+            <summary>
+            Expand the results of a template with given name and scope.
+            Throws errors if certain errors detected <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.TemplateErrors"/>.
+            </summary>
+            <param name="templateName">Given template name.</param>
+            <param name="scope">Given scope.</param>
+            <returns>All possiable results.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Expander.VisitNormalBody(LGTemplateParser.NormalBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Expander.VisitNormalTemplateBody(LGTemplateParser.NormalTemplateBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Expander.VisitIfElseBody(LGTemplateParser.IfElseBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Expander.VisitSwitchCaseBody(LGTemplateParser.SwitchCaseBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Expander.VisitStructuredBody(LGTemplateParser.StructuredBodyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Expander.VisitNormalTemplateString(LGTemplateParser.NormalTemplateStringContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Expander.ConstructScope(System.String,System.Collections.Generic.List{System.Object},System.Collections.Generic.IList{Microsoft.Bot.Builder.LanguageGeneration.Template})">
+            <summary>
+            Constructs the scope for mapping the values of arguments to the parameters of the template.
+            </summary>
+            <param name="templateName">The template name to evaluate.</param>
+            <param name="args">Arguments to map to the template parameters.</param>
+            <param name="allTemplates">All templates.</param>
+            <returns>
+            An object.
+            If the number of arguments is 0, returns the current scope.
+            Otherwise, returns an CustomizedMemory that the mapping of the parameter name to the argument value added to the scope.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.Extensions">
+            <summary>
+            Extension methods for LG.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.Extensions.EscapeRegex">
+            <summary>
+            Regular expression for matching escaped characters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Extensions.IsPureExpression(LGTemplateParser.KeyValueStructureValueContext)">
+            <summary>
+            If a value is pure Expression.
+            </summary>
+            <param name="context">Key value structure value context.</param>
+            <returns>Is pure expression or not.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Extensions.Escape(System.String)">
+            <summary>
+            Escape \ from text.
+            </summary>
+            <param name="text">Input text.</param>
+            <returns>Escaped text.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Extensions.TrimExpression(System.String)">
+            <summary>
+            trim expression. ${abc} => abc,  ${a == {}} => a == {}.
+            </summary>
+            <param name="expression">Input expression string.</param>
+            <returns>Pure expression string.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Extensions.NormalizePath(System.String)">
+            <summary>
+            Normalize authored path to OS path.
+            </summary>
+            <remarks>
+            path is from authored content which doesn't know what OS it is running on.
+            This method treats / and \ both as separators regardless of OS, for Windows that means / -> \ and for Linux/Mac \ -> /.
+            This allows author to use ../foo.lg or ..\foo.lg as equivalents for importing.
+            </remarks>
+            <param name="ambiguousPath">Authored path.</param>
+            <returns>Path expressed as OS path.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Extensions.GetPrefixErrorMessage(LGTemplateParser.NormalTemplateStringContext)">
+            <summary>
+            Get prefix error message from normal template sting context.
+            </summary>
+            <param name="context">Normal template sting context.</param>
+            <returns>Prefix error message.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Extensions.ConvertToRange(Antlr4.Runtime.ParserRuleContext,System.Int32)">
+            <summary>
+            Convert antlr parser into Range.
+            </summary>
+            <param name="context">Antlr parse context.</param>
+            <param name="lineOffset">Line offset.</param>
+            <returns>Range object.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.LGResource">
+            <summary>
+            LG resource entity, contains some core data structure.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.LGResource.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.LGResource"/> class.
+            </summary>
+            <param name="id">Resource id.</param>
+            <param name="fullName">The full path to the resource on disk.</param>
+            <param name="content">Resource content.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.LGResource.Id">
+            <summary>
+            Gets or sets resource id.
+            </summary>
+            <value>
+            Resource id.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.LGResource.FullName">
+            <summary>
+            Gets or sets the full path to the resource on disk.
+            </summary>
+            <value>
+            The full path to the resource on disk.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.LGResource.Content">
+            <summary>
+            Gets or sets resource content.
+            </summary>
+            <value>
+            Resource content.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.MultiLanguageLG">
+            <summary>
+            Multi locale Template Manager for language generation. This template manager will enumerate multi-locale LG files and will select
+            the appropriate template using the current culture to perform template evaluation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.MultiLanguageLG.#ctor(System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.MultiLanguageLG"/> class.
+            </summary>
+            <param name="filePerLocale">Dictionary of locale and LG file.</param>
+            <param name="defaultLanguage">Default language.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.MultiLanguageLG.#ctor(System.Collections.Generic.Dictionary{System.String,Microsoft.Bot.Builder.LanguageGeneration.Templates},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.MultiLanguageLG"/> class.
+            </summary>
+            <param name="templatesPerLocale">Dictionary of LG file templates per locale.</param>
+            <param name="defaultLanguage">Default language.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.MultiLanguageLG.Generate(System.String,System.Object,System.String)">
+            <summary>
+            Generate template evaluate result.
+            </summary>
+            <param name="template">Template name.</param>
+            <param name="data">Scope data.</param>
+            <param name="locale">Locale info.</param>
+            <returns>Evaluate result.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.MultiLanguageLG.LanguagePolicy">
+            <summary>
+            Language policy with fallback for each language as most specific to default en-us -> en -> default.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.Position">
+            <summary>
+            Represents a line and character position, such as
+            the position of the cursor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Position.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Position"/> class.
+            </summary>
+            <param name="line">Line number of the current position.</param>
+            <param name="character">Character number of the current line.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Position.Line">
+            <summary>
+            Gets or sets the zero-based line value.
+            </summary>
+            <value>
+            The zero-based line value.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Position.Character">
+            <summary>
+            Gets or sets the zero-based character value.
+            </summary>
+            <value>
+            The zero-based character value.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Position.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.Range">
+            <summary>
+            A range represents an ordered pair of two positions.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.Range.DefaultRange">
+            <summary>
+            Default.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Range.#ctor(Microsoft.Bot.Builder.LanguageGeneration.Position,Microsoft.Bot.Builder.LanguageGeneration.Position)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Range"/> class.
+            </summary>
+            <param name="start">Starting <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Position"/> in a file.</param>
+            <param name="end">Ending <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Position"/> in a file.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Range.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Range"/> class.
+            </summary>
+            <param name="startLine">Starting line number in a file.</param>
+            <param name="startChar">Starting character number in the start line.</param>
+            <param name="endLine">Ending line number in a file.</param>
+            <param name="endChar">Ending character number in the end line.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Range.Start">
+            <summary>
+            Gets or sets the start position. It is before or equal to <see cref="P:Microsoft.Bot.Builder.LanguageGeneration.Range.End"/>.
+            </summary>
+            <value>
+            The start position. It is before or equal to <see cref="P:Microsoft.Bot.Builder.LanguageGeneration.Range.End"/>.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Range.End">
+            <summary>
+            Gets or sets the end position. It is after or equal to <see cref="P:Microsoft.Bot.Builder.LanguageGeneration.Range.Start"/>.
+            </summary>
+            <value>
+            The end position. It is after or equal to <see cref="P:Microsoft.Bot.Builder.LanguageGeneration.Range.Start"/>.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Range.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.SourceRange">
+            <summary>
+            Source range of the context. Including parse tree, source id and the context range.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.SourceRange.#ctor(Antlr4.Runtime.ParserRuleContext,System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.SourceRange"/> class.
+            </summary>
+            <param name="parseTree">Rule invocation record for parsing.</param>
+            <param name="source">Source, used as the lg file path.</param>
+            <param name="offset">Offset in the parse tree.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.SourceRange.#ctor(Microsoft.Bot.Builder.LanguageGeneration.Range,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.SourceRange"/> class.
+            </summary>
+            <param name="range">Range of the block.</param>
+            <param name="source">Source, used as the lg file path.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.SourceRange.Range">
+            <summary>
+            Gets or sets range of the block.
+            </summary>
+            <value>
+            range of the block.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.SourceRange.Source">
+            <summary>
+            Gets or sets code source, used as the lg file path.
+            </summary>
+            <value>
+            Code source, used as the lg file path.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.StaticChecker">
+            <summary>
+            LG managed code checker.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.StaticChecker.#ctor(Microsoft.Bot.Builder.LanguageGeneration.Templates)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.StaticChecker"/> class.
+            </summary>
+            <param name="templates">Templates wihch would be checked.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.StaticChecker.Check">
+            <summary>
+            Returns a list of Diagnostic instances.
+            </summary>
+            <returns>Report result.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.Template">
+            <summary>
+            Class which represents a single template which can be evaluated.
+            </summary>
+            <remarks>
+            Defines a data model that can easily understand and use the context for all kinds of visitors,
+            whether it's an evaluator, static checker, analyzer, and so on.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Template.#ctor(System.String,System.Collections.Generic.List{System.String},System.String,Microsoft.Bot.Builder.LanguageGeneration.SourceRange)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Template"/> class.
+            </summary>
+            <param name="templateName">Template name without parameters.</param>
+            <param name="parameters">Parameter list.</param>
+            <param name="templateBody">Template content.</param>
+            <param name="sourceRange">Source range of template.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Template.Expressions">
+            <summary>
+            Gets expression reference list.
+            </summary>
+            <value>
+            Expression reference list.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Template.SourceRange">
+            <summary>
+            Gets or sets source range.
+            </summary>
+            <value>
+            Start line of the template in LG file.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Template.Name">
+            <summary>
+            Gets or sets name of the template, which follows '#' in a LG file.
+            </summary>
+            <value>
+            Name of the template, which follows '#' in a LG file.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Template.Parameters">
+            <summary>
+            Gets or sets parameter list of this template.
+            </summary>
+            <value>
+            Parameter list of this template.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Template.Body">
+            <summary>
+            Gets or sets text format of Body of this template. All content except Name and Parameters.
+            </summary>
+            <value>
+            Text format of Body of this template. All content except Name and Parameters.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Template.TemplateBodyParseTree">
+            <summary>
+            Gets or sets the parse tree of this template.
+            </summary>
+            <value>
+            The parse tree of this template.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Template.Properties">
+            <summary>
+            Gets or sets properties that are not otherwise defined by the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Template"/> core type.
+            </summary>
+            <value>The extended properties for the object.</value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Template.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.TemplateException">
+            <summary>
+            Template Exception that contains diagnostics.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplateException.#ctor(System.String,System.Collections.Generic.IList{Microsoft.Bot.Builder.LanguageGeneration.Diagnostic})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.TemplateException"/> class.
+            </summary>
+            <param name="message">Error message.</param>
+            <param name="diagnostics">List of diagnostics to throw.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.TemplateException.Diagnostics">
+            <summary>
+            Gets or sets diagnostics.
+            </summary>
+            <value>
+            Diagnostics.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.TemplateImport">
+            <summary>
+            Class which which does actual import definition.</summary>
+            <remarks>
+            Here is a data model that can help users understand and use the LG import definition in LG files easily. 
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplateImport.#ctor(System.String,System.String,Microsoft.Bot.Builder.LanguageGeneration.SourceRange,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.TemplateImport"/> class.
+            </summary>
+            <param name="description">Import description, which is in [].</param>
+            <param name="id">Import id, which is a path, in ().</param>
+            <param name="sourceRange">Source range of template.</param>
+            <param name="alias">Imports alias.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.TemplateImport.Description">
+            <summary>
+            Gets or sets description of the import, included by '[]' in a lg file.
+            </summary>
+            <value>
+            Description of the import, included by '[]' in a lg file.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.TemplateImport.Id">
+            <summary>
+            Gets or sets id of this import, included by '()' in a lg file.
+            </summary>
+            <value>
+            Id of this import.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.TemplateImport.SourceRange">
+            <summary>
+            Gets or sets original root source of the import.
+            </summary>
+            <value>
+            Original root source of the import.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.TemplateImport.Alias">
+            <summary>
+            Gets or sets alias for templates. For example: [import](path) as myAlias.
+            </summary>
+            <value>
+            Alias for templates. For example: [import](path) as myAlias.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplateImport.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.Templates">
+            <summary>
+            Class for working with Language Generation templates.
+            </summary>
+            <remarks>
+            Templates.ParseFile(path) will load a .LG file .
+            Templates.ParseText(text) will load language generation templates from text.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.Templates.InlineTemplateIdPrefix">
+            <summary>
+            Temp Template ID prefix for inline content.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.#ctor(System.Collections.Generic.IList{Microsoft.Bot.Builder.LanguageGeneration.Template},System.Collections.Generic.IList{Microsoft.Bot.Builder.LanguageGeneration.TemplateImport},System.Collections.Generic.IList{Microsoft.Bot.Builder.LanguageGeneration.Diagnostic},System.Collections.Generic.IList{Microsoft.Bot.Builder.LanguageGeneration.Templates},System.String,System.String,AdaptiveExpressions.ExpressionParser,Microsoft.Bot.Builder.LanguageGeneration.ImportResolverDelegate,System.Collections.Generic.IList{System.String},System.String,System.Collections.Generic.IDictionary{System.String,Microsoft.Bot.Builder.LanguageGeneration.Templates})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/> class.
+            </summary>
+            <param name="templates">List of Template instances.</param>
+            <param name="imports">List of TemplateImport instances.</param>
+            <param name="diagnostics">List of Diagnostic instances.</param>
+            <param name="references">List of Templates instances.</param>
+            <param name="content">Content of the current Templates instance.</param>
+            <param name="id">Id of the current Templates instance.</param>
+            <param name="expressionParser">ExpressionParser to parse the expressions in the conent.</param>
+            <param name="importResolver">Resolver to resolve LG import id to template text.</param>
+            <param name="options">List of strings representing the options during evaluating the templates.</param>
+            <param name="source">Templates source.</param>
+            <param name="namedReferences">References that imported with the "as" syntax，for example: [import](path.lg) as myAlias.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.AllTemplates">
+            <summary>
+            Gets get all templates from current lg file and reference lg files.
+            </summary>
+            <value>
+            All templates from current lg file and reference lg files.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.AllDiagnostics">
+            <summary>
+            Gets get all diagnostics from current lg file and reference lg files.
+            </summary>
+            <value>
+            All diagnostics from current lg file and reference lg files.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.ImportResolver">
+            <summary>
+            Gets or sets delegate for resolving resource id of imported lg file.
+            </summary>
+            <value>
+            Delegate for resolving resource id of imported lg file.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.ExpressionParser">
+            <summary>
+            Gets or sets expression parser.
+            </summary>
+            <value>
+            Expression parser.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.Imports">
+            <summary>
+            Gets or sets import elements that this LG file contains directly.
+            </summary>
+            <value>
+            Import elements that this LG file contains directly.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.References">
+            <summary>
+            Gets or sets all references that this LG file has from <see cref="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.Imports"/>.
+            Notice: reference includes all child imports from the LG file,
+            not only the children belong to this LG file directly.
+            so, reference count may >= imports count. 
+            </summary>
+            <value>
+            All references that this LG file has from <see cref="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.Imports"/>.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.Diagnostics">
+            <summary>
+            Gets or sets diagnostics.
+            </summary>
+            <value>
+            Diagnostics.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.Content">
+            <summary>
+            Gets or sets LG content.
+            </summary>
+            <value>
+            LG content.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.Id">
+            <summary>
+            Gets or sets id of this LG file.
+            </summary>
+            <value>
+            Id of the lg resource.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.Source">
+            <summary>
+            Gets or sets source of this LG file.
+            </summary>
+            <value>
+            Source of the lg resource. Full path for lg file.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.Options">
+            <summary>
+            Gets or sets lG file options.
+            </summary>
+            <value>
+            LG file options.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.NamedReferences">
+            <summary>
+            Gets or sets map from import alias to templates.
+            </summary>
+            <value>
+            Map from import alias to templates.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.LgOptions">
+            <summary>
+            Gets the evluation options for current LG file.
+            </summary>
+            <value>
+            An EvaluationOption.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.LanguageGeneration.Templates.Namespace">
+            <summary>
+            Gets the namespace to register for current LG file.
+            </summary>
+            <value>
+            A string value.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.ParseFile(System.String,Microsoft.Bot.Builder.LanguageGeneration.ImportResolverDelegate,AdaptiveExpressions.ExpressionParser)">
+            <summary>
+            Parser to turn lg content into a <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/>.
+            </summary>
+            <param name="filePath">Absolute path of a LG file.</param>
+            <param name="importResolver">resolver to resolve LG import id to template text.</param>
+            <param name="expressionParser">expressionEngine Expression engine for evaluating expressions.</param>
+            <returns>new <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/> entity.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.ParseText(System.String,System.String,Microsoft.Bot.Builder.LanguageGeneration.ImportResolverDelegate,AdaptiveExpressions.ExpressionParser)">
+            <summary>
+            Parser to turn lg content into a <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/>.
+            </summary>
+            <param name="content">Text content contains lg templates.</param>
+            <param name="id">Id is the identifier of content. If importResolver is null, id must be a full path string. </param>
+            <param name="importResolver">Resolver to resolve LG import id to template text.</param>
+            <param name="expressionParser">Expression parser engine for parsing expressions.</param>
+            <returns>new <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/> entity.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.ParseResource(Microsoft.Bot.Builder.LanguageGeneration.LGResource,Microsoft.Bot.Builder.LanguageGeneration.ImportResolverDelegate,AdaptiveExpressions.ExpressionParser)">
+            <summary>
+            Parser to turn lg content into a <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/>.
+            </summary>
+            <param name="resource">LG resource.</param>
+            <param name="importResolver">Resolver to resolve LG import id to template text.</param>
+            <param name="expressionParser">Expression parser engine for parsing expressions.</param>
+            <returns>new <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/> entity.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.Evaluate(System.String,System.Object,Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions)">
+            <summary>
+            Evaluate a template with given name and scope.
+            </summary>
+            <param name="templateName">Template name to be evaluated.</param>
+            <param name="scope">State visible in the evaluation.</param>
+            <param name="opt">EvaluationOptions in evaluating a template.</param>
+            <returns>Evaluate result.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.EvaluateText(System.String,System.Object,Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions)">
+            <summary>
+            Evaluates an inline template string.
+            </summary>
+            <param name="text">Inline string which will be evaluated.</param>
+            <param name="scope">Scope object or JToken.</param>
+            <param name="opt">EvaluationOptions in evaluating a template.</param>
+            <returns>Evaluated result.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.ExpandTemplate(System.String,System.Object,Microsoft.Bot.Builder.LanguageGeneration.EvaluationOptions)">
+            <summary>
+            Expands a template with given name and scope.
+            Return all possible responses instead of random one.
+            </summary>
+            <param name="templateName">Template name to be evaluated.</param>
+            <param name="scope">State visible in the evaluation.</param>
+            <param name="opt">EvaluationOptions in expanding a template.</param>
+            <returns>Expanded result.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.AnalyzeTemplate(System.String)">
+            <summary>
+            (experimental)
+            Analyzes a template to get the static analyzer results including variables and template references.
+            </summary>
+            <param name="templateName">Template name to be evaluated.</param>
+            <returns>Analyzer result.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.UpdateTemplate(System.String,System.String,System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Updates an existing template in current Templates instance.
+            </summary>
+            <param name="templateName">Original template name. The only id of a template.</param>
+            <param name="newTemplateName">New template Name.</param>
+            <param name="parameters">New params.</param>
+            <param name="templateBody">New template body.</param>
+            <returns>Updated LG file.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.AddTemplate(System.String,System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Adds a new template and returns the updated Templates instance.
+            </summary>
+            <param name="templateName">New template name.</param>
+            <param name="parameters">New params.</param>
+            <param name="templateBody">New template body.</param>
+            <returns>Updated LG file.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.DeleteTemplate(System.String)">
+            <summary>
+            Removes an existing template in current Templates instances.
+            </summary>
+            <param name="templateName">Which template should delete.</param>
+            <returns>Updated LG file.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.Templates.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.ImportResolverDelegate">
+            <summary>
+            Delegate for resolving resource id of imported lg file.
+            </summary>
+            <param name="resource">Original resource.</param>
+            <param name="resourceId">Resource id to resolve.</param>
+            <returns>Resolved resource.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser">
+            <summary>
+            Parser to turn lg content into a <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/>.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.InlineContentId">
+            <summary>
+            Inline text id.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.OptionRegex">
+            <summary>
+            option regex.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.ImportRegex">
+            <summary>
+            Import regex.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.ParseFile(System.String,Microsoft.Bot.Builder.LanguageGeneration.ImportResolverDelegate,AdaptiveExpressions.ExpressionParser)">
+            <summary>
+            Parser to turn lg content into a <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/>.
+            </summary>
+            <param name="filePath">Absolut path of a LG file.</param>
+            <param name="importResolver">Resolver to resolve LG import id to template text.</param>
+            <param name="expressionParser">Expression parser for parsing expressions.</param>
+            <returns>new <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/> entity.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.ParseText(System.String,System.String,Microsoft.Bot.Builder.LanguageGeneration.ImportResolverDelegate,AdaptiveExpressions.ExpressionParser)">
+            <summary>
+            Parser to turn lg content into a <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/>.
+            </summary>
+            <param name="content">Text content contains lg templates.</param>
+            <param name="id">Id is the identifier of content. If importResolver is null, id must be a full path string. </param>
+            <param name="importResolver">Resolver to resolve LG import id to template text.</param>
+            <param name="expressionParser">Expression parser for parsing expressions.</param>
+            <returns>New <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/> entity.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.ParseResource(Microsoft.Bot.Builder.LanguageGeneration.LGResource,Microsoft.Bot.Builder.LanguageGeneration.ImportResolverDelegate,AdaptiveExpressions.ExpressionParser)">
+            <summary>
+            Parser to turn lg content into a <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/>.
+            </summary>
+            <param name="resource">LG resource.</param>
+            <param name="importResolver">Resolver to resolve LG import id to template text.</param>
+            <param name="expressionParser">Expression parser for parsing expressions.</param>
+            <returns>new <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/> entity.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.ParseTextWithRef(System.String,Microsoft.Bot.Builder.LanguageGeneration.Templates)">
+            <summary>
+            Parser to turn lg content into a <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/> based on the original LGFile.
+            </summary>
+            <param name="content">Text content contains lg templates.</param>
+            <param name="lg">Original LGFile.</param>
+            <returns>New <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/> entity.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.AntlrParseTemplates(Microsoft.Bot.Builder.LanguageGeneration.LGResource)">
+            <summary>
+            Parse LG content and achieve the AST.
+            </summary>
+            <param name="resource">LG resource.</param>
+            <returns>The abstract syntax tree of lg file.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.InnerParseResource(Microsoft.Bot.Builder.LanguageGeneration.LGResource,Microsoft.Bot.Builder.LanguageGeneration.ImportResolverDelegate,AdaptiveExpressions.ExpressionParser,System.Collections.Generic.Dictionary{System.String,Microsoft.Bot.Builder.LanguageGeneration.Templates},System.Collections.Generic.Stack{Microsoft.Bot.Builder.LanguageGeneration.Templates})">
+            <summary>
+            Parser to turn lg content into a <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/>.
+            </summary>
+            <param name="resource">LG resource.</param>
+            <param name="importResolver">Resolver to resolve LG import id to template text.</param>
+            <param name="expressionParser">Expression parser for parsing expressions.</param>
+            <param name="cachedTemplates">Give the file path and templates to avoid parsing and to improve performance.</param>
+            <param name="parentTemplates">Parent visited Templates.</param>
+            <returns>new <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.Templates"/> entity.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.DefaultFileResolver(Microsoft.Bot.Builder.LanguageGeneration.LGResource,System.String)">
+            <summary>
+            Default import resolver, using relative/absolute file path to access the file content.
+            </summary>
+            <param name="resource">Original Resource.</param>
+            <param name="resourceId">Import path.</param>
+            <returns>Target content id.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.TemplatesTransformer">
+            <summary>
+            Templates transformer. Fulfill more details and body context into the templates object.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.TemplatesTransformer.#ctor(Microsoft.Bot.Builder.LanguageGeneration.Templates)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.TemplatesTransformer"/> class.
+            </summary>
+            <param name="templates">Templates to transform.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.TemplatesTransformer.Transform(Antlr4.Runtime.Tree.IParseTree)">
+            <summary>
+            Transform the parse tree into templates.
+            </summary>
+            <param name="parseTree">Input abstract syntax tree.</param>
+            <returns>Templates.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.TemplatesTransformer.VisitErrorDefinition(LGFileParser.ErrorDefinitionContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.TemplatesTransformer.VisitImportDefinition(LGFileParser.ImportDefinitionContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.TemplatesTransformer.VisitOptionDefinition(LGFileParser.OptionDefinitionContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.LanguageGeneration.TemplatesParser.TemplatesTransformer.VisitTemplateDefinition(LGFileParser.TemplateDefinitionContext)">
+            <inheritdoc/>
+        </member>
+        <member name="T:LGFileParserBaseListener">
+            <summary>
+            This class provides an empty implementation of <see cref="T:ILGFileParserListener"/>,
+            which can be extended to create a listener which only needs to handle a subset
+            of the available methods.
+            </summary>
+        </member>
+        <member name="M:LGFileParserBaseListener.EnterFile(LGFileParser.FileContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.file"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.ExitFile(LGFileParser.FileContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.file"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.EnterParagraph(LGFileParser.ParagraphContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.paragraph"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.ExitParagraph(LGFileParser.ParagraphContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.paragraph"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.EnterCommentDefinition(LGFileParser.CommentDefinitionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.commentDefinition"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.ExitCommentDefinition(LGFileParser.CommentDefinitionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.commentDefinition"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.EnterImportDefinition(LGFileParser.ImportDefinitionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.importDefinition"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.ExitImportDefinition(LGFileParser.ImportDefinitionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.importDefinition"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.EnterOptionDefinition(LGFileParser.OptionDefinitionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.optionDefinition"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.ExitOptionDefinition(LGFileParser.OptionDefinitionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.optionDefinition"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.EnterErrorDefinition(LGFileParser.ErrorDefinitionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.errorDefinition"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.ExitErrorDefinition(LGFileParser.ErrorDefinitionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.errorDefinition"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.EnterTemplateDefinition(LGFileParser.TemplateDefinitionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.templateDefinition"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.ExitTemplateDefinition(LGFileParser.TemplateDefinitionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.templateDefinition"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.EnterTemplateNameLine(LGFileParser.TemplateNameLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.templateNameLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.ExitTemplateNameLine(LGFileParser.TemplateNameLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.templateNameLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.EnterTemplateBody(LGFileParser.TemplateBodyContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.templateBody"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.ExitTemplateBody(LGFileParser.TemplateBodyContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.templateBody"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.EnterTemplateBodyLine(LGFileParser.TemplateBodyLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.templateBodyLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.ExitTemplateBodyLine(LGFileParser.TemplateBodyLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.templateBodyLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGFileParserBaseListener.EnterEveryRule(Antlr4.Runtime.ParserRuleContext)">
+            <inheritdoc/>
+            <remarks>The default implementation does nothing.</remarks>
+        </member>
+        <member name="M:LGFileParserBaseListener.ExitEveryRule(Antlr4.Runtime.ParserRuleContext)">
+            <inheritdoc/>
+            <remarks>The default implementation does nothing.</remarks>
+        </member>
+        <member name="M:LGFileParserBaseListener.VisitTerminal(Antlr4.Runtime.Tree.ITerminalNode)">
+            <inheritdoc/>
+            <remarks>The default implementation does nothing.</remarks>
+        </member>
+        <member name="M:LGFileParserBaseListener.VisitErrorNode(Antlr4.Runtime.Tree.IErrorNode)">
+            <inheritdoc/>
+            <remarks>The default implementation does nothing.</remarks>
+        </member>
+        <member name="T:LGFileParserBaseVisitor`1">
+            <summary>
+            This class provides an empty implementation of <see cref="T:ILGFileParserVisitor`1"/>,
+            which can be extended to create a visitor which only needs to handle a subset
+            of the available methods.
+            </summary>
+            <typeparam name="Result">The return type of the visit operation.</typeparam>
+        </member>
+        <member name="M:LGFileParserBaseVisitor`1.VisitFile(LGFileParser.FileContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.file"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGFileParserBaseVisitor`1.VisitParagraph(LGFileParser.ParagraphContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.paragraph"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGFileParserBaseVisitor`1.VisitCommentDefinition(LGFileParser.CommentDefinitionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.commentDefinition"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGFileParserBaseVisitor`1.VisitImportDefinition(LGFileParser.ImportDefinitionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.importDefinition"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGFileParserBaseVisitor`1.VisitOptionDefinition(LGFileParser.OptionDefinitionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.optionDefinition"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGFileParserBaseVisitor`1.VisitErrorDefinition(LGFileParser.ErrorDefinitionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.errorDefinition"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGFileParserBaseVisitor`1.VisitTemplateDefinition(LGFileParser.TemplateDefinitionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.templateDefinition"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGFileParserBaseVisitor`1.VisitTemplateNameLine(LGFileParser.TemplateNameLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.templateNameLine"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGFileParserBaseVisitor`1.VisitTemplateBody(LGFileParser.TemplateBodyContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.templateBody"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGFileParserBaseVisitor`1.VisitTemplateBodyLine(LGFileParser.TemplateBodyLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.templateBodyLine"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="T:ILGFileParserListener">
+            <summary>
+            This interface defines a complete listener for a parse tree produced by
+            <see cref="T:LGFileParser"/>.
+            </summary>
+        </member>
+        <member name="M:ILGFileParserListener.EnterFile(LGFileParser.FileContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.file"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.ExitFile(LGFileParser.FileContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.file"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.EnterParagraph(LGFileParser.ParagraphContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.paragraph"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.ExitParagraph(LGFileParser.ParagraphContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.paragraph"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.EnterCommentDefinition(LGFileParser.CommentDefinitionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.commentDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.ExitCommentDefinition(LGFileParser.CommentDefinitionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.commentDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.EnterImportDefinition(LGFileParser.ImportDefinitionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.importDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.ExitImportDefinition(LGFileParser.ImportDefinitionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.importDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.EnterOptionDefinition(LGFileParser.OptionDefinitionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.optionDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.ExitOptionDefinition(LGFileParser.OptionDefinitionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.optionDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.EnterErrorDefinition(LGFileParser.ErrorDefinitionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.errorDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.ExitErrorDefinition(LGFileParser.ErrorDefinitionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.errorDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.EnterTemplateDefinition(LGFileParser.TemplateDefinitionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.templateDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.ExitTemplateDefinition(LGFileParser.TemplateDefinitionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.templateDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.EnterTemplateNameLine(LGFileParser.TemplateNameLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.templateNameLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.ExitTemplateNameLine(LGFileParser.TemplateNameLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.templateNameLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.EnterTemplateBody(LGFileParser.TemplateBodyContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.templateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.ExitTemplateBody(LGFileParser.TemplateBodyContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.templateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.EnterTemplateBodyLine(LGFileParser.TemplateBodyLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGFileParser.templateBodyLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGFileParserListener.ExitTemplateBodyLine(LGFileParser.TemplateBodyLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGFileParser.templateBodyLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="T:ILGFileParserVisitor`1">
+            <summary>
+            This interface defines a complete generic visitor for a parse tree produced
+            by <see cref="T:LGFileParser"/>.
+            </summary>
+            <typeparam name="Result">The return type of the visit operation.</typeparam>
+        </member>
+        <member name="M:ILGFileParserVisitor`1.VisitFile(LGFileParser.FileContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.file"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGFileParserVisitor`1.VisitParagraph(LGFileParser.ParagraphContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.paragraph"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGFileParserVisitor`1.VisitCommentDefinition(LGFileParser.CommentDefinitionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.commentDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGFileParserVisitor`1.VisitImportDefinition(LGFileParser.ImportDefinitionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.importDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGFileParserVisitor`1.VisitOptionDefinition(LGFileParser.OptionDefinitionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.optionDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGFileParserVisitor`1.VisitErrorDefinition(LGFileParser.ErrorDefinitionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.errorDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGFileParserVisitor`1.VisitTemplateDefinition(LGFileParser.TemplateDefinitionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.templateDefinition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGFileParserVisitor`1.VisitTemplateNameLine(LGFileParser.TemplateNameLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.templateNameLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGFileParserVisitor`1.VisitTemplateBody(LGFileParser.TemplateBodyContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.templateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGFileParserVisitor`1.VisitTemplateBodyLine(LGFileParser.TemplateBodyLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGFileParser.templateBodyLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="T:LGTemplateParserBaseListener">
+            <summary>
+            This class provides an empty implementation of <see cref="T:ILGTemplateParserListener"/>,
+            which can be extended to create a listener which only needs to handle a subset
+            of the available methods.
+            </summary>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterContext(LGTemplateParser.ContextContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.context"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitContext(LGTemplateParser.ContextContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.context"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterNormalBody(LGTemplateParser.NormalBodyContext)">
+            <summary>
+            Enter a parse tree produced by the <c>normalBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitNormalBody(LGTemplateParser.NormalBodyContext)">
+            <summary>
+            Exit a parse tree produced by the <c>normalBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterIfElseBody(LGTemplateParser.IfElseBodyContext)">
+            <summary>
+            Enter a parse tree produced by the <c>ifElseBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitIfElseBody(LGTemplateParser.IfElseBodyContext)">
+            <summary>
+            Exit a parse tree produced by the <c>ifElseBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterSwitchCaseBody(LGTemplateParser.SwitchCaseBodyContext)">
+            <summary>
+            Enter a parse tree produced by the <c>switchCaseBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitSwitchCaseBody(LGTemplateParser.SwitchCaseBodyContext)">
+            <summary>
+            Exit a parse tree produced by the <c>switchCaseBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterStructuredBody(LGTemplateParser.StructuredBodyContext)">
+            <summary>
+            Enter a parse tree produced by the <c>structuredBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitStructuredBody(LGTemplateParser.StructuredBodyContext)">
+            <summary>
+            Exit a parse tree produced by the <c>structuredBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterStructuredTemplateBody(LGTemplateParser.StructuredTemplateBodyContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.structuredTemplateBody"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitStructuredTemplateBody(LGTemplateParser.StructuredTemplateBodyContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.structuredTemplateBody"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterStructuredBodyNameLine(LGTemplateParser.StructuredBodyNameLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyNameLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitStructuredBodyNameLine(LGTemplateParser.StructuredBodyNameLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyNameLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterErrorStructuredName(LGTemplateParser.ErrorStructuredNameContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.errorStructuredName"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitErrorStructuredName(LGTemplateParser.ErrorStructuredNameContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.errorStructuredName"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterStructuredBodyContentLine(LGTemplateParser.StructuredBodyContentLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyContentLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitStructuredBodyContentLine(LGTemplateParser.StructuredBodyContentLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyContentLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterErrorStructureLine(LGTemplateParser.ErrorStructureLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.errorStructureLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitErrorStructureLine(LGTemplateParser.ErrorStructureLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.errorStructureLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterKeyValueStructureLine(LGTemplateParser.KeyValueStructureLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.keyValueStructureLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitKeyValueStructureLine(LGTemplateParser.KeyValueStructureLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.keyValueStructureLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterKeyValueStructureValue(LGTemplateParser.KeyValueStructureValueContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.keyValueStructureValue"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitKeyValueStructureValue(LGTemplateParser.KeyValueStructureValueContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.keyValueStructureValue"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterStructuredBodyEndLine(LGTemplateParser.StructuredBodyEndLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyEndLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitStructuredBodyEndLine(LGTemplateParser.StructuredBodyEndLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyEndLine"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterNormalTemplateBody(LGTemplateParser.NormalTemplateBodyContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.normalTemplateBody"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitNormalTemplateBody(LGTemplateParser.NormalTemplateBodyContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.normalTemplateBody"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterTemplateString(LGTemplateParser.TemplateStringContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.templateString"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitTemplateString(LGTemplateParser.TemplateStringContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.templateString"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterNormalTemplateString(LGTemplateParser.NormalTemplateStringContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.normalTemplateString"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitNormalTemplateString(LGTemplateParser.NormalTemplateStringContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.normalTemplateString"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterErrorTemplateString(LGTemplateParser.ErrorTemplateStringContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.errorTemplateString"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitErrorTemplateString(LGTemplateParser.ErrorTemplateStringContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.errorTemplateString"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterIfElseTemplateBody(LGTemplateParser.IfElseTemplateBodyContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.ifElseTemplateBody"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitIfElseTemplateBody(LGTemplateParser.IfElseTemplateBodyContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.ifElseTemplateBody"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterIfConditionRule(LGTemplateParser.IfConditionRuleContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.ifConditionRule"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitIfConditionRule(LGTemplateParser.IfConditionRuleContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.ifConditionRule"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterIfCondition(LGTemplateParser.IfConditionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.ifCondition"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitIfCondition(LGTemplateParser.IfConditionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.ifCondition"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterSwitchCaseTemplateBody(LGTemplateParser.SwitchCaseTemplateBodyContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.switchCaseTemplateBody"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitSwitchCaseTemplateBody(LGTemplateParser.SwitchCaseTemplateBodyContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.switchCaseTemplateBody"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterSwitchCaseRule(LGTemplateParser.SwitchCaseRuleContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.switchCaseRule"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitSwitchCaseRule(LGTemplateParser.SwitchCaseRuleContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.switchCaseRule"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterSwitchCaseStat(LGTemplateParser.SwitchCaseStatContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.switchCaseStat"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitSwitchCaseStat(LGTemplateParser.SwitchCaseStatContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.switchCaseStat"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterExpression(LGTemplateParser.ExpressionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.expression"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitExpression(LGTemplateParser.ExpressionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.expression"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterExpressionInStructure(LGTemplateParser.ExpressionInStructureContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.expressionInStructure"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitExpressionInStructure(LGTemplateParser.ExpressionInStructureContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.expressionInStructure"/>.
+            <para>The default implementation does nothing.</para>
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.EnterEveryRule(Antlr4.Runtime.ParserRuleContext)">
+            <inheritdoc/>
+            <remarks>The default implementation does nothing.</remarks>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.ExitEveryRule(Antlr4.Runtime.ParserRuleContext)">
+            <inheritdoc/>
+            <remarks>The default implementation does nothing.</remarks>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.VisitTerminal(Antlr4.Runtime.Tree.ITerminalNode)">
+            <inheritdoc/>
+            <remarks>The default implementation does nothing.</remarks>
+        </member>
+        <member name="M:LGTemplateParserBaseListener.VisitErrorNode(Antlr4.Runtime.Tree.IErrorNode)">
+            <inheritdoc/>
+            <remarks>The default implementation does nothing.</remarks>
+        </member>
+        <member name="T:LGTemplateParserBaseVisitor`1">
+            <summary>
+            This class provides an empty implementation of <see cref="T:ILGTemplateParserVisitor`1"/>,
+            which can be extended to create a visitor which only needs to handle a subset
+            of the available methods.
+            </summary>
+            <typeparam name="Result">The return type of the visit operation.</typeparam>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitContext(LGTemplateParser.ContextContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.context"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitNormalBody(LGTemplateParser.NormalBodyContext)">
+            <summary>
+            Visit a parse tree produced by the <c>normalBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitIfElseBody(LGTemplateParser.IfElseBodyContext)">
+            <summary>
+            Visit a parse tree produced by the <c>ifElseBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitSwitchCaseBody(LGTemplateParser.SwitchCaseBodyContext)">
+            <summary>
+            Visit a parse tree produced by the <c>switchCaseBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitStructuredBody(LGTemplateParser.StructuredBodyContext)">
+            <summary>
+            Visit a parse tree produced by the <c>structuredBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitStructuredTemplateBody(LGTemplateParser.StructuredTemplateBodyContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.structuredTemplateBody"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitStructuredBodyNameLine(LGTemplateParser.StructuredBodyNameLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyNameLine"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitErrorStructuredName(LGTemplateParser.ErrorStructuredNameContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.errorStructuredName"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitStructuredBodyContentLine(LGTemplateParser.StructuredBodyContentLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyContentLine"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitErrorStructureLine(LGTemplateParser.ErrorStructureLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.errorStructureLine"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitKeyValueStructureLine(LGTemplateParser.KeyValueStructureLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.keyValueStructureLine"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitKeyValueStructureValue(LGTemplateParser.KeyValueStructureValueContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.keyValueStructureValue"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitStructuredBodyEndLine(LGTemplateParser.StructuredBodyEndLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyEndLine"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitNormalTemplateBody(LGTemplateParser.NormalTemplateBodyContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.normalTemplateBody"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitTemplateString(LGTemplateParser.TemplateStringContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.templateString"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitNormalTemplateString(LGTemplateParser.NormalTemplateStringContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.normalTemplateString"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitErrorTemplateString(LGTemplateParser.ErrorTemplateStringContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.errorTemplateString"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitIfElseTemplateBody(LGTemplateParser.IfElseTemplateBodyContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.ifElseTemplateBody"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitIfConditionRule(LGTemplateParser.IfConditionRuleContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.ifConditionRule"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitIfCondition(LGTemplateParser.IfConditionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.ifCondition"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitSwitchCaseTemplateBody(LGTemplateParser.SwitchCaseTemplateBodyContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.switchCaseTemplateBody"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitSwitchCaseRule(LGTemplateParser.SwitchCaseRuleContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.switchCaseRule"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitSwitchCaseStat(LGTemplateParser.SwitchCaseStatContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.switchCaseStat"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitExpression(LGTemplateParser.ExpressionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.expression"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:LGTemplateParserBaseVisitor`1.VisitExpressionInStructure(LGTemplateParser.ExpressionInStructureContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.expressionInStructure"/>.
+            <para>
+            The default implementation returns the result of calling <see cref="M:Antlr4.Runtime.Tree.AbstractParseTreeVisitor`1.VisitChildren(Antlr4.Runtime.Tree.IRuleNode)"/>
+            on <paramref name="context"/>.
+            </para>
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="T:ILGTemplateParserListener">
+            <summary>
+            This interface defines a complete listener for a parse tree produced by
+            <see cref="T:LGTemplateParser"/>.
+            </summary>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterContext(LGTemplateParser.ContextContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.context"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitContext(LGTemplateParser.ContextContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.context"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterNormalBody(LGTemplateParser.NormalBodyContext)">
+            <summary>
+            Enter a parse tree produced by the <c>normalBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitNormalBody(LGTemplateParser.NormalBodyContext)">
+            <summary>
+            Exit a parse tree produced by the <c>normalBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterIfElseBody(LGTemplateParser.IfElseBodyContext)">
+            <summary>
+            Enter a parse tree produced by the <c>ifElseBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitIfElseBody(LGTemplateParser.IfElseBodyContext)">
+            <summary>
+            Exit a parse tree produced by the <c>ifElseBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterSwitchCaseBody(LGTemplateParser.SwitchCaseBodyContext)">
+            <summary>
+            Enter a parse tree produced by the <c>switchCaseBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitSwitchCaseBody(LGTemplateParser.SwitchCaseBodyContext)">
+            <summary>
+            Exit a parse tree produced by the <c>switchCaseBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterStructuredBody(LGTemplateParser.StructuredBodyContext)">
+            <summary>
+            Enter a parse tree produced by the <c>structuredBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitStructuredBody(LGTemplateParser.StructuredBodyContext)">
+            <summary>
+            Exit a parse tree produced by the <c>structuredBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterStructuredTemplateBody(LGTemplateParser.StructuredTemplateBodyContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.structuredTemplateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitStructuredTemplateBody(LGTemplateParser.StructuredTemplateBodyContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.structuredTemplateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterStructuredBodyNameLine(LGTemplateParser.StructuredBodyNameLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyNameLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitStructuredBodyNameLine(LGTemplateParser.StructuredBodyNameLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyNameLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterErrorStructuredName(LGTemplateParser.ErrorStructuredNameContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.errorStructuredName"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitErrorStructuredName(LGTemplateParser.ErrorStructuredNameContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.errorStructuredName"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterStructuredBodyContentLine(LGTemplateParser.StructuredBodyContentLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyContentLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitStructuredBodyContentLine(LGTemplateParser.StructuredBodyContentLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyContentLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterErrorStructureLine(LGTemplateParser.ErrorStructureLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.errorStructureLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitErrorStructureLine(LGTemplateParser.ErrorStructureLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.errorStructureLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterKeyValueStructureLine(LGTemplateParser.KeyValueStructureLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.keyValueStructureLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitKeyValueStructureLine(LGTemplateParser.KeyValueStructureLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.keyValueStructureLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterKeyValueStructureValue(LGTemplateParser.KeyValueStructureValueContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.keyValueStructureValue"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitKeyValueStructureValue(LGTemplateParser.KeyValueStructureValueContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.keyValueStructureValue"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterStructuredBodyEndLine(LGTemplateParser.StructuredBodyEndLineContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyEndLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitStructuredBodyEndLine(LGTemplateParser.StructuredBodyEndLineContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyEndLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterNormalTemplateBody(LGTemplateParser.NormalTemplateBodyContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.normalTemplateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitNormalTemplateBody(LGTemplateParser.NormalTemplateBodyContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.normalTemplateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterTemplateString(LGTemplateParser.TemplateStringContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.templateString"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitTemplateString(LGTemplateParser.TemplateStringContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.templateString"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterNormalTemplateString(LGTemplateParser.NormalTemplateStringContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.normalTemplateString"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitNormalTemplateString(LGTemplateParser.NormalTemplateStringContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.normalTemplateString"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterErrorTemplateString(LGTemplateParser.ErrorTemplateStringContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.errorTemplateString"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitErrorTemplateString(LGTemplateParser.ErrorTemplateStringContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.errorTemplateString"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterIfElseTemplateBody(LGTemplateParser.IfElseTemplateBodyContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.ifElseTemplateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitIfElseTemplateBody(LGTemplateParser.IfElseTemplateBodyContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.ifElseTemplateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterIfConditionRule(LGTemplateParser.IfConditionRuleContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.ifConditionRule"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitIfConditionRule(LGTemplateParser.IfConditionRuleContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.ifConditionRule"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterIfCondition(LGTemplateParser.IfConditionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.ifCondition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitIfCondition(LGTemplateParser.IfConditionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.ifCondition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterSwitchCaseTemplateBody(LGTemplateParser.SwitchCaseTemplateBodyContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.switchCaseTemplateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitSwitchCaseTemplateBody(LGTemplateParser.SwitchCaseTemplateBodyContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.switchCaseTemplateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterSwitchCaseRule(LGTemplateParser.SwitchCaseRuleContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.switchCaseRule"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitSwitchCaseRule(LGTemplateParser.SwitchCaseRuleContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.switchCaseRule"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterSwitchCaseStat(LGTemplateParser.SwitchCaseStatContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.switchCaseStat"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitSwitchCaseStat(LGTemplateParser.SwitchCaseStatContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.switchCaseStat"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterExpression(LGTemplateParser.ExpressionContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.expression"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitExpression(LGTemplateParser.ExpressionContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.expression"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.EnterExpressionInStructure(LGTemplateParser.ExpressionInStructureContext)">
+            <summary>
+            Enter a parse tree produced by <see cref="M:LGTemplateParser.expressionInStructure"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="M:ILGTemplateParserListener.ExitExpressionInStructure(LGTemplateParser.ExpressionInStructureContext)">
+            <summary>
+            Exit a parse tree produced by <see cref="M:LGTemplateParser.expressionInStructure"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+        </member>
+        <member name="T:ILGTemplateParserVisitor`1">
+            <summary>
+            This interface defines a complete generic visitor for a parse tree produced
+            by <see cref="T:LGTemplateParser"/>.
+            </summary>
+            <typeparam name="Result">The return type of the visit operation.</typeparam>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitContext(LGTemplateParser.ContextContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.context"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitNormalBody(LGTemplateParser.NormalBodyContext)">
+            <summary>
+            Visit a parse tree produced by the <c>normalBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitIfElseBody(LGTemplateParser.IfElseBodyContext)">
+            <summary>
+            Visit a parse tree produced by the <c>ifElseBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitSwitchCaseBody(LGTemplateParser.SwitchCaseBodyContext)">
+            <summary>
+            Visit a parse tree produced by the <c>switchCaseBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitStructuredBody(LGTemplateParser.StructuredBodyContext)">
+            <summary>
+            Visit a parse tree produced by the <c>structuredBody</c>
+            labeled alternative in <see cref="M:LGTemplateParser.body"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitStructuredTemplateBody(LGTemplateParser.StructuredTemplateBodyContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.structuredTemplateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitStructuredBodyNameLine(LGTemplateParser.StructuredBodyNameLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyNameLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitErrorStructuredName(LGTemplateParser.ErrorStructuredNameContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.errorStructuredName"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitStructuredBodyContentLine(LGTemplateParser.StructuredBodyContentLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyContentLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitErrorStructureLine(LGTemplateParser.ErrorStructureLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.errorStructureLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitKeyValueStructureLine(LGTemplateParser.KeyValueStructureLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.keyValueStructureLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitKeyValueStructureValue(LGTemplateParser.KeyValueStructureValueContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.keyValueStructureValue"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitStructuredBodyEndLine(LGTemplateParser.StructuredBodyEndLineContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.structuredBodyEndLine"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitNormalTemplateBody(LGTemplateParser.NormalTemplateBodyContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.normalTemplateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitTemplateString(LGTemplateParser.TemplateStringContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.templateString"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitNormalTemplateString(LGTemplateParser.NormalTemplateStringContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.normalTemplateString"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitErrorTemplateString(LGTemplateParser.ErrorTemplateStringContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.errorTemplateString"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitIfElseTemplateBody(LGTemplateParser.IfElseTemplateBodyContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.ifElseTemplateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitIfConditionRule(LGTemplateParser.IfConditionRuleContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.ifConditionRule"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitIfCondition(LGTemplateParser.IfConditionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.ifCondition"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitSwitchCaseTemplateBody(LGTemplateParser.SwitchCaseTemplateBodyContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.switchCaseTemplateBody"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitSwitchCaseRule(LGTemplateParser.SwitchCaseRuleContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.switchCaseRule"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitSwitchCaseStat(LGTemplateParser.SwitchCaseStatContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.switchCaseStat"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitExpression(LGTemplateParser.ExpressionContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.expression"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+        <member name="M:ILGTemplateParserVisitor`1.VisitExpressionInStructure(LGTemplateParser.ExpressionInStructureContext)">
+            <summary>
+            Visit a parse tree produced by <see cref="M:LGTemplateParser.expressionInStructure"/>.
+            </summary>
+            <param name="context">The parse tree.</param>
+            <return>The visitor result.</return>
+        </member>
+    </members>
+</doc>

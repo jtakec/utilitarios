@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Bot.Builder.Integration.ApplicationInsights.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.ApplicationBuilderExtensions">
+            <summary>
+            ApplicationBuilder extension methods for use when registering Application Insights services at startup.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.ApplicationBuilderExtensions.AppInsightsInstrumentationKey">
+            <summary>
+            Constant key used for Application Insights Instrumentation Key.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.ApplicationBuilderExtensions.UseBotApplicationInsights(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Adds Telemetry ASP.Net Middleware.
+            </summary>
+            <param name="applicationBuilder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
+            <returns>A reference to this instance after the operation has completed.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.ServiceCollectionExtensions">
+            <summary>
+            Services collection extension methods for use when configuring Application Insights at startup.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.ServiceCollectionExtensions.AddBotApplicationInsights(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Bot.Configuration.BotConfiguration,System.String)">
+            <summary>
+            Adds and configures services for Application Insights to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> which specifies the contract for a collection of service descriptors.</param>
+            <param name="botConfiguration">Bot configuration that contains the Application Insights configuration information.</param>
+            <param name="appInsightsServiceInstanceName">(OPTIONAL) Specifies a Application Insights instance name in the Bot configuration.</param>
+            <returns>A reference to this instance after the operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.ServiceCollectionExtensions.AddBotApplicationInsights(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds and configures services for Application Insights to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> which specifies the contract for a collection of service descriptors.</param>
+            <param name="config">Represents a set of key/value application configuration properties.</param>
+            <returns>A reference to this instance after the operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.ServiceCollectionExtensions.AddBotApplicationInsights(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Bot.Builder.IBotTelemetryClient,System.String)">
+            <summary>
+            Adds and configures services for Application Insights to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> which specifies the contract for a collection of service descriptors.</param>
+            <param name="botTelemetryClient">Bot Telemetry Client that logs event information.</param>
+            <param name="instrumentationKey">If Bot Telemetry Client is using Application Insights, provide the instrumentation key.</param>
+            <returns>A reference to this instance after the operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.ServiceCollectionExtensions.AddBotApplicationInsights(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds and configures services for Application Insights to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> which specifies the contract for a collection of service descriptors.</param>
+            <returns>A reference to this instance after the operation has completed.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetryBotIdInitializer">
+            <summary>
+            Initializer that sets the user ID and session ID (in addition to other bot-specific properties such as activity ID).
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetryBotIdInitializer.BotActivityKey">
+            <summary>
+            Constant key used for storing activity information in turn state.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetryBotIdInitializer.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetryBotIdInitializer"/> class.
+            </summary>
+            <param name="httpContextAccessor">The HttpContextAccessor used to access the current HttpContext.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetryBotIdInitializer.Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetryInitializerMiddleware">
+            <summary>
+            Middleware for storing incoming activity on the HttpContext to make it available to the <see cref="T:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetryBotIdInitializer"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetryInitializerMiddleware.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Bot.Builder.TelemetryLoggerMiddleware,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetryInitializerMiddleware"/> class.
+            </summary>
+            <param name="httpContextAccessor">The IHttpContextAccessor to allow access to the HttpContext.</param>
+            <param name="telemetryLoggerMiddleware">The TelemetryLoggerMiddleware to allow for logging of activity events.</param>
+            <param name="logActivityTelemetry">Indicates if the TelemetryLoggerMiddleware should be executed to log activity events.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetryInitializerMiddleware.OnTurnAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Builder.NextDelegate,System.Threading.CancellationToken)">
+            <summary>
+            Stores the incoming activity as JSON in the items collection on the HttpContext.
+            </summary>
+            <param name="context">The context object for this turn.</param>
+            <param name="nextTurn">The delegate to call to continue the bot middleware pipeline.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+            <seealso cref="T:Microsoft.Bot.Builder.ITurnContext"/>
+            <seealso cref="T:Microsoft.Bot.Schema.IActivity"/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetrySaveBodyASPMiddleware">
+            <summary>
+            Middleware to store the incoming activity request body into the HttpContext items collection.
+            This class has been deprecated in favor of using TelemetryInitializerMiddleware in
+            Microsoft.Bot.Integration.ApplicationInsights.Core and Microsoft.Bot.Integration.ApplicationInsights.WebApi.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetrySaveBodyASPMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetrySaveBodyASPMiddleware"/> class.
+            </summary>
+            <param name="next">The delegate to the next piece of middleware in the pipeline.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Integration.ApplicationInsights.Core.TelemetrySaveBodyASPMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invokes the TelemetrySaveBodyASPMiddleware middleware.
+            </summary>
+            <param name="httpContext">The HttpContext.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+        </member>
+    </members>
+</doc>

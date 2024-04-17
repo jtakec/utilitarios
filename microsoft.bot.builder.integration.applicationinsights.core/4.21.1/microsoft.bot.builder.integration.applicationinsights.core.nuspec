@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.Bot.Builder.Integration.ApplicationInsights.Core</id>
+    <version>4.21.1</version>
+    <authors>Microsoft</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>icon.png</icon>
+    <projectUrl>https://github.com/Microsoft/botbuilder-dotnet</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png</iconUrl>
+    <description>This library integrates the Microsoft Bot Builder SDK with Application Insights.</description>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>bots ai botframework botbuilder</tags>
+    <repository type="git" url="https://github.com/Microsoft/botbuilder-dotnet" commit="617394d6ff834b0804cceabff2ed9d6e06342cd4" />
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="Microsoft.Bot.Builder.ApplicationInsights" version="4.21.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Bot.Builder" version="4.21.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Bot.Configuration" version="4.21.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.ApplicationInsights.AspNetCore" version="2.21.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Http" version="2.2.0" exclude="Build,Analyzers" />
+        <dependency id="System.Drawing.Common" version="4.7.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0">
+        <dependency id="Microsoft.Bot.Builder.ApplicationInsights" version="4.21.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Bot.Builder" version="4.21.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Bot.Configuration" version="4.21.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.ApplicationInsights.AspNetCore" version="2.21.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Http" version="2.2.0" exclude="Build,Analyzers" />
+        <dependency id="System.Drawing.Common" version="4.7.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Microsoft.Bot.Builder.ApplicationInsights" version="4.21.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Bot.Builder" version="4.21.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Bot.Configuration" version="4.21.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.ApplicationInsights.AspNetCore" version="2.21.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Http" version="2.2.0" exclude="Build,Analyzers" />
+        <dependency id="System.Drawing.Common" version="4.7.2" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Security" version="4.3.1" exclude="Build,Analyzers" />
+        <dependency id="System.Text.Encodings.Web" version="5.0.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework=".NETCoreApp3.1">
+        <frameworkReference name="Microsoft.AspNetCore.App" />
+      </group>
+      <group targetFramework="net6.0">
+        <frameworkReference name="Microsoft.AspNetCore.App" />
+      </group>
+      <group targetFramework=".NETStandard2.0" />
+    </frameworkReferences>
+  </metadata>
+</package>

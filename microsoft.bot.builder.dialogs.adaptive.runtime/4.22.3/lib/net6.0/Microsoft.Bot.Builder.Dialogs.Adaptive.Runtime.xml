@@ -1,0 +1,532 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.AssemblyBotComponentEnumerator">
+            <summary>
+            Retrieve available registered bot components.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.AssemblyBotComponentEnumerator.#ctor(System.Runtime.Loader.AssemblyLoadContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.AssemblyBotComponentEnumerator"/> class.
+            </summary>
+            <param name="loadContext">
+            Context used to discover and load assemblies available to the application runtime.
+            </param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.AssemblyBotComponentEnumerator.GetComponents(System.String)">
+            <summary>
+            Get available bot components.
+            </summary>
+            <param name="componentName">Bot component identifier used to retrieve applicable components.</param>
+            <returns>A collection of available bot componentsfor the specified component name.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.BotComponentDefinition">
+            <summary>
+            Represents the definition of a plugin that can be loaded into the bot runtime.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.BotComponentDefinition.Name">
+            <summary>
+            Gets or sets the name of the assembly containing the plugin entry point.
+            </summary>
+            <value>
+            The name of the assembly containing the plugin entry point.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.BotComponentDefinition.SettingsPrefix">
+            <summary>
+            Gets or sets the prefix of application settings that should be supplied to the plugin.
+            </summary>
+            <value>
+            The prefix of the application settings that should be supplied to the plugin.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.BotComponentDefinition.EmptyConfiguration">
+            <summary>
+            Gets an empty <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.BotComponentDefinition.Load(Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.IBotComponentEnumerator,Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Loads the plugin based on the definition information into the runtime.
+            </summary>
+            <param name="pluginEnumerator">Enumerates available plugins from the definition information.</param>
+            <param name="services">The application's collection of registered services.</param>
+            <param name="configuration">Application configuration.</param>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.BuiltInBotComponents">
+            <summary>
+            Retrieve the built-in enumeration of <see cref="T:Microsoft.Bot.Builder.BotComponent"/> instances.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.IBotComponentEnumerator">
+            <summary>
+            Provides an interface for retrieving a collection of bot components from a given source.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Component.IBotComponentEnumerator.GetComponents(System.String)">
+            <summary>
+            Get available bot components.
+            </summary>
+            <param name="componentName">Bot component identifier used to retrieve applicable components.</param>
+            <returns>A collection of available bot components for the specified component name.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.ConfigurationAdaptiveDialogBot.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Bot.Builder.Dialogs.Declarative.Resources.ResourceExplorer,Microsoft.Bot.Builder.ConversationState,Microsoft.Bot.Builder.UserState,Microsoft.Bot.Builder.Skills.SkillConversationIdFactoryBase,Microsoft.Bot.Builder.Dialogs.Adaptive.LanguagePolicy,Microsoft.Bot.Connector.Authentication.BotFrameworkAuthentication,Microsoft.Bot.Builder.IBotTelemetryClient,System.Collections.Generic.IEnumerable{Microsoft.Bot.Builder.Dialogs.Memory.Scopes.MemoryScope},System.Collections.Generic.IEnumerable{Microsoft.Bot.Builder.Dialogs.Memory.IPathResolver},System.Collections.Generic.IEnumerable{Microsoft.Bot.Builder.Dialogs.Dialog},Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.ConfigurationAdaptiveDialogBot"/> class using <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>.
+            </summary>
+            <param name="configuration">An <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance.</param>
+            <param name="resourceExplorer">The Bot Builder <see cref="T:Microsoft.Bot.Builder.Dialogs.Declarative.Resources.ResourceExplorer"/> to load the <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.AdaptiveDialog"/> from.</param>
+            <param name="conversationState">The <see cref="T:Microsoft.Bot.Builder.ConversationState"/> implementation to use for this <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.AdaptiveDialog"/>.</param>
+            <param name="userState">The <see cref="T:Microsoft.Bot.Builder.UserState"/> implementation to use for this <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.AdaptiveDialog"/>.</param>
+            <param name="skillConversationIdFactoryBase">The <see cref="T:Microsoft.Bot.Builder.Skills.SkillConversationIdFactoryBase"/> implementation to use for this <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.AdaptiveDialog"/>.</param>
+            <param name="languagePolicy">The <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.LanguagePolicy"/> implementation to use for this <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.AdaptiveDialog"/>.</param>
+            <param name="botFrameworkAuthentication">A <see cref="T:Microsoft.Bot.Connector.Authentication.BotFrameworkAuthentication"/> for making calls to Bot Builder Skills.</param>
+            <param name="telemetryClient">A <see cref="T:Microsoft.Bot.Builder.IBotTelemetryClient"/> for logging bot telemetry events.</param>
+            <param name="scopes">A set of <see cref="T:Microsoft.Bot.Builder.Dialogs.Memory.Scopes.MemoryScope"/> that will be added to the <see cref="T:Microsoft.Bot.Builder.ITurnContext"/>.</param>
+            <param name="pathResolvers">A set of <see cref="T:Microsoft.Bot.Builder.Dialogs.Memory.IPathResolver"/> that will be added to the <see cref="T:Microsoft.Bot.Builder.ITurnContext"/>.</param>
+            <param name="dialogs">Custom <see cref="T:Microsoft.Bot.Builder.Dialogs.Dialog"/> that will be added to the root DialogSet.</param>
+            <param name="logger">An <see cref="T:Microsoft.Extensions.Logging.ILogger"/> instance.</param>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.ConfigurationConstants">
+            <summary>
+            Defines configuration-related constants.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.ConfigurationConstants.ApplicationRootKey">
+            <summary>
+            The configuration key mapping to the value representing the application root path.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.ConfigurationConstants.BotKey">
+            <summary>
+            The configuration key mapping to the value representing the bot root path.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.ConfigurationConstants.RootDialogKey">
+            <summary>
+            The configuration key mapping to the value representing the default resource identifier
+            of the dialog to be used as the root dialog of the bot.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.ConfigurationConstants.LanguageGeneratorKey">
+            <summary>
+            The configuration key mapping to the value representing the default resource identifier
+            of the LanguageGenerator to be used by the bot.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.ConfigurationConstants.RuntimeSettingsKey">
+            <summary>
+            Default configuration location for runtime settings.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.ConfigurationConstants.DefaultLocaleKey">
+            <summary>
+            The configuration key mapping to the value representing the default locale.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Extensions.ConfigurationBuilderExtensions">
+            <summary>
+            Extensions for setting up Runtime IConfiguration.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Extensions.ConfigurationBuilderExtensions.AddBotRuntimeConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder,System.String,System.String,System.String)">
+            <summary>
+            Setup the provided <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/> with the required Runtime configuration.
+            </summary>
+            <param name="builder">
+            The <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/> to supply with additional in-memory configuration settings.
+            </param>
+            <param name="applicationRoot">
+            The application root directory. When running in local development mode from Composer, this is determined
+            to be three directory levels above where the runtime application project is ejected, i.e. '../../..'.
+            </param>
+            <param name="settingsDirectory">
+            The relative path to the directory containing the appsettings.json file to add as a configuration source.
+            If null is specified, appsettings.json will be located within the application root directory.
+            </param>
+            <param name="environmentName">The name for the environment used to load appsettings.[EnvironmentName].json.</param>
+            <returns>
+            Supplied <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/> instance with additional in-memory configuration provider.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Extensions.ConfigurationBuilderExtensions.AddBotRuntimeProperties(Microsoft.Extensions.Configuration.IConfigurationBuilder,System.String)">
+            <summary>
+            Provides a collection of in-memory configuration values for the bot runtime to
+            the provided <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/>.
+            </summary>
+            <param name="builder">
+            The <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/> to supply with additional in-memory configuration settings.
+            </param>
+            <param name="applicationRoot">
+            The application root directory. When running in local development mode from Composer, this is determined
+            to be three directory levels above where the runtime application project is ejected, i.e. '../../..'.
+            </param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Extensions.ConfigurationBuilderExtensions.AddComposerConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder,System.String)">
+            <summary>
+            Setup configuration to utilize the settings file generated by bf luis:build and qna:build. This is a luis
+            and qnamaker settings extensions adapter aligning with Composer customized settings.
+            </summary>
+            <remarks>
+            This will pick up LUIS_AUTHORING_REGION or --region settings as the setting to target.
+            This will pick up --environment as the environment to target.  If environment is Development it will use
+            the name of the logged in user.
+            This will pick up --root as the root folder to run in.
+            </remarks>
+            <param name="builder">Configuration builder to modify.</param>
+            <param name="applicationRoot">The path to the application root containing the generated folder.</param>
+            <returns>Modified configuration builder.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Extensions.ServiceCollectionExtensions">
+            <summary>
+            Defines extension methods for <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Extensions.ServiceCollectionExtensions.AddBotRuntime(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds bot runtime-related services to the application's service collection.
+            </summary>
+            <remark>
+            The following dependencies are added with TrySingleton so advanced scenarios can override them to customize the runtime behavior:
+            <see cref="T:Microsoft.Bot.Connector.Authentication.BotFrameworkAuthentication"/>,
+            <see cref="T:Microsoft.Bot.Builder.IBot"/>,
+            <see cref="T:Microsoft.Bot.Builder.Dialogs.Declarative.Resources.ResourceExplorer"/>,
+            <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.LanguagePolicy"/>,
+            <see cref="T:Microsoft.Bot.Builder.ChannelServiceHandlerBase"/>,
+            <see cref="T:Microsoft.Bot.Builder.IStorage"/>,
+            <see cref="T:Microsoft.Bot.Builder.UserState"/>,
+            <see cref="T:Microsoft.Bot.Builder.ConversationState"/>,
+            <see cref="T:Microsoft.Bot.Builder.Skills.SkillConversationIdFactoryBase"/>
+            and <see cref="T:Microsoft.Bot.Builder.IBotTelemetryClient"/>.
+            
+            While the full set of dependencies is designed to be sufficient to run Adaptiev Dialogs the <see cref="T:Microsoft.Bot.Builder.IBot"/> dependency can actually be
+            any <see cref="T:Microsoft.Bot.Builder.IBot"/> implementation and is not constrained to one that uses Adaptive Dialogs. Any Bot Framework project Startup can therefore
+            be simplified by just using this function along with a custom <see cref="T:Microsoft.Bot.Builder.IBot"/> implementation.
+            
+            Aspects of the behavior of a number of these dependencies, including those that can be overriden, can be controlled through configuration.   
+            
+            The default <see cref="T:Microsoft.Bot.Builder.Dialogs.Declarative.Resources.ResourceExplorer"/> uses the file system. The folder used being read from configuration.
+            
+            The default <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.LanguagePolicy"/> is "us-en" and this can be changed through configuration.
+            
+            If not overriden, the exact type of <see cref="T:Microsoft.Bot.Builder.IStorage"/> added depends on configuration. With no configuration the default is memory storage.
+            It should be noted that <see cref="T:Microsoft.Bot.Builder.MemoryStorage"/> is designed primarily for testing with a single host running the bot and no durable storage.
+            
+            The default Skills implementation can be constrained in terms of allowed callers through configuration.
+            Refer to the product documentation for further details.
+            
+            The default <see cref="T:Microsoft.Bot.Builder.IBotTelemetryClient"/> implementation used AppInsights and aspects of what is included in the telemetry data recorded can be controller through configuration.
+            Refer to the product documentation for further details.
+            
+            A number of the features of the runtime are implemented through middleware. Various feature flags in configuration determine whether these
+            middleware are added at runtime, the settings include: UseInspection, RemoveRecipientMentions, ShowTyping and SetSpeak. Which control the addition of:
+            <see cref="T:Microsoft.Bot.Builder.InspectionMiddleware"/>, <see cref="T:Microsoft.Bot.Builder.NormalizeMentionsMiddleware"/>, <see cref="T:Microsoft.Bot.Builder.ShowTypingMiddleware"/> and <see cref="T:Microsoft.Bot.Builder.SetSpeakMiddleware"/> respectively.
+            
+            </remark>
+            <param name="services">The application's collection of registered services.</param>
+            <param name="configuration">The application configuration.</param>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.AdapterSettings">
+            <summary>
+            Settings for configurable bot adapters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.AdapterSettings.AdapterSettingsKey">
+            <summary>
+            Gets the configuration key for <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.AdapterSettings"/>.
+            </summary>
+            <value>
+            Configuration key for <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.AdapterSettings"/>.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.AdapterSettings.CoreBotAdapterSettings">
+            <summary>
+            Gets the default adapter route settings.
+            </summary>
+            <value>
+            Default adapter route settings.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.AdapterSettings.Name">
+            <summary>
+            Gets or sets the name of the adapter.
+            </summary>
+            <value>
+            Name of the adapter.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.AdapterSettings.Type">
+            <summary>
+            Gets or sets the type name of the adapter.
+            </summary>
+            <value>
+            Fully qualified name of the adapter.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.AdapterSettings.Route">
+            <summary>
+            Gets or sets the route in which to expose the adapter exposed over http.
+            </summary>
+            <value>
+            Route in which to expose the adapter exposed over http.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.AdapterSettings.Enabled">
+            <summary>
+            Gets or sets a value indicating whether the adapter is enabled.
+            </summary>
+            <value>
+            Value indicating whether the adapter is enabled.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.BlobsStorageSettings">
+            <summary>
+            Settings for blob storage.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.BlobsStorageSettings.ConnectionString">
+            <summary>
+            Gets or sets the blob connection string.
+            </summary>
+            <value>
+            The blob connection string.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.BlobsStorageSettings.ContainerName">
+            <summary>
+            Gets or sets the blob container name.
+            </summary>
+            <value>
+            The blob container name.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.FeatureSettings">
+            <summary>
+            Settings for runtime features.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.FeatureSettings.FeaturesSettingsKey">
+            <summary>
+            Gets the configuration key for <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.FeatureSettings"/>.
+            </summary>
+            <value>
+            Configuration key for <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.FeatureSettings"/>.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.FeatureSettings.RemoveRecipientMentions">
+            <summary>
+            Gets or sets a value indicating whether the runtime should remove recipient mentions.
+            </summary>
+            <value>
+            A value indicating whether the runtime should remove recipient mentions.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.FeatureSettings.ShowTyping">
+            <summary>
+            Gets or sets a value indicating whether the runtime should send typing activities.
+            </summary>
+            <value>
+            A value indicating whether the runtime should send typing activities.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.FeatureSettings.UseInspection">
+            <summary>
+            Gets or sets a value indicating whether to use inspection middleware.
+            </summary>
+            <value>
+            A value indicating whether to use inspection middleware.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.FeatureSettings.TraceTranscript">
+            <summary>
+            Gets or sets a value indicating whether to use traces for transcripts.
+            </summary>
+            <value>
+            A value indicating whether to use traces for transcripts.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.FeatureSettings.BlobTranscript">
+            <summary>
+            Gets or sets the blob transcript store settings.
+            </summary>
+            <value>
+            The blob transcript store settings.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.FeatureSettings.SetSpeak">
+            <summary>
+            Gets or sets the SetSpeakMiddleware settings.
+            </summary>
+            <value>
+            The SetSpeakMiddleware settings.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.RuntimeSettings">
+            <summary>
+            Settings for the bot runtime.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.RuntimeSettings.Features">
+            <summary>
+            Gets or sets the settings for runtime features.
+            </summary>
+            <value>
+            The settings for runtime features.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.RuntimeSettings.Telemetry">
+            <summary>
+            Gets or sets the telemetry settings for the runtime.
+            </summary>
+            <value>
+            The telemetry settings for the runtime.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.RuntimeSettings.Skills">
+            <summary>
+            Gets or sets the skill settings for the runtime.
+            </summary>
+            <value>
+            The skill settings for the runtime.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.RuntimeSettings.Components">
+            <summary>
+            Gets or sets the list of components registered for the runtime.
+            </summary>
+            <value>
+            The list of components registered for the runtime.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.RuntimeSettings.Adapters">
+            <summary>
+            Gets or sets the list of adapters to expose in the runtime.
+            </summary>
+            <value>
+            The list of adapters to expose in the runtime.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.RuntimeSettings.Storage">
+            <summary>
+            Gets or sets the name of the storage to use.
+            </summary>
+            <value>
+            The name of the storage to use.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SkillConfigurationEntry">
+            <summary>
+            Definition of a skill entry in the appsettings.json file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SkillConfigurationEntry.SkillSettingsKey">
+            <summary>
+            Gets the configuration key for <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SkillConfigurationEntry"/>.
+            </summary>
+            <value>
+            Configuration key for <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SkillConfigurationEntry"/>.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SkillConfigurationEntry.MsAppId">
+            <summary>
+            Gets or sets of sets the MSAppId for the entry.
+            </summary>
+            <value>
+            The MSAppId for the entry.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SkillSettings">
+            <summary>
+            Skill settings for the runtime.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SkillSettings.SkillSettingsKey">
+            <summary>
+            Gets the configuration key for <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.AdapterSettings"/>.
+            </summary>
+            <value>
+            Configuration key for <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SkillSettings"/>.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SkillSettings.AllowedCallers">
+            <summary>
+            Gets or sets the list of application Ids that are allowed to call this bot.
+            </summary>
+            <value>
+            The list of application Ids that are allowed to call this bot.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SpeakSettings">
+            <summary>
+            Speak settings for the runtim.  This is used by SetSpeakMiddleware.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SpeakSettings.VoiceFontName">
+            <summary>
+            Gets or sets the SSML voice name attribute value.
+            </summary>
+            <value>
+            The SSML voice name attribute value.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SpeakSettings.FallbackToTextForSpeechIfEmpty">
+            <summary>
+            Gets or sets a value indicating whether gets or sets the behavior to set an empty Activity.Speak 
+            property with the value from Activity.Text.
+            </summary>
+            <value>
+            true to indicates empty Activity.Speak should be set with Activity.Text.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.SpeakSettings.Lang">
+            <summary>
+            Gets or sets the xml:lang value for a SSML speak element.
+            </summary>
+            <value>
+            The xml:lang value.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.TelemetrySettings">
+            <summary>
+            Settings for runtime telemetry.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.TelemetrySettings.TelemetrySettingsKey">
+            <summary>
+            Gets the configuration key for <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.TelemetrySettings"/>.
+            </summary>
+            <value>
+            Configuration key for <see cref="T:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.TelemetrySettings"/>.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.TelemetrySettings.Options">
+            <summary>
+            Gets or sets the telemetry <see cref="T:Microsoft.ApplicationInsights.AspNetCore.Extensions.ApplicationInsightsServiceOptions"/>.
+            </summary>
+            <value>
+            <see cref="T:Microsoft.ApplicationInsights.AspNetCore.Extensions.ApplicationInsightsServiceOptions"/>.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.TelemetrySettings.LogPersonalInformation">
+            <summary>
+            Gets or sets a value indicating whether to log personal information to the telemetry system.
+            </summary>
+            <value>
+            A value indicating whether to log personal information to the telemetry system.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Settings.TelemetrySettings.LogActivities">
+            <summary>
+            Gets or sets a value indicating whether to log activities to the telemetry system.
+            </summary>
+            <value>
+            A value indicating whether to log activities to the telemetry system.
+            </value>
+        </member>
+    </members>
+</doc>
