@@ -1,0 +1,1047 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Bot.Builder.Adapters.Facebook</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter">
+            <summary>
+            BotAdapter to allow for handling Facebook App payloads and responses via the Facebook API.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter._facebookClient">
+            <summary>
+            An instance of the FacebookClientWrapper class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapterOptions,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter"/> class using configuration settings.
+            </summary>
+            <param name="configuration">An <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance.</param>
+            <remarks>
+            The adapter uses these configuration keys:
+            - `VerifyToken`, the token to respond to the initial verification request.
+            - `AppSecret`, the secret used to validate incoming webhooks.
+            - `AccessToken`, an access token for the bot.
+            </remarks>
+            <param name="options">An instance of <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapterOptions"/>.</param>
+            <param name="logger">The logger this adapter should use.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter.#ctor(Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper,Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapterOptions,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter"/> class using an existing Facebook client.
+            </summary>
+            /// <param name="facebookClient">Client used to interact with the Facebook API.</param>
+            <param name="options">Options for the Facebook Adapter.</param>
+            <param name="logger">The logger this adapter should use.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="options"/> is null.</exception>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter.SendActivitiesAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Schema.Activity[],System.Threading.CancellationToken)">
+            <summary>
+            Sends activities to the conversation.
+            </summary>
+            <param name="turnContext">The context object for the turn.</param>
+            <param name="activities">The activities to send.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+            <remarks>If the activities are successfully sent, the task result contains
+            an array of <see cref="T:Microsoft.Bot.Schema.ResourceResponse"/> objects containing the IDs that
+            the receiving channel assigned to the activities.</remarks>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter.UpdateActivityAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Schema.Activity,System.Threading.CancellationToken)">
+            <summary>
+            Throws a <see cref="T:System.NotImplementedException"/> exception in all cases.
+            </summary>
+            <param name="turnContext">The context object for the turn.</param>
+            <param name="activity">New replacement activity.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter.DeleteActivityAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Schema.ConversationReference,System.Threading.CancellationToken)">
+            <summary>
+            Throws a <see cref="T:System.NotImplementedException"/> exception in all cases.
+            </summary>
+            <param name="turnContext">The context object for the turn.</param>
+            <param name="reference">Conversation reference for the activity to delete.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter.ContinueConversationAsync(Microsoft.Bot.Schema.ConversationReference,Microsoft.Bot.Builder.BotCallbackHandler,System.Threading.CancellationToken)">
+            <summary>
+            Sends a proactive message to a conversation using a conversation reference.
+            </summary>
+            <param name="reference">A reference to the conversation to continue.</param>
+            <param name="logic">The method to call for the resulting bot turn.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+            <remarks>Call this method to proactively send a message to a conversation.</remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="logic"/> or
+            <paramref name="reference"/> is null.</exception>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter.ContinueConversationAsync(System.Security.Claims.ClaimsIdentity,Microsoft.Bot.Schema.ConversationReference,Microsoft.Bot.Builder.BotCallbackHandler,System.Threading.CancellationToken)">
+            <summary>
+            Sends a proactive message from the bot to a conversation.
+            </summary>
+            <param name="claimsIdentity">A <see cref="T:System.Security.Claims.ClaimsIdentity"/> for the conversation.</param>
+            <param name="reference">A reference to the conversation to continue.</param>
+            <param name="callback">The method to call for the resulting bot turn.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+            <remarks>Call this method to proactively send a message to a conversation.
+            <para>This method registers the following services for the turn.<list type="bullet">
+            <item><description><see cref="T:System.Security.Principal.IIdentity"/> (key = "BotIdentity"), a claims claimsIdentity for the bot.
+            </description></item>
+            </list></para>
+            </remarks>
+            <seealso cref="M:Microsoft.Bot.Builder.BotAdapter.RunPipelineAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Builder.BotCallbackHandler,System.Threading.CancellationToken)"/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter.ProcessAsync(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Bot.Builder.IBot,System.Threading.CancellationToken)">
+            <summary>
+            Accepts an incoming webhook request, creates a turn context,
+            and runs the middleware pipeline for an incoming TRUSTED activity.
+            </summary>
+            <param name="httpRequest">Represents the incoming side of an HTTP request.</param>
+            <param name="httpResponse">Represents the outgoing side of an HTTP request.</param>
+            <param name="bot">The code to run at the end of the adapter's middleware pipeline.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+            <exception cref="T:System.Security.Authentication.AuthenticationException">The webhook receives message with invalid signature.</exception>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter.HasConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Determines whether the provided <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> has the settings needed to
+            configure a <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter"/>.
+            </summary>
+            <param name="configuration"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> to verify for settings.</param>
+            <returns>A value indicating whether the configuration has the necessary settings required to create a <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter.CreateFacebookMessageFromActivity(Microsoft.Bot.Schema.Activity)">
+            <summary>
+            Factory method to create the <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage"/> instance of the <see cref="T:Microsoft.Bot.Schema.Activity"/> to be sent to Facebook.
+            </summary>
+            <remarks>
+            This lets an override add a Facebook-supported message tag to an outgoing message.
+            See https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags/.
+            </remarks>
+            <param name="activity">An <see cref="T:Microsoft.Bot.Schema.Activity"/> instance to build the message.</param>
+            <returns>A <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage"/> built from the activity instance.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapterBotComponent">
+            <summary>
+            <see cref="T:Microsoft.Bot.Builder.BotComponent"/> definition for <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapter"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapterBotComponent.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapterOptions">
+            <summary>
+            Options class for Facebook Adapter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookAdapterOptions.VerifyIncomingRequests">
+            <summary>
+            Gets or sets a value indicating whether incoming requests should be verified.
+            Should be set to true in Production but can be set to false for testing or development purposes.
+            </summary>
+            <value>The flag to indicate if incoming requests should be verified.</value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper">
+            <summary>
+            Client for interacting with the Facebook API.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper._options">
+            <summary>
+            An instance of the FacebookClientWrapperOptions class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper.#ctor(Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapperOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper"/> class.
+            </summary>
+            <param name="options">An object containing API credentials, a webhook verification token, and other options.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper.SendMessageAsync(System.String,Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage,System.Net.Http.HttpMethod,System.Threading.CancellationToken)">
+            <summary>
+            Sends a REST message to Facebook.
+            </summary>
+            <param name="path">Path to the API endpoint, for example `/me/messages`.</param>
+            <param name="payload">An object to be sent as parameters to the API call.</param>
+            <param name="method">The HTTP method, for example POST, GET, DELETE or PUT.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="path"/> or <paramref name="payload"/> is null.</exception>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper.VerifySignature(Microsoft.AspNetCore.Http.HttpRequest,System.String)">
+            <summary>
+            Verifies the SHA1 signature of the raw request payload before bodyParser parses it will abort parsing if signature is invalid, and pass a generic error to response.
+            </summary>
+            <param name="request">Represents the incoming side of an HTTP request.</param>
+            <param name="payload">The request body.</param>
+            <returns>The result of the comparison between the signature in the request and hashed body.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="request"/> is null.</exception>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper.GetAppSecretProof">
+            <summary>
+            Generates the app secret proof used to increase security on calls to the Graph API.
+            </summary>
+            <returns>The app secret proof.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper.VerifyWebhookAsync(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.HttpResponse,System.Threading.CancellationToken)">
+            <summary>
+            Verifies the verify token from the message. If the token matches the one configured, sends back the challenge.
+            </summary>
+            <param name="request">Represents the incoming side of an HTTP request.</param>
+            <param name="response">Represents the outgoing side of an HTTP request.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="request"/> or <paramref name="response"/> is null.</exception>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper.PostToFacebookApiAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Posts webhook control events to Facebook.
+            </summary>
+            <param name="postType">The REST post type (GET, PUT, POST, etc).</param>
+            <param name="content">The string content to be posted to Facebook.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>`true` if the operation succeeded; otherwise, `false`.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="postType"/> or <paramref name="content"/> is null.</exception>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper.RequestThreadControlAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends the request_thread_control webhook event to Facebook.
+            </summary>
+            <param name="userId">The sender user ID.</param>
+            <param name="message">An optional message for the metadata parameter.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>`true` if the operation succeeded; otherwise, `false`.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="userId"/> is null.</exception>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper.TakeThreadControlAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends the take_thread_control webhook event to Facebook.
+            </summary>
+            <param name="userId">The sender user ID.</param>
+            <param name="message">An optional message for the metadata parameter.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>`true` if the operation succeeded; otherwise, `false`.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="userId"/> is null.</exception>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapper.PassThreadControlAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends the pass_thread_control webhook event to Facebook.
+            </summary>
+            <param name="targetAppId">The ID of the target app to pass control to.</param>
+            <param name="userId">The sender user ID.</param>
+            <param name="message">An optional message for the metadata parameter.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>`true` if the operation succeeded; otherwise, `false`.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="targetAppId"/> or <paramref name="userId"/> is null.</exception>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapperOptions">
+            <summary>
+            Options class for Facebook Adapter.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapperOptions.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapperOptions"/> class.
+            </summary>
+            <param name="verifyToken">The token used to validate that incoming webhooks are originated from Facebook.</param>
+            <param name="appSecret">The app secret.</param>
+            <param name="accessToken">The Facebook access token.</param>
+            <param name="apiHost">A token for validating the origin of incoming webhooks.</param>
+            <param name="apiVersion">A token for a bot to work on a single workspace.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapperOptions.FacebookApiHost">
+            <summary>
+            Gets or sets the alternate root URL used to construct calls to Facebook's API. Defaults to "graph.facebook.com" but can be changed (for mocking, proxy, etc).
+            </summary>
+            <value>The API host.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapperOptions.FacebookApiVersion">
+            <summary>
+            Gets or sets the alternate API version used to construct calls to Facebook's API. Defaults to "v3.2".
+            </summary>
+            <value>The API version.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapperOptions.FacebookVerifyToken">
+            <summary>
+            Gets or sets the verify token used to initially create and verify the webhooks subscription settings on Facebook's developer portal.
+            </summary>
+            <value>The verify token.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapperOptions.FacebookAppSecret">
+            <summary>
+            Gets or sets the app secret from the **Basic Settings** page from your app's configuration in the Facebook developer portal.
+            </summary>
+            <value>The app secret.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookClientWrapperOptions.FacebookAccessToken">
+            <summary>
+            Gets or sets the access token.
+            When bound to a single page, use `access_token` to specify the "page access token" provided in the Facebook developer portal's "Access Tokens" widget of the "Messenger Settings" page.
+            </summary>
+            <value>The access token.</value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload">
+            <summary>
+            Inner Facebook Attachment payload that can be sent as part of a Facebook Attachment on a Facebook message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.Url">
+            <summary>
+            Gets or sets the URL of the attachment.
+            </summary>
+            <value>The URL of the attachment.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.IsReusable">
+            <summary>
+            Gets or sets a value indicating whether the attachment is reusable or not. Default false.
+            </summary>
+            <value>Indicates whether the attachment is reusable.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.AttachmentId">
+            <summary>
+            Gets or sets the ID of the attachment (for reusable attachments).
+            </summary>
+            <value>The ID of the saved attachment.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.TemplateType">
+            <summary>
+            Gets or sets the type of the template attached.
+            </summary>
+            <value>The type of template attached.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.Text">
+            <summary>
+            Gets or sets the text of the template.
+            </summary>
+            <value>The text of the template.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.Buttons">
+            <summary>
+            Gets a list of buttons of the template.
+            </summary>
+            <value>The list of buttons of the template.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.Elements">
+            <summary>
+            Gets a list of media elements of the template.
+            </summary>
+            <value>The list of media elements of the template.</value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.ShouldSerializeIsReusable">
+            <summary>
+            Newtonsoft JSON method for conditionally serializing the <see cref="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.IsReusable"/> property.
+            </summary>
+            <returns>`true` to serialize the property; otherwise, `false`.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.ShouldSerializeButtons">
+            <summary>
+            Newtonsoft JSON method for conditionally serializing the <see cref="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.Buttons"/> property.
+            </summary>
+            <returns>`true` to serialize the property; otherwise, `false`.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.ShouldSerializeElements">
+            <summary>
+            Newtonsoft JSON method for conditionally serializing the <see cref="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.AttachmentPayload.Elements"/> property.
+            </summary>
+            <returns>`true` to serialize the property; otherwise, `false`.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookAttachment">
+            <summary>
+            Facebook Attachment object that can be sent as part of a Facebook message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookAttachment.Type">
+            <summary>
+            Gets or sets the type of the attachment.
+            </summary>
+            <value>The type of attachment.
+            May be "image", "audio", "video", "file", or "template".</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookAttachment.Payload">
+            <summary>
+            Gets or sets the payload of the attachment.
+            </summary>
+            <value>The payload of the attachment.</value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookBotUser">
+            <summary>
+            Represents a Facebook Bot User object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookBotUser.Id">
+            <summary>
+            Gets or sets the ID of the bot user.
+            </summary>
+            <value>The ID of the bot user.</value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookEntry">
+            <summary>
+            Represents a Facebook Message Entry.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookEntry.Id">
+            <summary>
+            Gets or sets the page ID.
+            </summary>
+            <value>The ID of the page.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookEntry.Time">
+            <summary>
+            Gets or sets the time of the update.
+            </summary>
+            <value>The time of update (epoch time in milliseconds).</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookEntry.Messaging">
+            <summary>
+            Gets the messaging list.
+            </summary>
+            <value>List containing one messaging object.</value>
+            <remarks>Note that even though this is an enumerable, it will only contain one object.</remarks>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookEntry.Changes">
+            <summary>
+            Gets the changes list.
+            </summary>
+            <value>The list of changes.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookEntry.Standby">
+            <summary>
+            Gets the standby messages list.
+            </summary>
+            <value>List containing the messages sent while in standby mode.</value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookEntry.ShouldSerializeMessaging">
+            <summary>
+            Newtonsoft JSON method for conditionally serializing the <see cref="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookEntry.Messaging"/> property.
+            </summary>
+            <returns>`true` to serialize the property; otherwise, `false`.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookEntry.ShouldSerializeStandby">
+            <summary>
+            Newtonsoft JSON method for conditionally serializing the <see cref="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookEntry.Standby"/> property.
+            </summary>
+            <returns>`true` to serialize the property; otherwise, `false`.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookEntry.ShouldSerializeChanges">
+            <summary>
+            Newtonsoft JSON method for conditionally serializing the <see cref="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookEntry.Changes"/> property.
+            </summary>
+            <returns>`true` to serialize the property; otherwise, `false`.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookPostBack">
+            <summary>
+            Represents a Facebook Post Back.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookPostBack.Title">
+            <summary>
+            Gets or sets the title of the post back message.
+            </summary>
+            <value>The title of the post back message.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookPostBack.Payload">
+            <summary>
+            Gets or sets the string to send back to the webhook.
+            </summary>
+            <value>The string to post back to the webhook.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookPostBack.Referral">
+            <summary>
+            Gets or sets the referral of the post back message.
+            </summary>
+            <value>The referral of the post back message.</value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookQuickReply">
+            <summary>
+            Facebook Quick Reply object that can be sent as part of a Facebook message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookQuickReply.ContentType">
+            <summary>
+            Gets or sets the content type of the reply. Can be:
+            - "text", which sends a text button.
+            - "user_phone_number", which sends a button allowing the recipient to send the phone number associated with their account.
+            - "user_email", which sends a button allowing the recipient to send the email associated with their account.
+            </summary>
+            <value>The content type.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookQuickReply.Title">
+            <summary>
+            Gets or sets the title of the reply. Required if content_type is "text".
+            </summary>
+            <value>The title of the reply. 20 character limit. </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookQuickReply.Payload">
+            <summary>
+            Gets or sets the payload of the reply. May be set to an empty string if the <see cref="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookQuickReply.ImageUrl"/> property is set.
+            </summary>
+            <value>The payload. Can be either a string or a long.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookQuickReply.ImageUrl">
+            <summary>
+            Gets or sets the optional URL of the image to display on the quick reply button for text quick replies.
+            Required if the <see cref="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookQuickReply.Title"/> property is empty.
+            </summary>
+            <value>The optional URL of the image to display.</value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookRead">
+            <summary>A Facebook read message, including watermark of messages that were read.</summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookRead.Watermark">
+            <summary>
+            Gets or sets the timestamp were messages were read.
+            </summary>
+            <value>
+            All messages that were sent before or at this timestamp were read.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookRecipient">
+            <summary>
+            Facebook Recipient object used as part of a Facebook message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookRecipient.Id">
+            <summary>
+            Gets or sets the message recipient ID.
+            </summary>
+            <value>The Page-scoped ID (PSID) of the message recipient.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookRecipient.UserRef">
+            <summary>
+            Gets or sets the value for the `user_ref` parameter of the checkbox plugin.
+            </summary>
+            <value>Used for the checkbox plugin.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookRecipient.PostId">
+            <summary>
+            Gets or sets the post ID.
+            </summary>
+            <value>Used for private replies to reference the visitor post to reply to.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookRecipient.CommentId">
+            <summary>
+            Gets or sets the comment ID.
+            </summary>
+            <value>Used for private replies to reference the visitor comment to reply to.</value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookResponseEvent">
+            <summary>
+            Represents the incoming object received from Facebook and processed by the adapter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookResponseEvent.ResponseObject">
+            <summary>
+            Gets or sets the object property.
+            </summary>
+            <value>A string with different values.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookResponseEvent.Entry">
+            <summary>
+            Gets the entry property.
+            </summary>
+            <value>Array containing event data.</value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookResponseEvent.ShouldSerializeEntry">
+            <summary>
+            Gets the flag to determine if the Entry property should be serialized.
+            </summary>
+            <returns>True if Entry count is greater than zero.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookResponseOk">
+            <summary>
+            Represents the response object received from Facebook API when a message is sent.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookResponseOk.RecipientId">
+            <summary>
+            Gets or sets the recipient ID.
+            </summary>
+            <value>The ID of the recipient.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookResponseOk.MessageId">
+            <summary>
+            Gets or sets the message ID.
+            </summary>
+            <value>The message ID.</value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookPassThreadControl">
+            <summary>
+            Event object sent to Facebook when requesting to pass thread control to another app.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookPassThreadControl.NewOwnerAppId">
+            <summary>
+            Gets or sets the app ID of the new owner.
+            </summary>
+            <remarks>
+            263902037430900 for the page inbox.
+            </remarks>
+            <value>The app ID of the new owner.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookPassThreadControl.PreviousOwnerAppId">
+            <summary>
+            Gets or sets the app ID of the previous owner.
+            </summary>
+            <value>The app ID of the previous owner.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookPassThreadControl.RequestedOwnerAppId">
+            <summary>
+            Gets or sets the app ID of the requested owner.
+            </summary>
+            <value>The app ID of the requested owner.</value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookRequestThreadControl">
+            <summary>A Facebook thread control message, including app ID of requested thread owner and an optional message
+            to send with the request.</summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookRequestThreadControl.RequestedOwnerAppId">
+            <summary>
+            Gets or sets the app ID of the requested owner.
+            </summary>
+            <remarks>
+            263902037430900 for the page inbox.
+            </remarks>
+            <value>
+            the app ID of the requested owner.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookTakeThreadControl">
+            <summary>
+            Event object sent to Facebook when requesting to take thread control from another app.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookTakeThreadControl.PreviousOwnerAppId">
+            <summary>
+            Gets or sets the app ID of the previous owner.
+            </summary>
+            <remarks>
+            263902037430900 for the page inbox.
+            </remarks>
+            <value>
+            The app ID of the previous owner.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookThreadControl">
+            <summary>
+            Base event object for thread control request payloads.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookThreadControl.Metadata">
+            <summary>
+            Gets or sets the message sent from the requester.
+            </summary>
+            <remarks>
+            Example: "All yours!".
+            </remarks>
+            <value>
+            Message sent from the requester.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.HandoverConstants">
+            <summary>
+            Constants used as part of the Facebook handover protocol.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.HandoverConstants.PassThreadControl">
+            <summary>
+            Constant for the pass_thread_control webhook event.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.HandoverConstants.RequestThreadControl">
+            <summary>
+            Constant for the request_thread_control webhook event.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.HandoverConstants.TakeThreadControl">
+            <summary>
+            Constant for the take_thread_control webhook event.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.HandoverConstants.PageInboxId">
+            <summary>
+            Constant value for the inbox ID of any page in Facebook.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.HandoverConstants.MetadataPassThreadControl">
+            <summary>
+            Constant for passing thread control to be shared between all bots using the handover protocol.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.HandoverConstants.MetadataRequestThreadControl">
+            <summary>
+            Constant for requesting thread control to be shared between all bots using the handover protocol.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.HandoverConstants.MetadataTakeThreadControl">
+            <summary>
+            Constant for taking thread control to be shared between all bots using the handover protocol.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Button">
+            <summary>
+            Facebook button object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Button.Type">
+            <summary>
+            Gets or sets the type of button.
+            </summary>
+            <value>The type of the button.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Button.Url">
+            <summary>
+            Gets or sets the URL of the button.
+            </summary>
+            <value>The URL of the button.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Button.Title">
+            <summary>
+            Gets or sets the title of the button.
+            </summary>
+            <value>The title of the button.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Button.Payload">
+            <summary>
+            Gets or sets the string sent to webhook.
+            </summary>
+            <value>The string sent to webhook.</value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.DefaultAction">
+            <summary>
+            Default action template.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.DefaultAction.ActionType">
+            <summary>
+            Gets or sets the type of action.
+            </summary>
+            <value>The type of action.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.DefaultAction.ActionUrl">
+            <summary>
+            Gets or sets the default URL to open.
+            </summary>
+            <value>The URL of the action.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.DefaultAction.MessengerExtensions">
+            <summary>
+            Gets or sets a value indicating whether the action has extensions or not.
+            </summary>
+            <value>Indicates whether the action has extensions or not.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.DefaultAction.WebviewHeightRatio">
+            <summary>
+            Gets or sets the height ratio for the WebView. It can be "COMPACT", "TALL", or "FULL".
+            </summary>
+            <value>The height ratio for the WebView.</value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Element">
+            <summary>
+            Represents an element of a template message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Element.MediaType">
+            <summary>
+            Gets or sets the type of the media element.
+            </summary>
+            <value>The type of the media element.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Element.Url">
+            <summary>
+            Gets or sets the URL of the media element.
+            </summary>
+            <value>The URL of the media element.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Element.Title">
+            <summary>
+            Gets or sets the title of the element.
+            </summary>
+            <value>The title of the element.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Element.Subtitle">
+            <summary>
+            Gets or sets the subtitle text of the element.
+            </summary>
+            <value>The subtitle of the element.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Element.ImageUrl">
+            <summary>
+            Gets or sets the URL of the image.
+            </summary>
+            <value>The URL of the image.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Element.DefaultAction">
+            <summary>
+            Gets or sets the default action for the element.
+            </summary>
+            <value>The default action for the element.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Element.Buttons">
+            <summary>
+            Gets a list of buttons for the element.
+            </summary>
+            <value>The list of buttons for the element.</value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Element.ShouldSerializeButtons">
+            <summary>
+            Newtonsoft JSON method for conditionally serializing the <see cref="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Templates.Element.Buttons"/> property.
+            </summary>
+            <returns>`true` to serialize the property; otherwise, `false`.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookHelper">
+            <summary>
+            Helper class for converting between Bot Framework objects and Facebook API objects.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookHelper.ActivityToFacebook(Microsoft.Bot.Schema.Activity)">
+            <summary>
+            Converts a Bot Framework activity to a Facebook messenger outbound message ready for the API.
+            </summary>
+            <param name="activity">The activity to be converted to Facebook message.</param>
+            <returns>The resulting message.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="activity"/> is null.</exception>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookHelper.ProcessSingleMessage(Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage)">
+            <summary>
+            Converts a single Facebook messenger message to a Bot Framework activity.
+            </summary>
+            <param name="message">The message to be processed.</param>
+            <returns>An Activity with the result.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="message"/> is null.</exception>
+            <remarks>A webhook call may deliver more than one message at a time.</remarks>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookHelper.HandleMessageAttachments(Microsoft.Bot.Builder.Adapters.Facebook.Message)">
+            <summary>
+            Extracts attachments from a Facebook message.
+            </summary>
+            <param name="message">The message to get attachments from.</param>
+            <returns>A List of the attachments contained within the message.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookHelper.WriteAsync(Microsoft.AspNetCore.Http.HttpResponse,System.Net.HttpStatusCode,System.String,System.Text.Encoding,System.Threading.CancellationToken)">
+            <summary>
+            Writes an HTTP response payload.
+            </summary>
+            <param name="response">The HTTP response to write to.</param>
+            <param name="code">The status code to apply.</param>
+            <param name="text">The text to be written.</param>
+            <param name="encoding">The encoding for the text.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects
+            or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="response"/>, <paramref name="text"/>,
+            or <paramref name="encoding"/> is null.</exception>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookHelper.GenerateTypingActivity(System.String)">
+            <summary>
+            Generates an activity that displays a typing indicator.
+            </summary>
+            <param name="recipientId">The ID of the recipient of the message.</param>
+            <returns>An activity with sender_action equal to "typing_on".</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage">
+            <summary>
+            Represents information associated with a Facebook webhook event. For more information, see the Facebook
+            [Webhook Events Reference](https://developers.facebook.com/docs/messenger-platform/reference/webhook-events).
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.#ctor(System.String,Microsoft.Bot.Builder.Adapters.Facebook.Message,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage"/> class.
+            </summary>
+            <param name="recipientId">Contents of the recipient ID field.</param>
+            <param name="message">Contents of the message field.</param>
+            <param name="messagingType">The type of webhook event. For more information, see the Facebook
+            [List of Webhook Events](https://developers.facebook.com/docs/messenger-platform/reference/webhook-events#event_list).</param>
+            <param name="tag">The optional message tag string. See https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags.</param>
+            <param name="notificationType">The optional notification type: REGULAR (default value), SILENT_PUSH, NO_PUSH.</param>
+            <param name="personaId">The persona ID.</param>
+            <param name="senderAction">Message state to display to the user: typing_on, typing_off, mark_seen. Cannot be sent with 'message'. When used, 'recipient' should be the only other property set in the request.</param>
+            <param name="senderId">The sender ID.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.Recipient">
+            <summary>
+            Gets or sets the ID of the recipient.
+            </summary>
+            <value>The ID of the recipient.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.Sender">
+            <summary>
+            Gets or sets the ID of the sender.
+            </summary>
+            <value>The ID of the sender.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.Message">
+            <summary>
+            Gets or sets the message to be sent.
+            </summary>
+            <value>The message.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.MessagingType">
+            <summary>
+            Gets or sets the messaging type.
+            </summary>
+            <value>The messaging type.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.Tag">
+            <summary>
+            Gets or sets a tag to the message.
+            </summary>
+            <value>The tag.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.NotificationType">
+            <summary>
+            Gets or sets the notification type.
+            </summary>
+            <value>The notification type.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.PersonaId">
+            <summary>
+            Gets or sets the persona ID.
+            </summary>
+            <value>The persona ID.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.SenderAction">
+            <summary>
+            Gets or sets the sender action.
+            </summary>
+            <value>The sender action (typing_on, typing_off, mark_seen).</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.TimeStamp">
+            <summary>
+            Gets or sets the time-stamp.
+            </summary>
+            <value>Time-stamp.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.IsStandby">
+            <summary>
+            Gets or sets a value indicating whether the message was received while in Standby mode.
+            </summary>
+            <value>Value indicating whether the message was received while in Standby mode.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.PostBack">
+            <summary>
+            Gets or sets the value of the postback property.
+            </summary>
+            <value>The postback payload. A postback occurs when a postback button, **Get Started** button, or persistent menu item is tapped.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.OptIn">
+            <summary>
+            Gets or sets the value of the optin property.
+            </summary>
+            <value>The optin field. See https://developers.facebook.com/docs/messenger-platform/reference/webhook-events/messaging_optins. </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.PassThreadControl">
+            <summary>
+            Gets or sets the contents of the pass_thread_control property.
+            </summary>
+            <value>A <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookPassThreadControl"/> holding the contents of the pass_thread_control property.</value>.
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.TakeThreadControl">
+            <summary>
+            Gets or sets the contents of the take_thread_control property.
+            </summary>
+            <value>A <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookTakeThreadControl"/> holding the contents of the pass_thread_control property.</value>.
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.RequestThreadControl">
+            <summary>
+             Gets or sets the contents of the request_thread_control property.
+            </summary>
+            <value>A <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.Handover.FacebookRequestThreadControl"/> holding the contents of the pass_thread_control property.</value>.
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.FacebookMessage.Reads">
+            <summary>
+             Gets or sets the contents of the message_reads property.
+            </summary>
+            <value>A <see cref="T:Microsoft.Bot.Builder.Adapters.Facebook.FacebookEvents.FacebookRead"/> holding the contents of the message_reads property.
+            See https://developers.facebook.com/docs/messenger-platform/reference/webhook-events/message-reads. </value>.
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Facebook.Message">
+            <summary>
+            Facebook message object used when sending messages via the Facebook API.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.Message.Text">
+            <summary>
+            Gets or sets the text of the message.
+            </summary>
+            <value>The text of the message.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.Message.StickerId">
+            <summary>
+            Gets or sets the sticker ID.
+            </summary>
+            <value>The sticker ID.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.Message.Attachments">
+            <summary>
+            Gets a list of attachments.
+            </summary>
+            <value>Attachments that could come with a Facebook message.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.Message.Attachment">
+            <summary>
+            Gets or sets the attachment.
+            </summary>
+            <value>Single attachment that will be sent back to Facebook.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.Message.Metadata">
+            <summary>
+            Gets or sets the metadata.
+            </summary>
+            <value>Custom string that is delivered as a message echo. 1000 character limit.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.Message.QuickReplies">
+            <summary>
+            Gets the quick replies.
+            </summary>
+            <value>The quick replies array.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.Message.IsEcho">
+            <summary>
+            Gets or sets a value indicating whether the message was sent from the page itself.
+            </summary>
+            <value>`true` if the message was sent from the page itself; otherwise, `false`.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Facebook.Message.Mid">
+            <summary>
+            Gets or sets the message ID.
+            </summary>
+            <value>The message ID.</value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.Message.ShouldSerializeQuickReplies">
+            <summary>
+            Newtonsoft JSON method for conditionally serializing the <see cref="P:Microsoft.Bot.Builder.Adapters.Facebook.Message.QuickReplies"/> property.
+            </summary>
+            <returns>`true` to serialize the property; otherwise, `false`.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.Message.ShouldSerializeIsEcho">
+            <summary>
+            Newtonsoft JSON method for conditionally serializing the <see cref="P:Microsoft.Bot.Builder.Adapters.Facebook.Message.IsEcho"/> property.
+            </summary>
+            <returns>`true` to serialize the property; otherwise, `false`.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Facebook.Message.ShouldSerializeAttachments">
+            <summary>
+            Newtonsoft JSON method for conditionally serializing the <see cref="P:Microsoft.Bot.Builder.Adapters.Facebook.Message.Attachments"/> property.
+            </summary>
+            <returns>`true` to serialize the property; otherwise, `false`.</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,418 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Bot.Builder.Adapters.Webex</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Webex.AttachmentActionData">
+            <summary>
+            Represents an Attachment Action - Users create attachment actions by interacting with
+            message attachments such as clicking on a submit button in a card.
+            https://developer.webex.com/docs/api/v1/attachment-actions.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.AttachmentActionData.Id">
+            <summary>
+            Gets or sets the unique identifier for the action.
+            </summary>
+            <value>
+            The unique identifier for the action.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.AttachmentActionData.Type">
+            <summary>
+            Gets or sets the type of action performed.
+            </summary>
+            <value>
+            The type of action performed.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.AttachmentActionData.MessageId">
+            <summary>
+            Gets or sets the parent message the attachment action was performed on.
+            </summary>
+            <value>
+            The parent message the attachment action was performed on.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.AttachmentActionData.PersonId">
+            <summary>
+            Gets or sets the ID of the person who performed the action.
+            </summary>
+            <value>
+            The ID of the person who performed the action.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.AttachmentActionData.Created">
+            <summary>
+            Gets or sets the date and time the action was created.
+            </summary>
+            <value>
+            The date and time the action was created.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.AttachmentActionData.Inputs">
+            <summary>
+            Gets the action's inputs.
+            </summary>
+            <value>
+            The action's inputs.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter">
+            <summary>
+            BotAdapter to allow for handling Webex Teams app payloads and responses via the Webex Teams API.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Bot.Builder.Adapters.Webex.WebexAdapterOptions,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter"/> class using configuration settings.
+            </summary>
+            <param name="configuration">An <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance.</param>
+            <remarks>
+            The configuration keys are:
+            WebexAccessToken: An access token for the bot.
+            WebexPublicAddress: The root URL of the bot application.
+            WebexSecret: The secret used to validate incoming webhooks.
+            WebexWebhookName: A name for the webhook subscription.
+            </remarks>
+            <param name="options">An instance of <see cref="T:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapterOptions"/>.</param>
+            <param name="logger">The ILogger implementation this adapter should use.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter.#ctor(Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapper,Microsoft.Bot.Builder.Adapters.Webex.WebexAdapterOptions,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter"/> class.
+            Creates a Webex adapter.
+            </summary>
+            <param name="webexClient">A Webex API interface.</param>
+            <param name="options">An instance of <see cref="T:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapterOptions"/>.</param>
+            <param name="logger">The ILogger implementation this adapter should use.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter.SendActivitiesAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Schema.Activity[],System.Threading.CancellationToken)">
+            <summary>
+            Standard BotBuilder adapter method to send a message from the bot to the messaging API.
+            </summary>
+            <param name="turnContext">A TurnContext representing the current incoming message and environment.</param>
+            <param name="activities">An array of outgoing activities to be sent back to the messaging API.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter.UpdateActivityAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Schema.Activity,System.Threading.CancellationToken)">
+            <summary>
+            Standard BotBuilder adapter method to update a previous message.
+            </summary>
+            <param name="turnContext">A TurnContext representing the current incoming message and environment.</param>
+            <param name="activity">An activity to be sent back to the messaging API.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter.DeleteActivityAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Schema.ConversationReference,System.Threading.CancellationToken)">
+            <summary>
+            Standard BotBuilder adapter method to delete a previous message.
+            </summary>
+            <param name="turnContext">A <see cref="T:Microsoft.Bot.Builder.ITurnContext"/> representing the current incoming message and environment.</param>
+            <param name="reference">A <see cref="T:Microsoft.Bot.Schema.ConversationReference"/> object.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter.ContinueConversationAsync(Microsoft.Bot.Schema.ConversationReference,Microsoft.Bot.Builder.BotCallbackHandler,System.Threading.CancellationToken)">
+            <summary>
+            Standard BotBuilder adapter method for continuing an existing conversation based on a conversation reference.
+            </summary>
+            <param name="reference">A <see cref="T:Microsoft.Bot.Schema.ConversationReference"/> to be applied to future messages.</param>
+            <param name="logic">A bot logic function that will perform continuing action.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter.ContinueConversationAsync(System.Security.Claims.ClaimsIdentity,Microsoft.Bot.Schema.ConversationReference,Microsoft.Bot.Builder.BotCallbackHandler,System.Threading.CancellationToken)">
+            <summary>
+            Sends a proactive message from the bot to a conversation.
+            </summary>
+            <param name="claimsIdentity">A <see cref="T:System.Security.Claims.ClaimsIdentity"/> for the conversation.</param>
+            <param name="reference">A reference to the conversation to continue.</param>
+            <param name="callback">The method to call for the resulting bot turn.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+            <remarks>Call this method to proactively send a message to a conversation.
+            Most _channels require a user to initialize a conversation with a bot
+            before the bot can send activities to the user.
+            <para>This method registers the following services for the turn.<list type="bullet">
+            <item><description><see cref="T:System.Security.Principal.IIdentity"/> (key = "BotIdentity"), a claims claimsIdentity for the bot.
+            </description></item>
+            </list></para>
+            </remarks>
+            <seealso cref="M:Microsoft.Bot.Builder.BotAdapter.RunPipelineAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Builder.BotCallbackHandler,System.Threading.CancellationToken)"/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter.ProcessAsync(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Bot.Builder.IBot,System.Threading.CancellationToken)">
+            <summary>
+            Accept an incoming webhook <see cref="T:Microsoft.AspNetCore.Http.HttpRequest"/> and convert it into a <see cref="T:Microsoft.Bot.Builder.TurnContext"/> which can be processed by the bot's logic.
+            </summary>
+            <param name="request">The incoming <see cref="T:Microsoft.AspNetCore.Http.HttpRequest"/>.</param>
+            <param name="response">When this method completes, the <see cref="T:Microsoft.AspNetCore.Http.HttpResponse"/> to send.</param>
+            <param name="bot">The bot that will handle the incoming activity.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter.HasConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Determines whether the provided <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> has the settings needed to
+            configure a <see cref="T:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter"/>.
+            </summary>
+            <param name="configuration"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> to verify for settings.</param>
+            <returns>A value indicating whether the configuration has the necessary settings required to create a <see cref="T:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapterBotComponent">
+            <summary>
+            <see cref="T:Microsoft.Bot.Builder.BotComponent"/> definition for <see cref="T:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapterBotComponent.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapterOptions">
+            <summary>
+            Options class for the <see cref="T:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapter" />.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexAdapterOptions.ValidateIncomingRequests">
+            <summary>
+            Gets or sets a value indicating whether the signature on incoming requests should be validated as originating from Webex.
+            </summary>
+            <value>
+            A value indicating if the signature on incoming requests should be validated as originating from Webex.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapper">
+            <summary>
+            A client for interacting with the Webex Teams API.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapper.#ctor(Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapperOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapper"/> class.
+            Creates a Webex Client Wrapper. See <see cref="T:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapperOptions"/> for a full definition of the allowed parameters.
+            </summary>
+            <param name="options">An object containing API credentials, a webhook verification token and other options.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapper.Options">
+            <summary>
+            Gets the options collection for the adapter.
+            </summary>
+            <value>A WebexClientWrapperOptions class exposing properties for each of the available options.</value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapper.ValidateSignature(Microsoft.AspNetCore.Http.HttpRequest,System.String)">
+            <summary>
+            Validates the local secret against the one obtained from the request header.
+            </summary>
+            <param name="request">The <see cref="T:Microsoft.AspNetCore.Http.HttpRequest"/> with the signature.</param>
+            <param name="jsonPayload">The serialized payload to be use for comparison.</param>
+            <returns>The result of the comparison between the signature in the request and hashed json.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapper.CreateMessageAsync(System.String,System.String,System.Collections.Generic.IList{System.Uri},Thrzn41.WebexTeams.Version1.MessageTextType,Thrzn41.WebexTeams.Version1.MessageTarget,System.Threading.CancellationToken)">
+            <summary>
+            Wraps Webex API's CreateMessageAsync method.
+            </summary>
+            <param name="recipient">Target id of the message.</param>
+            <param name="text">Text of the message.</param>
+            <param name="files">List of files attached to the message.</param>
+            <param name="messageType">Type of message. It can be Text or Markdown.</param>
+            <param name="target">Target for the message.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>The created message id.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapper.DeleteMessageAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Wraps Webex API's DeleteMessageAsync method.
+            </summary>
+            <param name="messageId">The id of the message to be deleted.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapper.CreateMessageWithAttachmentsAsync(System.String,System.String,System.Collections.Generic.IList{Microsoft.Bot.Schema.Attachment},Thrzn41.WebexTeams.Version1.MessageTextType,Thrzn41.WebexTeams.Version1.MessageTarget,System.Threading.CancellationToken)">
+            <summary>
+            Creates a message with attachments.
+            </summary>
+            <param name="recipient">PersonId, email or roomId of the message.</param>
+            <param name="text">Text of the message.</param>
+            <param name="attachments">List of attachments attached to the message.</param>
+            <param name="messageType">Type of the message. It can be Text or Markdown.</param>
+            <param name="target">Target for the message.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>The created message id.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapper.GetAttachmentActionAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Shows details for an attachment action, by ID.
+            </summary>
+            <param name="actionId">An unique identifier for the attachment action.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>The attachment action details.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapper.GetMeAsync(System.Threading.CancellationToken)">
+            <summary>
+            Wraps Webex API's GetMeAsync method.
+            </summary>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>The <see cref="T:Thrzn41.WebexTeams.Version1.Person"/> object associated with the bot.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapper.GetMessageAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Wraps Webex API's GetMessageAsync method.
+            </summary>
+            <param name="messageId">Id of the message to be recovered.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>The message's data.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapperOptions">
+            <summary>
+            Defines implementation of the WebexAdapter Options.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapperOptions.#ctor(System.String,System.Uri,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapperOptions"/> class.
+            </summary>
+            <param name="webexAccessToken">An access token for the bot.</param>
+            <param name="webexPublicAddress">The root URL of the bot application.</param>
+            <param name="webexSecret">The secret used to validate incoming webhooks.</param>
+            <param name="webexWebhookName">A name for the webhook subscription.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapperOptions.WebexAccessToken">
+            <summary>
+            Gets or sets an access token for the bot.
+            </summary>
+            <value>An access token for the bot. Get one from 'https://developer.webex.com/'.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapperOptions.WebexSecret">
+            <summary>
+            Gets or sets the secret used to validate incoming webhooks.
+            </summary>
+            <value>The secret used to validate incoming webhooks. You can define this yourself.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapperOptions.WebexPublicAddress">
+            <summary>
+            Gets or sets the root URI of your bot application. Something like 'https://mybot.com/'.
+            </summary>
+            <value>the root URI of your bot application.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexClientWrapperOptions.WebexWebhookName">
+            <summary>
+            Gets or sets a name for the webhook subscription that will be created to tell Webex to send your bot webhooks.
+            </summary>
+            <value>A name for the webhook subscription.</value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexHelper.PayloadToActivity(Thrzn41.WebexTeams.Version1.WebhookEventData,Thrzn41.WebexTeams.Version1.Person)">
+            <summary>
+            Creates an <see cref="T:Microsoft.Bot.Schema.Activity"/> using the body of a request.
+            </summary>
+            <param name="payload">The payload obtained from the body of the request.</param>
+            <param name="identity">The identity of the bot.</param>
+            <returns>An <see cref="T:Microsoft.Bot.Schema.Activity"/> object.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexHelper.GetDecryptedMessageAsync(Thrzn41.WebexTeams.Version1.WebhookEventData,System.Func{System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{Thrzn41.WebexTeams.Version1.Message}},System.Threading.CancellationToken)">
+            <summary>
+            Gets a decrypted <see cref="T:Thrzn41.WebexTeams.Version1.Message"/> by its Id.
+            </summary>
+            <param name="payload">The payload obtained from the body of the request.</param>
+            <param name="decrypterFunc">The function used to decrypt the message.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:Thrzn41.WebexTeams.Version1.Message"/> object.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexHelper.DecryptedMessageToActivity(Thrzn41.WebexTeams.Version1.Message,Thrzn41.WebexTeams.Version1.Person)">
+            <summary>
+            Converts a decrypted <see cref="T:Thrzn41.WebexTeams.Version1.Message"/> into an <see cref="T:Microsoft.Bot.Schema.Activity"/>.
+            </summary>
+            <param name="decryptedMessage">The decrypted message obtained from the body of the request.</param>
+            <param name="identity">The identity of the bot.</param>
+            <returns>An <see cref="T:Microsoft.Bot.Schema.Activity"/> object.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexHelper.AttachmentActionToActivity(Thrzn41.WebexTeams.Version1.Message,Thrzn41.WebexTeams.Version1.Person)">
+            <summary>
+            Converts a decrypted <see cref="T:Thrzn41.WebexTeams.Version1.Message"/> related to an attachment action into an <see cref="T:Microsoft.Bot.Schema.Activity"/>.
+            </summary>
+            <param name="decryptedMessage">The decrypted message obtained from the body of the request.</param>
+            <param name="identity">The identity of the bot.</param>
+            <returns>An <see cref="T:Microsoft.Bot.Schema.Activity"/> object.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexHelper.HandleMessageAttachments(Thrzn41.WebexTeams.Version1.Message)">
+            <summary>
+            Adds the message's files to an attachments list.
+            </summary>
+            <param name="message">The message with the files to process.</param>
+            <returns>A list of attachments containing the message's files.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Webex.WebexMessageRequest">
+            <summary>
+            Represents the payload received when a Webex Message is sent to the bot.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexMessageRequest.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Webex.WebexMessageRequest"/> class.
+            Represents the request needed to create a message with attachments.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexMessageRequest.RoomId">
+            <summary>
+            Gets or sets the room ID of the message.
+            </summary>
+            <value>
+            The room ID of the message.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexMessageRequest.ToPersonId">
+            <summary>
+            Gets or sets the person ID of the recipient when sending a private 1:1 message.
+            </summary>
+            <value>
+            The person ID of the recipient when sending a private 1:1 message.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexMessageRequest.ToPersonEmail">
+            <summary>
+            Gets or sets the email address of the recipient when sending a private 1:1 message.
+            </summary>
+            <value>
+            The email address of the recipient when sending a private 1:1 message.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexMessageRequest.Text">
+            <summary>
+            Gets or sets the text of the message.
+            </summary>
+            <value>
+            The text of the message.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexMessageRequest.Markdown">
+            <summary>
+            Gets or sets the message in Markdown format.
+            </summary>
+            <value>
+            The message, in Markdown format.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexMessageRequest.Files">
+            <summary>
+            Gets the URI to a binary file to be posted into the room. Only one file is allowed per message.
+            </summary>
+            <value>
+            The URI to a binary file to be posted into the room.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Webex.WebexMessageRequest.Attachments">
+            <summary>
+            Gets or sets the content attachments to attach to the message.
+            </summary>
+            <value>
+            The content attachments to attach to the message.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Webex.WebexMessageRequest.ShouldSerializeFiles">
+            <summary>
+            Checks if Files property should be serialized or not.
+            </summary>
+            <returns>True if there are files in the array to be serialized, false if there aren't.</returns>
+        </member>
+    </members>
+</doc>

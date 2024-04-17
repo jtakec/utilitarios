@@ -1,0 +1,460 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Bot.Builder.Adapters.Slack</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Slack.ActivityResourceResponse">
+            <summary>
+            Extends ResourceResponse with ActivityId and Conversation properties.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.ActivityResourceResponse.ActivityId">
+            <summary>
+            Gets or sets the Activity Id.
+            </summary>
+            <value>
+            The Activity Id.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.ActivityResourceResponse.Conversation">
+            <summary>
+            Gets or sets a Conversation Account.
+            </summary>
+            <value>
+            Conversation Account.
+            </value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Slack.Model.CommandPayload">
+            <summary>
+            Represents a Slack Command request https://api.slack.com/interactivity/slash-commands.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Slack.Model.EventRequest">
+            <summary>
+            Represents an incoming request from the Event API https://api.slack.com/events-api#receiving_events.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Slack.Model.Events.MessageEvent">
+            <summary>
+            Represents a Slack Message event https://api.slack.com/events/message.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Slack.Model.Events.UrlVerificationEvent">
+            <summary>
+            Represents a Slack Url Verification event https://api.slack.com/events/url_verification.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Slack.Model.EventType">
+            <summary>
+            Represents a Slack Event Type object https://api.slack.com/events-api#receiving_events.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Slack.Model.InteractionPayload">
+            <summary>
+            Union class to represent various user interaction payloads https://api.slack.com/interactivity/handling#payloads.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Slack.Model.NewSlackMessage">
+            <summary>
+            Message to send to Slack.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.NewSlackMessage.Ephemeral">
+            <summary>
+            Gets or Sets the message as ephemeral, it means, only the recipient can see it.
+            </summary>
+            <value>The ephemeral indicator of the message.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.NewSlackMessage.ThreadTs">
+            <summary>
+            Gets or Sets the timestamp of the thread.
+            </summary>
+            <value>Provide another message's timestamp value to make this message a reply.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.NewSlackMessage.User">
+            <summary>
+            Gets or sets the user.
+            </summary>
+            <value>The user who sent the message.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.NewSlackMessage.Channel">
+            <summary>
+            Gets or sets the channel.
+            </summary>
+            <value>The channel, private group, or IM channel to send message to.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.NewSlackMessage.Text">
+            <summary>
+            Gets or sets the text.
+            </summary>
+            <value>The text of the message.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.NewSlackMessage.Ts">
+            <summary>
+            Gets or sets the timestamp.
+            </summary>
+            <value>The timestamp for the message.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.NewSlackMessage.Username">
+            <summary>
+            Gets or sets the username.
+            </summary>
+            <value>Your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.NewSlackMessage.BotId">
+            <summary>
+            Gets or sets the bot id.
+            </summary>
+            <value>The bot id.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.NewSlackMessage.Blocks">
+            <summary>
+            Gets or sets the blocks that could come with the message.
+            </summary>
+            <value>The blocks that could come with the message.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.NewSlackMessage.Attachments">
+            <summary>
+            Gets or sets the attachments that could come with the message.
+            </summary>
+            <value>The attachments that could come with the message.</value>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Slack.Model.SlackResponse">
+            <summary>
+            SlackResponse class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.SlackResponse.Ok">
+            <summary>
+            Gets or sets a value indicating whether the Ok status is true or false.
+            </summary>
+            <value>The ok status of the response.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.SlackResponse.Channel">
+            <summary>
+            Gets or sets the Channel property.
+            </summary>
+            <value>The channel.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.SlackResponse.Ts">
+            <summary>
+            Gets or sets the Ts property.
+            </summary>
+            <value>The timestamp.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.Model.SlackResponse.Message">
+            <summary>
+            Gets or sets the Message property.
+            </summary>
+            <value>The message.</value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Bot.Builder.Adapters.Slack.SlackAdapterOptions,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter"/> class using configuration settings.
+            </summary>
+            <param name="configuration">An <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance.</param>
+            <remarks>
+            The configuration keys are:
+            SlackVerificationToken: A token for validating the origin of incoming webhooks.
+            SlackBotToken: A token for a bot to work on a single workspace.
+            SlackClientSigningSecret: The token used to validate that incoming webhooks are originated from Slack.
+            </remarks>
+            <param name="options">An instance of <see cref="T:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapterOptions"/>.</param>
+            <param name="logger">The ILogger implementation this adapter should use.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter.#ctor(Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper,Microsoft.Bot.Builder.Adapters.Slack.SlackAdapterOptions,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter"/> class.
+            Creates a Slack adapter.
+            </summary>
+            <param name="adapterOptions">The adapter options to be used when connecting to the Slack API.</param>
+            <param name="logger">The ILogger implementation this adapter should use.</param>
+            <param name="slackClient">The SlackClientWrapper used to connect to the Slack API.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter.SendActivitiesAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Schema.Activity[],System.Threading.CancellationToken)">
+            <summary>
+            Standard BotBuilder adapter method to send a message from the bot to the messaging API.
+            </summary>
+            <param name="turnContext">A TurnContext representing the current incoming message and environment.</param>
+            <param name="activities">An array of outgoing activities to be sent back to the messaging API.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>An array of <see cref="T:Microsoft.Bot.Schema.ResourceResponse"/> objects containing the IDs that Slack assigned to the sent messages.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter.UpdateActivityAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Schema.Activity,System.Threading.CancellationToken)">
+            <summary>
+            Standard BotBuilder adapter method to update a previous message with new content.
+            </summary>
+            <param name="turnContext">A TurnContext representing the current incoming message and environment.</param>
+            <param name="activity">The updated activity in the form '{id: `id of activity to update`, ...}'.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A resource response with the Id of the updated activity.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter.DeleteActivityAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Schema.ConversationReference,System.Threading.CancellationToken)">
+            <summary>
+            Standard BotBuilder adapter method to delete a previous message.
+            </summary>
+            <param name="turnContext">A TurnContext representing the current incoming message and environment.</param>
+            <param name="reference">An object in the form "{activityId: `id of message to delete`, conversation: { id: `id of slack channel`}}".</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter.ContinueConversationAsync(Microsoft.Bot.Schema.ConversationReference,Microsoft.Bot.Builder.BotCallbackHandler,System.Threading.CancellationToken)">
+            <summary>
+            Standard BotBuilder adapter method for continuing an existing conversation based on a conversation reference.
+            </summary>
+            <param name="reference">A conversation reference to be applied to future messages.</param>
+            <param name="logic">A bot logic function that will perform continuing action in the form 'async(context) => { ... }'.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter.ContinueConversationAsync(System.Security.Claims.ClaimsIdentity,Microsoft.Bot.Schema.ConversationReference,Microsoft.Bot.Builder.BotCallbackHandler,System.Threading.CancellationToken)">
+            <summary>
+            Sends a proactive message from the bot to a conversation.
+            </summary>
+            <param name="claimsIdentity">A <see cref="T:System.Security.Claims.ClaimsIdentity"/> for the conversation.</param>
+            <param name="reference">A reference to the conversation to continue.</param>
+            <param name="callback">The method to call for the resulting bot turn.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>A task that represents the work queued to execute.</returns>
+            <remarks>Call this method to proactively send a message to a conversation.
+            Most _channels require a user to initialize a conversation with a bot
+            before the bot can send activities to the user.
+            <para>This method registers the following services for the turn.<list type="bullet">
+            <item><description><see cref="T:System.Security.Principal.IIdentity"/> (key = "BotIdentity"), a claims claimsIdentity for the bot.
+            </description></item>
+            </list></para>
+            </remarks>
+            <seealso cref="M:Microsoft.Bot.Builder.BotAdapter.RunPipelineAsync(Microsoft.Bot.Builder.ITurnContext,Microsoft.Bot.Builder.BotCallbackHandler,System.Threading.CancellationToken)"/>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter.ProcessAsync(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Bot.Builder.IBot,System.Threading.CancellationToken)">
+            <summary>
+            Accept an incoming webhook request and convert it into a TurnContext which can be processed by the bot's logic.
+            </summary>
+            <param name="request">The incoming HTTP request.</param>
+            <param name="response">When this method completes, the HTTP response to send.</param>
+            <param name="bot">The bot that will handle the incoming activity.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter.HasConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Determines whether the provided <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> has the settings needed to
+            configure a <see cref="T:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter"/>.
+            </summary>
+            <param name="configuration"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> to verify for settings.</param>
+            <returns>A value indicating whether the configuration has the necessary settings required to create a <see cref="T:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapterBotComponent">
+            <summary>
+            <see cref="T:Microsoft.Bot.Builder.BotComponent"/> definition for <see cref="T:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapter"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapterBotComponent.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapterOptions">
+            <summary>
+            Class for defining implementation of the SlackAdapter Options.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.SlackAdapterOptions.VerifyIncomingRequests">
+            <summary>
+            Gets or sets a value indicating whether the signatures of incoming requests should be verified.
+            </summary>
+            <value>
+            A value indicating whether the signatures of incoming requests should be verified.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper.#ctor(Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapperOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper"/> class.
+            Creates a Slack client by supplying the access token.
+            </summary>
+            <param name="options">An object containing API credentials, a webhook verification token and other options.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper.Options">
+            <summary>
+            Gets the <see cref="T:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapperOptions"/>.
+            </summary>
+            <value>
+            An object containing API credentials, a webhook verification token and other options.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper.Identity">
+            <summary>
+            Gets the user identity.
+            </summary>
+            <value>
+            A string containing the user identity.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper.DeleteMessageAsync(System.String,System.DateTime,System.Threading.CancellationToken)">
+            <summary>
+            Wraps Slack API's DeleteMessageAsync method.
+            </summary>
+            <param name="channelId">The channel to delete the message from.</param>
+            <param name="ts">The timestamp of the message.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:SlackAPI.DeletedResponse"/> representing the response to deleting the message.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper.TestAuthAsync(System.Threading.CancellationToken)">
+            <summary>
+            Wraps Slack API's TestAuthAsync method.
+            </summary>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>The user Id.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper.UpdateAsync(System.String,System.String,System.String,System.String,System.String,System.Boolean,SlackAPI.Attachment[],System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Wraps Slack API's UpdateAsync method.
+            </summary>
+            <param name="ts">The timestamp of the message.</param>
+            <param name="channelId">The channel to delete the message from.</param>
+            <param name="text">The text to update with.</param>
+            <param name="botName">The optional bot name.</param>
+            <param name="parse">Change how messages are treated.Defaults to 'none'. See https://api.slack.com/methods/chat.postMessage#formatting. </param>
+            <param name="linkNames">If to find and link channel names and username.</param>
+            <param name="attachments">The attachments, if any.</param>
+            <param name="asUser">If the message is being sent as user instead of as a bot.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:SlackAPI.UpdateResponse"/> representing the response to the operation.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper.VerifySignature(Microsoft.AspNetCore.Http.HttpRequest,System.String)">
+            <summary>
+            Validates the local secret against the one obtained from the request header.
+            </summary>
+            <param name="request">The <see cref="T:Microsoft.AspNetCore.Http.HttpRequest"/> with the signature.</param>
+            <param name="body">The raw body of the request.</param>
+            <returns>The result of the comparison between the signature in the request and hashed secret.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper.PostMessageAsync(Microsoft.Bot.Builder.Adapters.Slack.Model.NewSlackMessage,System.Threading.CancellationToken)">
+            <summary>
+            Posts a message to Slack.
+            </summary>
+            <param name="message">The message to be posted.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>The <see cref="T:Microsoft.Bot.Builder.Adapters.Slack.Model.SlackResponse"/> to the posting operation.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper.GetBotUserIdentity(Microsoft.Bot.Schema.Activity)">
+            <summary>
+            Get the bot user id associated with the team on which an incoming activity originated. This is used internally by the SlackMessageTypeMiddleware to identify direct_mention and mention events.
+            In single-team mode, this will pull the information from the Slack API at launch.
+            In multi-team mode, this will use the `getBotUserByTeam` method passed to the constructor to pull the information from a developer-defined source.
+            </summary>
+            <param name="activity">An Activity.</param>
+            <returns>The identity of the bot's user.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper.LoginWithSlackAsync(System.Threading.CancellationToken)">
+            <summary>
+            Manages the login to Slack with the given credentials.
+            </summary>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A Task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapperOptions">
+            <summary>
+            Class for defining implementation of the SlackClientWrapperOptions Options.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapperOptions.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapperOptions"/> class.
+            </summary>
+            <param name="slackVerificationToken">A token for validating the origin of incoming webhooks.</param>
+            <param name="slackBotToken">A token for a bot to work on a single workspace.</param>
+            <param name="slackClientSigningSecret">The token used to validate that incoming webhooks are originated from Slack.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapperOptions.SlackVerificationToken">
+            <summary>
+            Gets or Sets the token for validating the origin of incoming webhooks.
+            </summary>
+            <value>The verification token.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapperOptions.SlackClientSigningSecret">
+            <summary>
+            Gets or Sets a token used to validate that incoming webhooks are originated from Slack.
+            </summary>
+            <value>The Client Signing Secret.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapperOptions.SlackBotToken">
+            <summary>
+            Gets or Sets a token (provided by Slack) for a bot to work on a single workspace.
+            </summary>
+            <value>The Bot token.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapperOptions.SlackClientId">
+            <summary>
+            Gets or Sets the oauth client id provided by Slack for multi-team apps.
+            </summary>
+            <value>The Client Id.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapperOptions.SlackClientSecret">
+            <summary>
+            Gets or Sets the oauth client secret provided by Slack for multi-team apps.
+            </summary>
+            <value>The Client Secret.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapperOptions.SlackRedirectUri">
+            <summary>
+            Gets or Sets the URI users will be redirected to after an oauth flow. In most cases, should be `https://mydomain.com/install/auth`.
+            </summary>
+            <value>The Redirect URI.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapperOptions.SlackScopes">
+            <summary>
+            Gets an array of scope names that are being requested during the oauth process. Must match the scopes defined at api.slack.com.
+            </summary>
+            <returns>The scopes array.</returns>
+            <value>An array of scope names that are being requested during the oauth process.</value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackHelper.ActivityToSlack(Microsoft.Bot.Schema.Activity)">
+            <summary>
+            Formats a BotBuilder activity into an outgoing Slack message.
+            </summary>
+            <param name="activity">A BotBuilder Activity object.</param>
+            <returns>A Slack message object with {text, attachments, channel, thread ts} as well as any fields found in activity.channelData.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackHelper.WriteAsync(Microsoft.AspNetCore.Http.HttpResponse,System.Net.HttpStatusCode,System.String,System.Text.Encoding,System.Threading.CancellationToken)">
+            <summary>
+            Writes the HttpResponse.
+            </summary>
+            <param name="response">The httpResponse.</param>
+            <param name="code">The status code to be written.</param>
+            <param name="text">The text to be written.</param>
+            <param name="encoding">The encoding for the text.</param>
+            <param name="cancellationToken">A cancellation token for the task.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackHelper.PayloadToActivity(Microsoft.Bot.Builder.Adapters.Slack.Model.InteractionPayload)">
+            <summary>
+            Creates an activity based on the slack event payload.
+            </summary>
+            <param name="slackPayload">The payload of the slack event.</param>
+            <returns>An activity containing the event data.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackHelper.EventToActivity(Microsoft.Bot.Builder.Adapters.Slack.Model.EventRequest,Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper)">
+            <summary>
+            Creates an activity based on the slack event data.
+            </summary>
+            <param name="eventRequest">The data of the slack event.</param>
+            <param name="client">The Slack client.</param>
+            <returns>An activity containing the event data.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackHelper.CommandToActivity(Microsoft.Bot.Builder.Adapters.Slack.Model.CommandPayload,Microsoft.Bot.Builder.Adapters.Slack.SlackClientWrapper)">
+            <summary>
+            Creates an activity based on a slack event related to a slash command.
+            </summary>
+            <param name="commandRequest">The data of the slack command request.</param>
+            <param name="client">The Slack client.</param>
+            <returns>An activity containing the event data.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.Adapters.Slack.SlackHelper.QueryStringToDictionary(System.String)">
+            <summary>
+            Converts a query string to a dictionary with key-value pairs.
+            </summary>
+            <param name="query">The query string to convert.</param>
+            <returns>A dictionary with the query values.</returns>
+        </member>
+    </members>
+</doc>
