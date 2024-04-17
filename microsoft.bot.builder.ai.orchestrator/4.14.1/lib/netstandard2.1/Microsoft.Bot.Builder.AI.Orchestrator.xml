@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Bot.Builder.AI.Orchestrator</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorBotComponent">
+            <summary>
+            Define component assets for Orchestrator.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorBotComponent.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorComponentRegistration">
+            <summary>
+            Define component assets for Orchestrator.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer">
+            <summary>
+            Class that represents an adaptive Orchestrator recognizer.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer.Kind">
+            <summary>
+            The Kind name for this recognizer.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer.ResultProperty">
+            <summary>
+            Property key in RecognizerResult that holds the full recognition result from Orchestrator core.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer.EntitiesProperty">
+            <summary>
+            Property key used when storing extracted entities in a custom event within telemetry.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer"/> class.
+            </summary>
+            <param name="callerLine">Caller line.</param>
+            <param name="callerPath">Caller path.</param>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer.#ctor(System.String,System.String,Microsoft.BotFramework.Orchestrator.ILabelResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer"/> class.
+            </summary>
+            <param name="modelFolder">Specifies the base model folder.</param>
+            <param name="snapshotFile">Specifies full path to the snapshot file.</param>
+            <param name="resolver">Label resolver.</param>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer.ModelFolder">
+            <summary>
+            Gets or sets the folder path to Orchestrator base model to use.
+            </summary>
+            <value>
+            Model path.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer.SnapshotFile">
+            <summary>
+            Gets or sets the full path to Orchestrator snapshot file to use.
+            </summary>
+            <value>
+            Snapshot path.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer.ExternalEntityRecognizer">
+            <summary>
+            Gets or sets an external entity recognizer.
+            </summary>
+            <remarks>This recognizer is run before calling Orchestrator and the entities are merged with Orchestrator results.</remarks>
+            <value>Recognizer.</value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer.DisambiguationScoreThreshold">
+            <summary>
+            Gets or sets the disambiguation score threshold.
+            </summary>
+            <value>
+            Recognizer returns ChooseIntent (disambiguation) if other intents are classified within this threshold of the top scoring intent.
+            </value>
+        </member>
+        <member name="P:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer.DetectAmbiguousIntents">
+            <summary>
+            Gets or sets detect ambiguous intents.
+            </summary>
+            <value>
+            When true, recognizer will look for ambiguous intents - those within specified threshold to top scoring intent.
+            </value>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer.RecognizeAsync(Microsoft.Bot.Builder.Dialogs.DialogContext,Microsoft.Bot.Schema.Activity,System.Threading.CancellationToken,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Double})">
+            <summary>
+            Return recognition results.
+            </summary>
+            <param name="dc">Context object containing information for a single turn of conversation with a user.</param>
+            <param name="activity">The incoming activity received from the user. The Text property value is used as the query text for QnA Maker.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="telemetryProperties">Additional properties to be logged to telemetry with the LuisResult event.</param>
+            <param name="telemetryMetrics">Additional metrics to be logged to telemetry with the LuisResult event.</param>
+            <returns>A <see cref="T:Microsoft.Bot.Builder.RecognizerResult"/> containing the QnA Maker result.</returns>
+        </member>
+        <member name="M:Microsoft.Bot.Builder.AI.Orchestrator.OrchestratorRecognizer.FillRecognizerResultTelemetryProperties(Microsoft.Bot.Builder.RecognizerResult,System.Collections.Generic.Dictionary{System.String,System.String},Microsoft.Bot.Builder.Dialogs.DialogContext)">
+            <summary>
+            Uses the RecognizerResult to create a list of properties to be included when tracking the result in telemetry.
+            </summary>
+            <param name="recognizerResult">Recognizer Result.</param>
+            <param name="telemetryProperties">A list of properties to append or override the properties created using the RecognizerResult.</param>
+            <param name="dialogContext">Dialog Context.</param>
+            <returns>A dictionary that can be included when calling the TrackEvent method on the TelemetryClient.</returns>
+        </member>
+    </members>
+</doc>
